@@ -130,7 +130,7 @@ class Homepage extends StatelessWidget {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                              top: 8,
+                                              top: 2,
                                             ),
                                             child: Container(
                                               height: 20,
@@ -142,7 +142,7 @@ class Homepage extends StatelessWidget {
                                               ),
                                               child: const Padding(
                                                 padding: EdgeInsets.only(
-                                                  top: 2,
+                                                  top: 1,
                                                   bottom: 2,
                                                   left: 2,
                                                   right: 2,
@@ -196,6 +196,7 @@ class Homepage extends StatelessWidget {
                                   top: 15,
                                 ),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Container(
                                       height: 6,
