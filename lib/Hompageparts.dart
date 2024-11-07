@@ -87,12 +87,14 @@ class Homepage extends StatelessWidget {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 15, top: 15, right: 15),
+                  padding: const EdgeInsets.only(left: 5, top: 15, right: 15),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         width: 350,
-                        height: 90,
+                        height: 92,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -105,11 +107,13 @@ class Homepage extends StatelessWidget {
                           ],
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.only(bottom: 25),
+                          padding: const EdgeInsets.only(
+                            bottom: 10,
+                            top: 10,
+                          ),
                           child: Column(
                             // Change from Row to Column to add multiple Rows
                             children: [
-                              // First Row
                               Row(
                                 children: [
                                   const Padding(
@@ -125,28 +129,24 @@ class Homepage extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 15),
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Column(
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.only(
-                                              top: 2,
-                                            ),
+                                            padding:
+                                                const EdgeInsets.only(top: 4),
                                             child: Container(
-                                              height: 20,
-                                              width: 80,
+                                              height: 18,
+                                              width: 78,
                                               decoration: const BoxDecoration(
                                                 color: Color(0xffD4EDDA),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(3)),
                                               ),
                                               child: const Padding(
-                                                padding: EdgeInsets.only(
-                                                  top: 1,
-                                                  bottom: 2,
-                                                  left: 2,
-                                                  right: 2,
-                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 2, vertical: 1),
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
@@ -186,13 +186,11 @@ class Homepage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const SizedBox(
-                                  height: 15), // Add spacing between rows
 
                               // Second Row - New Row
                               Padding(
                                 padding: const EdgeInsets.only(
-                                  left: 5,
+                                  left: 10,
                                   top: 15,
                                 ),
                                 child: Row(
@@ -239,7 +237,7 @@ class Homepage extends StatelessWidget {
                                     ),
                                     const Padding(
                                       padding: EdgeInsets.only(left: 4),
-                                      child: Text("4 Pending",
+                                      child: Text("Shared With 6 Persons",
                                           style: TextStyle(fontSize: 6)),
                                     ),
                                   ],
@@ -253,18 +251,21 @@ class Homepage extends StatelessWidget {
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(left: 15, top: 15, right: 15),
+                  padding: EdgeInsets.only(left: 15, top: 20, right: 15),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "suggested Items",
+                        "Suggested Items",
                         style: TextStyle(
                           fontSize: 14,
                           color: Color(0xff1B7C3F),
                           fontWeight: FontWeight.bold,
                           height: 1.3,
                         ),
+                      ),
+                      SizedBox(
+                        width: 140,
                       ),
                       Text(
                         "View All",
@@ -275,9 +276,61 @@ class Homepage extends StatelessWidget {
                           height: 1.3,
                         ),
                       ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: Color(0xff2E98D7),
+                        size: 10,
+                      ),
                     ],
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 12, left: 15),
+                  child: Row(
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            width: 120,
+                            height: 148,
+                            decoration: const BoxDecoration(
+                              color: Color(0xffF4F4F4),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: 120,
+                                  height: 95,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xffFFC107),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(5),
+                                      topRight: Radius.circular(5),
+                                      bottomLeft: Radius.circular(100),
+                                      bottomRight: Radius.circular(5),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                      right: 25,
+                                      top: 18,
+                                    ),
+                                    child: Image.asset("Assets/Images/1st.png"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
           ],
