@@ -1,0 +1,6 @@
+{
+  "appTitle": "sublime_groceria",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
