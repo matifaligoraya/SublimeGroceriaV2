@@ -122,7 +122,7 @@ Future<dynamic> showConfirmationDialog(
         builder: (context, state) {
           return AlertDialog(
             backgroundColor:
-                (state is ThemeDark) ? ColorDark.card : ColorLight.card,
+                (state is ThemeDark) ? ColorDark.card : ColorLight.secondary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(RADIUS),
             ),

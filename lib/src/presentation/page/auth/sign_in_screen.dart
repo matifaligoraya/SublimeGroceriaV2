@@ -1,3 +1,4 @@
+import 'package:sublime_groceria/src/common/colors.dart';
 import 'package:sublime_groceria/src/common/constant.dart';
 import 'package:sublime_groceria/src/common/enum.dart';
 import 'package:sublime_groceria/src/common/toast.dart';
@@ -81,6 +82,8 @@ class _SignInPageState extends State<SignInPage> {
                               .add(SignInFormEvent.passwordOnChanged(v));
                         },
                       ),
+                      const SizedBox(height: SPACE15),
+                      // DropdownButtonFormField(items: items, onChanged: onChanged),
                       const SizedBox(height: SPACE25),
                       _buildForgotPassword(context),
                       const SizedBox(height: SPACE25),
@@ -97,6 +100,7 @@ class _SignInPageState extends State<SignInPage> {
                             : false,
                         labelLoading: 'Signing...',
                         label: 'Sign In',
+                        // color: ColorLight.bg,
                       ),
                       const SizedBox(height: SPACE25),
                       _buildDivider(context),

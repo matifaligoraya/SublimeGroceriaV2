@@ -21,7 +21,7 @@ class SuggestedItems extends StatelessWidget {
               width: 110,
               height: 148,
               decoration: BoxDecoration(
-                color: ColorLight.background,
+                color: ColorLight.widgetsbg,
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Column(
@@ -32,7 +32,7 @@ class SuggestedItems extends StatelessWidget {
                       width: 110,
                       height: 95,
                       decoration: BoxDecoration(
-                        color: ColorLight.card,
+                        color: ColorLight.homecard,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(5),
                           topRight: Radius.circular(5),
@@ -58,18 +58,21 @@ class SuggestedItems extends StatelessWidget {
                                 padding: const EdgeInsets.only(
                                   top: 70,
                                 ),
-                                child: Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                      color: ColorLight.primary,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      )),
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                    size: 12,
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                        color: ColorLight.primary,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(20),
+                                        )),
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                      size: 12,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -91,7 +94,7 @@ class SuggestedItems extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 11,
                             height: 1.3,
-                            color: ColorLight.fontTitle,
+                            color: ColorLight.widgetstitle,
                           ),
                         ),
                       ],

@@ -1,27 +1,34 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 class ColorLight {
+  // Primary and accent colors
   static const Color primary = Color(0xFF1B7C3F);
-  static const Color background = Color(0xFFF4F4F4);
-  static const Color card = Color(0xFFFFC107);
-  static const Color fontTitle = Color(0xFF282828);
-  static const Color fontSubtitle = Color(0xFF737373);
-  static const Color fontDisable = Color(0xFF9B9B9B);
-  static const Color disabledButton = Color(0xFFB9B9B9);
-  static const Color divider = Color(0xFFDCDCDC);
-  static const Color tag = Color(0xFFD4EDDA);
+  static const Color secondary =
+      Color(0xFFD4EDDA); //primary color with low opacity
+  static const Color widgetstitle = Color(0xFF373B3D);
+  static const Color homecard = Color(0xFFFFC107);
+  static const Color bg = Color(0xFFFFFFFF);
+  // static const Color fontTitle = Color(0xFF282828);
+  // static const Color fontSubtitle = Color(0xFF737373);
+  // static const Color fontDisable = Color(0xFF9B9B9B);
+  // static const Color disabledButton = Color(0xFFB9B9B9);
+  // static const Color divider = Color(0xFFDCDCDC);
+  // static const Color tag = Color(0xFFD4EDDA);
 
-  static const Color success = Color(0xFF81C784);
-  static const Color warning = Color(0xFFFFB74D);
-  static const Color error = Color(0xFFE57373);
-  static const Color info = Color(0xFF64B5F6);
+  // Background and surface
 
-  // Other
-  static const Color silverTree = Color(0xFF5FB4A5);
-  static const Color catSkillWhite = Color(0xFFF0F5F9);
-  static const Color halfDutchWhite = Color(0xFFFFF6E1);
-  static const Color whiteSmoke = Color(0xFFF3F4F8);
-  static const Color linkWater = Color(0xFFDAE7F1);
+  static const Color widgetsbg = Color(0xFFF4F4F4);
+  static const Color buttons = Color(0xFF327298);
+  // static const Color error = Color(0xFFE57373);
+  // static const Color info = Color(0xFF64B5F6);
+
+  // Divider and outlines
+
+  static const Color link = Color(0xFF2E98D7);
+  static const Color carbohydrates = Color(0xFFC32626);
+  static const Color proteins = Color(0xFF4E79A7);
+  static const Color fats = Color(0xFFF28E2B);
+  // static const Color linkWater = Color(0xFFDAE7F1);
 }
 
 class ColorDark {

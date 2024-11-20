@@ -39,6 +39,13 @@ GoRouter routerinit = GoRouter(
         return const SignUnPage();
       },
     ),
+    // GoRoute(
+    //   name: AppRoutes.DRAWER,
+    //   path: AppRoutes.DRAWER_PATH,
+    //   builder: (BuildContext context, GoRouterState state) {
+    //     return const Drawer();
+    //   },
+    // ),
 
     ///  =================================================================
     /// ********************** DashBoard Route ******************************

@@ -31,72 +31,117 @@ class ListItem extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 5),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 14,
-              ),
-              Container(
-                width: 62,
-                height: 14,
-                decoration: BoxDecoration(
-                  color: ColorLight.tag,
-                  borderRadius: BorderRadius.all(Radius.circular(3)),
+                SizedBox(
+                  width: 14,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.access_time,
-                        color: ColorLight.primary, size: 10),
-                    SizedBox(
-                      width: 2,
-                    ),
-                    Text(tag,
-                        style: const TextStyle(
-                            fontSize: 6, color: ColorLight.primary)),
-                  ],
+                Container(
+                  width: 62,
+                  height: 14,
+                  decoration: BoxDecoration(
+                    color: ColorLight.secondary,
+                    borderRadius: BorderRadius.all(Radius.circular(3)),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.access_time,
+                          color: ColorLight.primary, size: 10),
+                      SizedBox(
+                        width: 2,
+                      ),
+                      Text(tag,
+                          style: const TextStyle(
+                              fontSize: 6, color: ColorLight.primary)),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 115,
-              ),
-              InkWell(
-                onTap: () {},
-                child: Icon(
-                  Icons.more_vert,
-                  color: Colors.black,
-                  size: 16,
+                SizedBox(
+                  width: 118,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Container(
-            height: 6,
-            width: 6,
-            decoration: BoxDecoration(
-                color: ColorLight.primary,
-                borderRadius: BorderRadius.all(Radius.circular(6))),
-            child: Padding(
+                InkWell(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.more_vert,
+                    color: Colors.black,
+                    size: 16,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 15),
+            Padding(
               padding: const EdgeInsets.only(left: 5),
-              child: Text(
-                purchaseditems,
-                style: const TextStyle(fontSize: 12),
+              child: Row(
+                children: [
+                  Container(
+                    width: 5,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      color: ColorLight.homecard,
+                    ),
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    purchaseditems,
+                    style: TextStyle(
+                      color: ColorLight.widgetstitle,
+                      fontSize: 8,
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Container(
+                    width: 5,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      color: ColorLight.carbohydrates,
+                    ),
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    pendingItems,
+                    style: TextStyle(
+                      color: ColorLight.widgetstitle,
+                      fontSize: 8,
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Container(
+                    width: 5,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      color: ColorLight.primary,
+                    ),
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    sharedWith,
+                    style: TextStyle(
+                      color: ColorLight.widgetstitle,
+                      fontSize: 8,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-          const SizedBox(height: 8),
-        ],
+          ],
+        ),
       ),
     );
   }

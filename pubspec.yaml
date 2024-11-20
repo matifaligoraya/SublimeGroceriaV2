@@ -47,4 +47,4 @@ flutter:
     - assets/lang/en.json
     - assets/lang/es.json
     - assets/lang/da.json
-    # - assets/images/
+    - assets/images/

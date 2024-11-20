@@ -25,6 +25,10 @@ class AppRoutes {
   static const String DASHBOARD_ROUTE_NAME = 'dashboard';
   static const String DASHBOARD_ROUTE_PATH = '/dashboard';
 
+  // // Drawer routes
+  // static const String DRAWER = 'drawer';
+  // static const String DRAWER_PATH = '/drawer';
+
   // create task routes
   static const String TASK_TITLE_ROUTE_NAME = 'task_title';
   static const String TASK_TITLE_ROUTE_PATH = '/task_title';
