@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sublime_groceria/src/common/colors.dart';
+import 'package:sublime_groceria/src/common/religionapi.dart';
 import 'package:sublime_groceria/src/presentation/Models/listsmodel.dart';
+import 'package:sublime_groceria/src/presentation/Models/religion.dart';
 // import 'package:sublime_groceria/src/presentation/page/auth/sign_in_screen.dart';
 import 'package:sublime_groceria/src/presentation/widget/bottomappbar.dart';
 import 'package:sublime_groceria/src/presentation/widget/items.dart';
@@ -23,13 +25,7 @@ final List<ShoppingListItem> item = [
   ),
 ];
 String dropdownvalue = 'Item 1';
-var items = [
-  'Item 1',
-  'Item 2',
-  'Item 3',
-  'Item 4',
-  'Item 5',
-];
+// final <List<Religion>> Religion = [] as String;
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
@@ -73,11 +69,16 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(right: 15),
-                  child: Icon(
-                    Icons.help_outline,
-                    color: Color(0xff1D1B1B),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: InkWell(
+                    onTap: () {
+                      showPopup(context);
+                    },
+                    child: const Icon(
+                      Icons.help_outline,
+                      color: Color(0xff1D1B1B),
+                    ),
                   ),
                 ),
               ],
@@ -123,123 +124,161 @@ class HomeScreen extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Text(AppLocalizations.of(context)!.homePageHeading);
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 15,
-                  top: 20,
-                  bottom: 30,
-                ),
-                child: Text(
-                  SublimeLocal.of(context).translate('home_page_heading'),
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: ColorLight.widgetstitle,
-                    fontWeight: FontWeight.bold,
-                    height: 1.3,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              bottom: 10,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Text(AppLocalizations.of(context)!.homePageHeading);
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15,
+                    top: 20,
+                    bottom: 30,
                   ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: SectionHeader(
-                  title: "Recent Lists",
-                  actionText: "View All",
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: ListItem(
-                  title: item[0].title,
-                  tag: item[0].tag,
-                  purchaseditems:
-                      '${item[0].totalItems} out of ${item[0].purchasedItems} Items Purchased',
-                  pendingItems: '${item[0].pendingItems} Pending',
-                  sharedWith: 'Shared With ${item[0].sharedWith} Persons',
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: SectionHeader(
-                  title: "Suggested Items",
-                  actionText: "View All",
-                ),
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12, left: 15),
-                    child: SuggestedItems(
-                      title: 'Himalayan Pink \nSalt',
-                      image: "assets/images/items1.png",
+                  child: Text(
+                    SublimeLocal.of(context).translate('home_page_heading'),
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: ColorLight.widgetstitle,
+                      fontWeight: FontWeight.bold,
+                      height: 1.3,
                     ),
                   ),
-                  SizedBox(
-                    width: 4,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: SectionHeader(
+                    title: "Recent Lists",
+                    actionText: "View All",
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 12,
-                    ),
-                    child: SuggestedItems(
-                      title: 'Fresh Parsley \nveg',
-                      image: "assets/images/items2.png",
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: ListItem(
+                    title: item[0].title,
+                    tag: item[0].tag,
+                    purchaseditems:
+                        '${item[0].totalItems} out of ${item[0].purchasedItems} Items Purchased',
+                    pendingItems: '${item[0].pendingItems} Pending',
+                    sharedWith: 'Shared With ${item[0].sharedWith} Persons',
                   ),
-                  SizedBox(
-                    width: 4,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: SectionHeader(
+                    title: "Suggested Items",
+                    actionText: "View All",
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 12,
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12, left: 15),
+                      child: SuggestedItems(
+                        title: 'Himalayan Pink \nSalt',
+                        image: "assets/images/items1.png",
+                      ),
                     ),
-                    child: SuggestedItems(
-                      title: 'Whole Red Chilli',
-                      image: "assets/images/items3.png",
+                    SizedBox(
+                      width: 4,
                     ),
-                  ),
-                ],
-              ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                      ),
+                      child: SuggestedItems(
+                        title: 'Fresh Parsley \nveg',
+                        image: "assets/images/items2.png",
+                      ),
+                    ),
+                    SizedBox(
+                      width: 4,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                      ),
+                      child: SuggestedItems(
+                        title: 'Whole Red Chilli',
+                        image: "assets/images/items3.png",
+                      ),
+                    ),
+                  ],
+                ),
 
-              const Padding(
-                padding: EdgeInsets.only(left: 15, top: 20, right: 15),
-                child: SectionHeader(
-                  title: "Recipe Integration",
-                  actionText: "View All",
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 20, right: 15),
+                  child: SectionHeader(
+                    title: "Recipe Integration",
+                    actionText: "View All",
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Recipeintegration(
-                  image: "assets/images/recipe3.png",
-                  title: "Crispy crispy Pasta Crispy \ncrispy Pasta",
+                SizedBox(
+                  height: 20,
+                ),
+                Recipeintegration(
+                    image: "assets/images/recipe3.png",
+                    title: "Crispy crispy Pasta Crispy \ncrispy Pasta",
+                    proteins: "Proteins",
+                    fats: "Fats",
+                    carbohydrates: "Carbohydrates",
+                    likes: "125k",
+                    time: "25 Min"),
+                SizedBox(
+                  height: 5,
+                ),
+                Recipeintegration(
+                  image: "assets/images/recipe2.png",
+                  title: "Zinger Cheesy \nBurger",
                   proteins: "Proteins",
                   fats: "Fats",
                   carbohydrates: "Carbohydrates",
-                  likes: "125k",
-                  time: "25 Min"),
-              SizedBox(
-                height: 5,
-              ),
-              Recipeintegration(
-                image: "assets/images/recipe2.png",
-                title: "Zinger Cheesy \nBurger",
-                proteins: "Proteins",
-                fats: "Fats",
-                carbohydrates: "Carbohydrates",
-                likes: "250k",
-                time: "40 Min",
-              ),
-            ],
+                  likes: "250k",
+                  time: "40 Min",
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+}
+
+void showPopup(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            "Title",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: ColorLight.primary,
+            ),
+          ), // Use the title provided to the Popup
+          content: Text('This is the content of the popup.'),
+          actions: [
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the popup
+              },
+            ),
+            // TextButton(
+            //   child: Text(actionText), // Use the actionText provided to the Popup
+            //   onPressed: () {
+            //     // Add any action you want to perform
+            //     Navigator.of(context).pop(); // Close the popup
+            //   },
+            // ),
+          ],
+        );
+      });
 }
 
 class _RecipeImage extends StatelessWidget {
