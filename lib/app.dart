@@ -1,20 +1,17 @@
 import 'dart:async';
 
-import 'package:sublime_groceria/common/SublimeDS.dart';
-import 'package:sublime_groceria/cubit/religion/religion_cubit.dart';
-import 'package:sublime_groceria/localization/applocalization.dart';
-import 'package:sublime_groceria/presentation/bloc/login_form/login_form_bloc.dart';
-import 'package:sublime_groceria/utilities/go_router_init.dart';
-import 'package:sublime_groceria/utilities/logger.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:sublime_groceria/common/themes.dart';
 import 'package:sublime_groceria/presentation/bloc/authenticator_watcher/authenticator_watcher_bloc.dart';
+import 'package:sublime_groceria/presentation/bloc/login_form/login_form_bloc.dart';
 import 'package:sublime_groceria/presentation/cubit/theme/theme_cubit.dart';
 import 'package:sublime_groceria/utilities/app_bloc_observer.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import './injection.dart' as di;
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sublime_groceria/utilities/go_router_init.dart';
+import 'package:sublime_groceria/utilities/logger.dart';
+
+import 'package:sublime_groceria/injection.dart' as di;
 
 void main() {
   logger.runLogging(
@@ -23,10 +20,9 @@ void main() {
         WidgetsFlutterBinding.ensureInitialized();
         Bloc.transformer = bloc_concurrency.sequential();
         Bloc.observer = const AppBlocObserver();
-        SublimeDS().init();
         di.init();
 
-        runApp(MyApp());
+        runApp(const MyApp());
       },
       logger.logZoneError,
     ),
@@ -37,7 +33,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -48,23 +43,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        title: 'flutter bloc clean architecture',
+        title: 'Flutter Bloc Clean Architecture',
         theme: themeLight(context),
         darkTheme: themeDark(context),
         themeMode: ThemeMode.system,
         routerConfig: routerinit,
-        supportedLocales: [
-          Locale('en', ''), // English
-          Locale('es', ''), // Spanish
-          Locale('da', ''), // Danish
-        ],
-        localizationsDelegates: [
-          SublimeLocal.delegate, // Your custom localization delegate
-          GlobalMaterialLocalizations.delegate, // Material localization
-          GlobalWidgetsLocalizations.delegate, // Widgets localization
-          // GlobalCupertinoLocalizations.delegate, // Cupertino localization
-        ],
-        locale: Locale('en'), // Default locale
       ),
     );
   }

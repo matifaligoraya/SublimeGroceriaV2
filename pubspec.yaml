@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations: # Add this dependency
+  flutter_localizations: 
     sdk: flutter
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.2.1
@@ -22,6 +22,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   bloc: ^8.1.4
   freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.0
   get_it: ^8.0.2
   flutter_spinkit: ^5.2.0
   form_field_validator: ^1.1.0
@@ -30,19 +31,16 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   bloc_concurrency: ^0.2.5
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
   very_good_analysis: ^6.0.0
-  flutter_lints: ^5.0.0
   mocktail: ^1.0.4
   bloc_test: ^9.0.0
   build_runner: ^2.4.6
-  mockito: ^5.4.4
+  json_serializable: ^6.7.1
+  freezed: ^2.3.0
   http: ^1.2.2
-
-
 
 flutter:
   uses-material-design: true
