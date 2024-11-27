@@ -1,7 +1,12 @@
 import 'dart:async';
 
-import 'package:sublime_groceria/src/domain/usecase/login.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sublime_groceria/src/common/SublimeDS.dart';
 import 'package:sublime_groceria/src/localization/applocalization.dart';
+import 'package:sublime_groceria/src/presentation/bloc/Religion/Religion_bloc.dart';
+import 'package:sublime_groceria/src/presentation/page/home/Home_Screens.dart';
+import 'package:sublime_groceria/src/presentation/page/home/login_screen.dart';
+import 'package:sublime_groceria/src/utilities/go_router_init.dart';
 import 'package:sublime_groceria/src/utilities/logger.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:sublime_groceria/src/common/themes.dart';
@@ -22,9 +27,11 @@ void main() {
         WidgetsFlutterBinding.ensureInitialized();
         Bloc.transformer = bloc_concurrency.sequential();
         Bloc.observer = const AppBlocObserver();
+        SublimeDS().init();
         di.init();
+        final religionBloc = ReligionBloc();
 
-        runApp(const MyApp());
+        runApp(MyApp(religionBloc: ReligionBloc()));
       },
       logger.logZoneError,
     ),
@@ -33,7 +40,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ReligionBloc religionBloc;
+  const MyApp({super.key, required this.religionBloc});
 
   // This widget is the root of your application.
   @override
@@ -43,6 +51,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<AuthenticatorWatcherBloc>()),
         BlocProvider(create: (_) => di.locator<SignInFormBloc>()),
         BlocProvider(create: (_) => di.locator<ThemeCubit>()),
+        BlocProvider(create: (_) => religionBloc),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
@@ -60,7 +69,7 @@ class MyApp extends StatelessWidget {
           SublimeLocal.delegate, // Your custom localization delegate
           GlobalMaterialLocalizations.delegate, // Material localization
           GlobalWidgetsLocalizations.delegate, // Widgets localization
-          GlobalCupertinoLocalizations.delegate, // Cupertino localization
+          // GlobalCupertinoLocalizations.delegate, // Cupertino localization
         ],
         locale: Locale('en'), // Default locale
       ),

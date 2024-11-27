@@ -1,12 +1,12 @@
 import 'package:sublime_groceria/src/common/routes.dart';
-import 'package:sublime_groceria/src/presentation/page/auth/sign_in_screen.dart';
+import 'package:sublime_groceria/src/presentation/bloc/Religion/Religion_bloc.dart';
 import 'package:sublime_groceria/src/presentation/page/auth/sign_up_screen.dart';
 import 'package:sublime_groceria/src/presentation/page/dashboard/dashboard_screen.dart';
 import 'package:sublime_groceria/src/presentation/page/error/error_screen.dart';
-import 'package:sublime_groceria/src/presentation/page/home/home_screen.dart';
-
+import 'package:sublime_groceria/src/presentation/page/home/Home_Screens.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sublime_groceria/src/presentation/page/home/login_screen.dart';
 import 'package:sublime_groceria/src/utilities/logger.dart';
 
 GoRouter routerinit = GoRouter(
@@ -15,10 +15,10 @@ GoRouter routerinit = GoRouter(
     ///  ********************** Splash Route *****************************
     /// ==================================================================
     GoRoute(
-      name: AppRoutes.SPLASH_ROUTE_NAME,
-      path: AppRoutes.SPLASH_ROUTE_PATH,
+      name: AppRoutes.LOGIN_ROUTE_NAME,
+      path: AppRoutes.LOGIN_ROUTE_PATH,
       builder: (BuildContext context, GoRouterState state) {
-        return const HomeScreen();
+        return const LoginScreen();
       },
     ),
 
@@ -26,10 +26,12 @@ GoRouter routerinit = GoRouter(
     /// ********************** Authentication Routes ********************
     /// ==================================================================
     GoRoute(
-      name: AppRoutes.LOGIN_ROUTE_NAME,
-      path: AppRoutes.LOGIN_ROUTE_PATH,
+      name: AppRoutes.HOME_ROUTE_NAME,
+      path: AppRoutes.HOME_ROUTE_PATH,
       builder: (BuildContext context, GoRouterState state) {
-        return const SignInPage();
+        return HomeScreens(
+          religionBloc: ReligionBloc(),
+        );
       },
     ),
     GoRoute(

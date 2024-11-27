@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sublime_groceria/src/presentation/Models/religion.dart';
 
 class DropdownWithoutAPI extends StatefulWidget {
   const DropdownWithoutAPI({super.key});
@@ -18,7 +17,7 @@ class DropdownWithoutAPIState extends State<DropdownWithoutAPI> {
     'Elderberry'
   ];
   String? dropdownvalue; // Selected value
-  final List<Religion> religionList = [];
+
   // Selected item variable
   String? selectedItem; // Nullable to start with no selection
 
