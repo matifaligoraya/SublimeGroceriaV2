@@ -37,7 +37,6 @@ class SublimeDS {
     }
 
     await _prefs!.setString("token", token);
-    print("Token saved: $token");
   }
 
   bool isTokenValid() {

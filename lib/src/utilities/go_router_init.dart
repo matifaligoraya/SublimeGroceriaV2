@@ -59,6 +59,14 @@ GoRouter routerinit = GoRouter(
         return const DashBoardScreen();
       },
     ),
+
+    GoRoute(
+      name: AppRoutes.DRAWER_ROUTE_NAME,
+      path: AppRoutes.DRAWER_ROUTE_PATH,
+      builder: (BuildContext context, GoRouterState state) {
+        return const Drawer();
+      },
+    ),
   ],
   errorPageBuilder: (context, state) {
     return const MaterialPage(child: ErrorScreen());

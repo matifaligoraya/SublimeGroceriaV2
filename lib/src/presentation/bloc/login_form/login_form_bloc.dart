@@ -1,12 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
-// import 'package:dio/dio.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:sublime_groceria/src/common/SublimeDS.dart';
-
 part 'login_form_event.dart';
 part 'login_form_state.dart';
 
@@ -33,6 +29,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
 
   FutureOr<void> loginApi(LoginApi event, Emitter<LoginFormState> emit) async {
     emit(state.copyWith(loginState: LoginState.loading));
+    print(state);
     Map data = {'vUserName': state.email, 'vPassword': state.password};
 
     try {
@@ -72,14 +69,4 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
       ));
     }
   }
-
-  // Future<void> testToken() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final storedToken = prefs.getString('auth_token');
-  //   if (storedToken != null) {
-  //     print('Token from SharedPreferences: $storedToken');
-  //   } else {
-  //     print('No token found in SharedPreferences.');
-  //   }
-  // }
 }

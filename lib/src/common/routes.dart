@@ -45,6 +45,9 @@ class AppRoutes {
   static const String TASK_BUDGET_ROUTE_NAME = 'task_budget';
   static const String TASK_BUDGET_ROUTE_PATH = '/task_budget';
 
+  static const String DRAWER_ROUTE_NAME = 'drawer';
+  static const String DRAWER_ROUTE_PATH = '/drawer';
+
   static const String PUBLIC_PROFILE_VIEW_SCREEN_NAME =
       'public_prfoile_view_screen';
   static const String PUBLIC_PROFILE_VIEW_SCREEN_PATH =
