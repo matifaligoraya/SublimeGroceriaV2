@@ -9,8 +9,8 @@ class AppRoutes {
   static const String HOME_ROUTE_NAME = 'Home_Screens';
   static const String HOME_ROUTE_PATH = '/Home_Screens';
 
-  static const String SIGNUP_ROUTE_NAME = 'signup';
-  static const String SIGNUP_ROUTE_PATH = '/signup';
+  static const String RELIGION_ROUTE_NAME = 'religion_screen';
+  static const String RELIGION_ROUTE_PATH = '/religion_screen';
 
   static const String SELECT_REGION_ROUTE_NAME = 'select_region';
   static const String SELECT_REGION_ROUTE_PATH = '/select_region';
@@ -21,6 +21,9 @@ class AppRoutes {
   // Dashboard routes
   static const String DASHBOARD_ROUTE_NAME = 'dashboard';
   static const String DASHBOARD_ROUTE_PATH = '/dashboard';
+
+  static const String SGITEM_ROUTE_NAME = 'sgitem_screen';
+  static const String SGITEM_ROUTE_PATH = '/sgitem_screen';
 
   // // Drawer routes
   // static const String DRAWER = 'drawer';

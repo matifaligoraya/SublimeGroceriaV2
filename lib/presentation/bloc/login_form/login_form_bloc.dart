@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:sublime_groceria/common/SublimeDS.dart';
+import 'package:sublime_groceria/common/api.dart';
 part 'login_form_event.dart';
 part 'login_form_state.dart';
 
@@ -30,11 +31,11 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   FutureOr<void> loginApi(LoginApi event, Emitter<LoginFormState> emit) async {
     emit(state.copyWith(loginState: LoginState.loading));
     print(state);
-    Map data = {'vUserName': state.email, 'vPassword': state.password};
+    Map data = {'vUserName': 'atigoraya', 'vPassword': 'Abfa\$\$123'};
 
     try {
       final response = await http.post(
-        Uri.parse("https://api.sublimecarecloud.com/Auth/login"),
+        Uri.parse(API.LOGIN),
         headers: SublimeDS().headerOfApi(),
         body: jsonEncode(data),
       );

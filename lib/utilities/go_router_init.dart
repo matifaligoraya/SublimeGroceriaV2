@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sublime_groceria/common/routes.dart';
 import 'package:sublime_groceria/cubit/religion/religion_cubit.dart';
+import 'package:sublime_groceria/cubit/sgitemcubit.dart';
 import 'package:sublime_groceria/presentation/pages/dashboard/dashboard_screen.dart';
 import 'package:sublime_groceria/presentation/pages/error/error_screen.dart';
 import 'package:sublime_groceria/presentation/pages/home/home_screens.dart';
 import 'package:sublime_groceria/presentation/pages/auth/login_screen.dart';
+import 'package:sublime_groceria/presentation/pages/religion/religion_screen.dart';
+import 'package:sublime_groceria/presentation/pages/religion/sgitem_screen.dart';
 import 'package:sublime_groceria/repositories/religionrepository/religionrepository.dart';
+import 'package:sublime_groceria/repositories/sgitemrepository.dart';
 import 'package:sublime_groceria/utilities/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,10 +42,23 @@ GoRouter routerinit = GoRouter(
       },
     ),
     GoRoute(
-      name: AppRoutes.SIGNUP_ROUTE_NAME,
-      path: AppRoutes.SIGNUP_ROUTE_PATH,
+      name: AppRoutes.RELIGION_ROUTE_NAME,
+      path: AppRoutes.RELIGION_ROUTE_PATH,
       builder: (BuildContext context, GoRouterState state) {
-        return const LoginScreen();
+        return BlocProvider(
+          create: (_) => ReligionCubit(ReligionRepository())..fetchReligions(),
+          child: const ReligionScreen(),
+        );
+      },
+    ),
+    GoRoute(
+      name: AppRoutes.SGITEM_ROUTE_NAME,
+      path: AppRoutes.SGITEM_ROUTE_PATH,
+      builder: (BuildContext context, GoRouterState state) {
+        return BlocProvider(
+          create: (_) => SgItemCubit(SgItemRepository())..fetchItems(),
+          child: const SgItemScreen(),
+        );
       },
     ),
 

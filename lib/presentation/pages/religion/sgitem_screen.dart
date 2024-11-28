@@ -2,41 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sublime_groceria/common/routes.dart';
-import 'package:sublime_groceria/cubit/religion/religion_cubit.dart';
-import 'package:sublime_groceria/cubit/sublime_state.dart';
-import 'package:sublime_groceria/models/religion.dart';
+import 'package:sublime_groceria/cubit/sgitemcubit.dart';
 
-class ReligionScreen extends StatelessWidget {
-  const ReligionScreen({Key? key}) : super(key: key);
+import 'package:sublime_groceria/cubit/sublime_state.dart';
+import 'package:sublime_groceria/models/item/sgitem.dart';
+
+class SgItemScreen extends StatelessWidget {
+  const SgItemScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Religions'),
+        title: const Text('SgItems'),
       ),
       body: Column(
         children: [
           Expanded(
-            child: BlocBuilder<ReligionCubit, SublimeState<List<Religion>>>(
+            child: BlocBuilder<SgItemCubit, SublimeState<List<SgItem>>>(
               builder: (context, state) {
-                if (state is SublimeLoading<List<Religion>>) {
+                if (state is SublimeLoading<List<SgItem>>) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is SublimeLoaded<List<Religion>>) {
-                  final religions = state.data;
+                } else if (state is SublimeLoaded<List<SgItem>>) {
+                  final SgItems = state.data;
                   return ListView.builder(
-                    itemCount: religions.length,
+                    itemCount: SgItems.length,
                     itemBuilder: (context, index) {
-                      final religion = religions[index];
+                      final SgItem = SgItems[index];
                       return ListTile(
-                        title: Text(religion.name),
-                        subtitle: Text('ID: ${religion.id}'),
+                        title: Text(SgItem.itemName),
+                        subtitle: Text('ID: ${SgItem.itemId}'),
                       );
                     },
                   );
-                } else if (state is SublimeError<List<Religion>>) {
+                } else if (state is SublimeError<List<SgItem>>) {
                   return Center(
                     child: Text(
                       'Error: ${state.message}',

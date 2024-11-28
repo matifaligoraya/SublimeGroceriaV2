@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         current.email != previous.email,
                     builder: (context, state) {
                       return Loginfields(
-                        lable: "helloworld@gmail.com",
+                        lable: "atigoraya",
                         suffix: Icon(
                           Icons.check_circle,
                           color: ColorLight.widgetstitle,
