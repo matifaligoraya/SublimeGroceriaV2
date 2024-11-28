@@ -1,32 +1,34 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sublime_groceria/common/api.dart';
 import 'package:sublime_groceria/models/common/response.dart';
 
 class SublimeBaseRepository {
-  final Dio _dio;
+  final Dio _dio = Dio();
+  String? _token;
 
-  SublimeBaseRepository() : _dio = Dio() {
+  Future<void> _initialize() async {
+    // _token = await _getToken();
     _dio.options = BaseOptions(
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
-      headers: {
-        'Content-Type': 'application/json',
-      },
     );
   }
 
   /// Fetch token from SharedPreferences
   Future<String?> _getToken() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs
-        .getString('auth_token'); // Replace 'auth_token' with your token key
+    return prefs.getString('token'); // Replace 'auth_token' with your token key
   }
 
   /// Update Authorization header dynamically
   Future<void> _updateHeaders() async {
     final token = await _getToken();
     if (token != null) {
+      _dio.options.headers['Content-Type'] = 'application/json';
       _dio.options.headers['Authorization'] = 'Bearer $token';
+
+      _dio.options.headers['Appkey'] = 'key ${API.apikey}';
     } else {
       _dio.options.headers.remove('Authorization');
     }

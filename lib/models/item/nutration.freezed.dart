@@ -20,17 +20,17 @@ Nutration _$NutrationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Nutration {
-  String get calories => throw _privateConstructorUsedError;
-  String get serving_size_g => throw _privateConstructorUsedError;
-  String get fat_total_g => throw _privateConstructorUsedError;
-  String get fat_saturated_g => throw _privateConstructorUsedError;
-  String get protein_g => throw _privateConstructorUsedError;
-  String get sodium_mg => throw _privateConstructorUsedError;
-  String get potassium_mg => throw _privateConstructorUsedError;
-  String get cholesterol_mg => throw _privateConstructorUsedError;
-  String get fiber_g => throw _privateConstructorUsedError;
-  String get sugar_g => throw _privateConstructorUsedError;
-  String get carbohydrates_total_g => throw _privateConstructorUsedError;
+  String? get calories => throw _privateConstructorUsedError;
+  String? get serving_size_g => throw _privateConstructorUsedError;
+  String? get fat_total_g => throw _privateConstructorUsedError;
+  String? get fat_saturated_g => throw _privateConstructorUsedError;
+  String? get protein_g => throw _privateConstructorUsedError;
+  String? get sodium_mg => throw _privateConstructorUsedError;
+  String? get potassium_mg => throw _privateConstructorUsedError;
+  String? get cholesterol_mg => throw _privateConstructorUsedError;
+  String? get fiber_g => throw _privateConstructorUsedError;
+  String? get sugar_g => throw _privateConstructorUsedError;
+  String? get carbohydrates_total_g => throw _privateConstructorUsedError;
 
   /// Serializes this Nutration to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,17 +48,17 @@ abstract class $NutrationCopyWith<$Res> {
       _$NutrationCopyWithImpl<$Res, Nutration>;
   @useResult
   $Res call(
-      {String calories,
-      String serving_size_g,
-      String fat_total_g,
-      String fat_saturated_g,
-      String protein_g,
-      String sodium_mg,
-      String potassium_mg,
-      String cholesterol_mg,
-      String fiber_g,
-      String sugar_g,
-      String carbohydrates_total_g});
+      {String? calories,
+      String? serving_size_g,
+      String? fat_total_g,
+      String? fat_saturated_g,
+      String? protein_g,
+      String? sodium_mg,
+      String? potassium_mg,
+      String? cholesterol_mg,
+      String? fiber_g,
+      String? sugar_g,
+      String? carbohydrates_total_g});
 }
 
 /// @nodoc
@@ -76,63 +76,63 @@ class _$NutrationCopyWithImpl<$Res, $Val extends Nutration>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? calories = null,
-    Object? serving_size_g = null,
-    Object? fat_total_g = null,
-    Object? fat_saturated_g = null,
-    Object? protein_g = null,
-    Object? sodium_mg = null,
-    Object? potassium_mg = null,
-    Object? cholesterol_mg = null,
-    Object? fiber_g = null,
-    Object? sugar_g = null,
-    Object? carbohydrates_total_g = null,
+    Object? calories = freezed,
+    Object? serving_size_g = freezed,
+    Object? fat_total_g = freezed,
+    Object? fat_saturated_g = freezed,
+    Object? protein_g = freezed,
+    Object? sodium_mg = freezed,
+    Object? potassium_mg = freezed,
+    Object? cholesterol_mg = freezed,
+    Object? fiber_g = freezed,
+    Object? sugar_g = freezed,
+    Object? carbohydrates_total_g = freezed,
   }) {
     return _then(_value.copyWith(
-      calories: null == calories
+      calories: freezed == calories
           ? _value.calories
           : calories // ignore: cast_nullable_to_non_nullable
-              as String,
-      serving_size_g: null == serving_size_g
+              as String?,
+      serving_size_g: freezed == serving_size_g
           ? _value.serving_size_g
           : serving_size_g // ignore: cast_nullable_to_non_nullable
-              as String,
-      fat_total_g: null == fat_total_g
+              as String?,
+      fat_total_g: freezed == fat_total_g
           ? _value.fat_total_g
           : fat_total_g // ignore: cast_nullable_to_non_nullable
-              as String,
-      fat_saturated_g: null == fat_saturated_g
+              as String?,
+      fat_saturated_g: freezed == fat_saturated_g
           ? _value.fat_saturated_g
           : fat_saturated_g // ignore: cast_nullable_to_non_nullable
-              as String,
-      protein_g: null == protein_g
+              as String?,
+      protein_g: freezed == protein_g
           ? _value.protein_g
           : protein_g // ignore: cast_nullable_to_non_nullable
-              as String,
-      sodium_mg: null == sodium_mg
+              as String?,
+      sodium_mg: freezed == sodium_mg
           ? _value.sodium_mg
           : sodium_mg // ignore: cast_nullable_to_non_nullable
-              as String,
-      potassium_mg: null == potassium_mg
+              as String?,
+      potassium_mg: freezed == potassium_mg
           ? _value.potassium_mg
           : potassium_mg // ignore: cast_nullable_to_non_nullable
-              as String,
-      cholesterol_mg: null == cholesterol_mg
+              as String?,
+      cholesterol_mg: freezed == cholesterol_mg
           ? _value.cholesterol_mg
           : cholesterol_mg // ignore: cast_nullable_to_non_nullable
-              as String,
-      fiber_g: null == fiber_g
+              as String?,
+      fiber_g: freezed == fiber_g
           ? _value.fiber_g
           : fiber_g // ignore: cast_nullable_to_non_nullable
-              as String,
-      sugar_g: null == sugar_g
+              as String?,
+      sugar_g: freezed == sugar_g
           ? _value.sugar_g
           : sugar_g // ignore: cast_nullable_to_non_nullable
-              as String,
-      carbohydrates_total_g: null == carbohydrates_total_g
+              as String?,
+      carbohydrates_total_g: freezed == carbohydrates_total_g
           ? _value.carbohydrates_total_g
           : carbohydrates_total_g // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -146,17 +146,17 @@ abstract class _$$NutrationImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String calories,
-      String serving_size_g,
-      String fat_total_g,
-      String fat_saturated_g,
-      String protein_g,
-      String sodium_mg,
-      String potassium_mg,
-      String cholesterol_mg,
-      String fiber_g,
-      String sugar_g,
-      String carbohydrates_total_g});
+      {String? calories,
+      String? serving_size_g,
+      String? fat_total_g,
+      String? fat_saturated_g,
+      String? protein_g,
+      String? sodium_mg,
+      String? potassium_mg,
+      String? cholesterol_mg,
+      String? fiber_g,
+      String? sugar_g,
+      String? carbohydrates_total_g});
 }
 
 /// @nodoc
@@ -172,63 +172,63 @@ class __$$NutrationImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? calories = null,
-    Object? serving_size_g = null,
-    Object? fat_total_g = null,
-    Object? fat_saturated_g = null,
-    Object? protein_g = null,
-    Object? sodium_mg = null,
-    Object? potassium_mg = null,
-    Object? cholesterol_mg = null,
-    Object? fiber_g = null,
-    Object? sugar_g = null,
-    Object? carbohydrates_total_g = null,
+    Object? calories = freezed,
+    Object? serving_size_g = freezed,
+    Object? fat_total_g = freezed,
+    Object? fat_saturated_g = freezed,
+    Object? protein_g = freezed,
+    Object? sodium_mg = freezed,
+    Object? potassium_mg = freezed,
+    Object? cholesterol_mg = freezed,
+    Object? fiber_g = freezed,
+    Object? sugar_g = freezed,
+    Object? carbohydrates_total_g = freezed,
   }) {
     return _then(_$NutrationImpl(
-      calories: null == calories
+      calories: freezed == calories
           ? _value.calories
           : calories // ignore: cast_nullable_to_non_nullable
-              as String,
-      serving_size_g: null == serving_size_g
+              as String?,
+      serving_size_g: freezed == serving_size_g
           ? _value.serving_size_g
           : serving_size_g // ignore: cast_nullable_to_non_nullable
-              as String,
-      fat_total_g: null == fat_total_g
+              as String?,
+      fat_total_g: freezed == fat_total_g
           ? _value.fat_total_g
           : fat_total_g // ignore: cast_nullable_to_non_nullable
-              as String,
-      fat_saturated_g: null == fat_saturated_g
+              as String?,
+      fat_saturated_g: freezed == fat_saturated_g
           ? _value.fat_saturated_g
           : fat_saturated_g // ignore: cast_nullable_to_non_nullable
-              as String,
-      protein_g: null == protein_g
+              as String?,
+      protein_g: freezed == protein_g
           ? _value.protein_g
           : protein_g // ignore: cast_nullable_to_non_nullable
-              as String,
-      sodium_mg: null == sodium_mg
+              as String?,
+      sodium_mg: freezed == sodium_mg
           ? _value.sodium_mg
           : sodium_mg // ignore: cast_nullable_to_non_nullable
-              as String,
-      potassium_mg: null == potassium_mg
+              as String?,
+      potassium_mg: freezed == potassium_mg
           ? _value.potassium_mg
           : potassium_mg // ignore: cast_nullable_to_non_nullable
-              as String,
-      cholesterol_mg: null == cholesterol_mg
+              as String?,
+      cholesterol_mg: freezed == cholesterol_mg
           ? _value.cholesterol_mg
           : cholesterol_mg // ignore: cast_nullable_to_non_nullable
-              as String,
-      fiber_g: null == fiber_g
+              as String?,
+      fiber_g: freezed == fiber_g
           ? _value.fiber_g
           : fiber_g // ignore: cast_nullable_to_non_nullable
-              as String,
-      sugar_g: null == sugar_g
+              as String?,
+      sugar_g: freezed == sugar_g
           ? _value.sugar_g
           : sugar_g // ignore: cast_nullable_to_non_nullable
-              as String,
-      carbohydrates_total_g: null == carbohydrates_total_g
+              as String?,
+      carbohydrates_total_g: freezed == carbohydrates_total_g
           ? _value.carbohydrates_total_g
           : carbohydrates_total_g // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -253,27 +253,27 @@ class _$NutrationImpl implements _Nutration {
       _$$NutrationImplFromJson(json);
 
   @override
-  final String calories;
+  final String? calories;
   @override
-  final String serving_size_g;
+  final String? serving_size_g;
   @override
-  final String fat_total_g;
+  final String? fat_total_g;
   @override
-  final String fat_saturated_g;
+  final String? fat_saturated_g;
   @override
-  final String protein_g;
+  final String? protein_g;
   @override
-  final String sodium_mg;
+  final String? sodium_mg;
   @override
-  final String potassium_mg;
+  final String? potassium_mg;
   @override
-  final String cholesterol_mg;
+  final String? cholesterol_mg;
   @override
-  final String fiber_g;
+  final String? fiber_g;
   @override
-  final String sugar_g;
+  final String? sugar_g;
   @override
-  final String carbohydrates_total_g;
+  final String? carbohydrates_total_g;
 
   @override
   String toString() {
@@ -341,43 +341,43 @@ class _$NutrationImpl implements _Nutration {
 
 abstract class _Nutration implements Nutration {
   factory _Nutration(
-      {required final String calories,
-      required final String serving_size_g,
-      required final String fat_total_g,
-      required final String fat_saturated_g,
-      required final String protein_g,
-      required final String sodium_mg,
-      required final String potassium_mg,
-      required final String cholesterol_mg,
-      required final String fiber_g,
-      required final String sugar_g,
-      required final String carbohydrates_total_g}) = _$NutrationImpl;
+      {required final String? calories,
+      required final String? serving_size_g,
+      required final String? fat_total_g,
+      required final String? fat_saturated_g,
+      required final String? protein_g,
+      required final String? sodium_mg,
+      required final String? potassium_mg,
+      required final String? cholesterol_mg,
+      required final String? fiber_g,
+      required final String? sugar_g,
+      required final String? carbohydrates_total_g}) = _$NutrationImpl;
 
   factory _Nutration.fromJson(Map<String, dynamic> json) =
       _$NutrationImpl.fromJson;
 
   @override
-  String get calories;
+  String? get calories;
   @override
-  String get serving_size_g;
+  String? get serving_size_g;
   @override
-  String get fat_total_g;
+  String? get fat_total_g;
   @override
-  String get fat_saturated_g;
+  String? get fat_saturated_g;
   @override
-  String get protein_g;
+  String? get protein_g;
   @override
-  String get sodium_mg;
+  String? get sodium_mg;
   @override
-  String get potassium_mg;
+  String? get potassium_mg;
   @override
-  String get cholesterol_mg;
+  String? get cholesterol_mg;
   @override
-  String get fiber_g;
+  String? get fiber_g;
   @override
-  String get sugar_g;
+  String? get sugar_g;
   @override
-  String get carbohydrates_total_g;
+  String? get carbohydrates_total_g;
 
   /// Create a copy of Nutration
   /// with the given fields replaced by the non-null parameter values.

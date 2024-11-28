@@ -32,8 +32,8 @@ class SgItemScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final SgItem = SgItems[index];
                       return ListTile(
-                        title: Text(SgItem.itemName),
-                        subtitle: Text('ID: ${SgItem.itemId}'),
+                        title: Text(SgItem.itemName!),
+                        subtitle: Text('ID: ${SgItem.itemId!}'),
                       );
                     },
                   );

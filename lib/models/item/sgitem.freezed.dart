@@ -20,23 +20,23 @@ SgItem _$SgItemFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SgItem {
-  int get itemId => throw _privateConstructorUsedError;
-  String get itemName => throw _privateConstructorUsedError;
-  String get itemKeyword => throw _privateConstructorUsedError;
-  int get quantityTypeId => throw _privateConstructorUsedError;
-  int get itemCategoryId => throw _privateConstructorUsedError;
-  String get categoryName => throw _privateConstructorUsedError;
-  String get typeName => throw _privateConstructorUsedError;
-  String get abbrivation => throw _privateConstructorUsedError;
-  String get unitName => throw _privateConstructorUsedError;
-  bool get couldBeDouble => throw _privateConstructorUsedError;
-  String get fileName => throw _privateConstructorUsedError;
-  String get fileType => throw _privateConstructorUsedError;
-  String get dataFiles => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  int get itemNutritionId => throw _privateConstructorUsedError;
-  int get moq => throw _privateConstructorUsedError;
-  bool get isActive => throw _privateConstructorUsedError;
+  int? get itemId => throw _privateConstructorUsedError;
+  String? get itemName => throw _privateConstructorUsedError;
+  String? get itemKeyword => throw _privateConstructorUsedError;
+  int? get quantityTypeId => throw _privateConstructorUsedError;
+  int? get itemCategoryId => throw _privateConstructorUsedError;
+  String? get categoryName => throw _privateConstructorUsedError;
+  String? get typeName => throw _privateConstructorUsedError;
+  String? get abbrivation => throw _privateConstructorUsedError;
+  String? get unitName => throw _privateConstructorUsedError;
+  bool? get couldBeDouble => throw _privateConstructorUsedError;
+  String? get fileName => throw _privateConstructorUsedError;
+  String? get fileType => throw _privateConstructorUsedError;
+  String? get dataFiles => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  int? get itemNutritionId => throw _privateConstructorUsedError;
+  int? get moq => throw _privateConstructorUsedError;
+  bool? get isActive => throw _privateConstructorUsedError;
   List<Nutration> get nutration => throw _privateConstructorUsedError;
 
   /// Serializes this SgItem to a JSON map.
@@ -54,23 +54,23 @@ abstract class $SgItemCopyWith<$Res> {
       _$SgItemCopyWithImpl<$Res, SgItem>;
   @useResult
   $Res call(
-      {int itemId,
-      String itemName,
-      String itemKeyword,
-      int quantityTypeId,
-      int itemCategoryId,
-      String categoryName,
-      String typeName,
-      String abbrivation,
-      String unitName,
-      bool couldBeDouble,
-      String fileName,
-      String fileType,
-      String dataFiles,
-      String description,
-      int itemNutritionId,
-      int moq,
-      bool isActive,
+      {int? itemId,
+      String? itemName,
+      String? itemKeyword,
+      int? quantityTypeId,
+      int? itemCategoryId,
+      String? categoryName,
+      String? typeName,
+      String? abbrivation,
+      String? unitName,
+      bool? couldBeDouble,
+      String? fileName,
+      String? fileType,
+      String? dataFiles,
+      String? description,
+      int? itemNutritionId,
+      int? moq,
+      bool? isActive,
       List<Nutration> nutration});
 }
 
@@ -89,94 +89,94 @@ class _$SgItemCopyWithImpl<$Res, $Val extends SgItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? itemId = null,
-    Object? itemName = null,
-    Object? itemKeyword = null,
-    Object? quantityTypeId = null,
-    Object? itemCategoryId = null,
-    Object? categoryName = null,
-    Object? typeName = null,
-    Object? abbrivation = null,
-    Object? unitName = null,
-    Object? couldBeDouble = null,
-    Object? fileName = null,
-    Object? fileType = null,
-    Object? dataFiles = null,
-    Object? description = null,
-    Object? itemNutritionId = null,
-    Object? moq = null,
-    Object? isActive = null,
+    Object? itemId = freezed,
+    Object? itemName = freezed,
+    Object? itemKeyword = freezed,
+    Object? quantityTypeId = freezed,
+    Object? itemCategoryId = freezed,
+    Object? categoryName = freezed,
+    Object? typeName = freezed,
+    Object? abbrivation = freezed,
+    Object? unitName = freezed,
+    Object? couldBeDouble = freezed,
+    Object? fileName = freezed,
+    Object? fileType = freezed,
+    Object? dataFiles = freezed,
+    Object? description = freezed,
+    Object? itemNutritionId = freezed,
+    Object? moq = freezed,
+    Object? isActive = freezed,
     Object? nutration = null,
   }) {
     return _then(_value.copyWith(
-      itemId: null == itemId
+      itemId: freezed == itemId
           ? _value.itemId
           : itemId // ignore: cast_nullable_to_non_nullable
-              as int,
-      itemName: null == itemName
+              as int?,
+      itemName: freezed == itemName
           ? _value.itemName
           : itemName // ignore: cast_nullable_to_non_nullable
-              as String,
-      itemKeyword: null == itemKeyword
+              as String?,
+      itemKeyword: freezed == itemKeyword
           ? _value.itemKeyword
           : itemKeyword // ignore: cast_nullable_to_non_nullable
-              as String,
-      quantityTypeId: null == quantityTypeId
+              as String?,
+      quantityTypeId: freezed == quantityTypeId
           ? _value.quantityTypeId
           : quantityTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
-      itemCategoryId: null == itemCategoryId
+              as int?,
+      itemCategoryId: freezed == itemCategoryId
           ? _value.itemCategoryId
           : itemCategoryId // ignore: cast_nullable_to_non_nullable
-              as int,
-      categoryName: null == categoryName
+              as int?,
+      categoryName: freezed == categoryName
           ? _value.categoryName
           : categoryName // ignore: cast_nullable_to_non_nullable
-              as String,
-      typeName: null == typeName
+              as String?,
+      typeName: freezed == typeName
           ? _value.typeName
           : typeName // ignore: cast_nullable_to_non_nullable
-              as String,
-      abbrivation: null == abbrivation
+              as String?,
+      abbrivation: freezed == abbrivation
           ? _value.abbrivation
           : abbrivation // ignore: cast_nullable_to_non_nullable
-              as String,
-      unitName: null == unitName
+              as String?,
+      unitName: freezed == unitName
           ? _value.unitName
           : unitName // ignore: cast_nullable_to_non_nullable
-              as String,
-      couldBeDouble: null == couldBeDouble
+              as String?,
+      couldBeDouble: freezed == couldBeDouble
           ? _value.couldBeDouble
           : couldBeDouble // ignore: cast_nullable_to_non_nullable
-              as bool,
-      fileName: null == fileName
+              as bool?,
+      fileName: freezed == fileName
           ? _value.fileName
           : fileName // ignore: cast_nullable_to_non_nullable
-              as String,
-      fileType: null == fileType
+              as String?,
+      fileType: freezed == fileType
           ? _value.fileType
           : fileType // ignore: cast_nullable_to_non_nullable
-              as String,
-      dataFiles: null == dataFiles
+              as String?,
+      dataFiles: freezed == dataFiles
           ? _value.dataFiles
           : dataFiles // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
+              as String?,
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      itemNutritionId: null == itemNutritionId
+              as String?,
+      itemNutritionId: freezed == itemNutritionId
           ? _value.itemNutritionId
           : itemNutritionId // ignore: cast_nullable_to_non_nullable
-              as int,
-      moq: null == moq
+              as int?,
+      moq: freezed == moq
           ? _value.moq
           : moq // ignore: cast_nullable_to_non_nullable
-              as int,
-      isActive: null == isActive
+              as int?,
+      isActive: freezed == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       nutration: null == nutration
           ? _value.nutration
           : nutration // ignore: cast_nullable_to_non_nullable
@@ -193,23 +193,23 @@ abstract class _$$SgItemImplCopyWith<$Res> implements $SgItemCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int itemId,
-      String itemName,
-      String itemKeyword,
-      int quantityTypeId,
-      int itemCategoryId,
-      String categoryName,
-      String typeName,
-      String abbrivation,
-      String unitName,
-      bool couldBeDouble,
-      String fileName,
-      String fileType,
-      String dataFiles,
-      String description,
-      int itemNutritionId,
-      int moq,
-      bool isActive,
+      {int? itemId,
+      String? itemName,
+      String? itemKeyword,
+      int? quantityTypeId,
+      int? itemCategoryId,
+      String? categoryName,
+      String? typeName,
+      String? abbrivation,
+      String? unitName,
+      bool? couldBeDouble,
+      String? fileName,
+      String? fileType,
+      String? dataFiles,
+      String? description,
+      int? itemNutritionId,
+      int? moq,
+      bool? isActive,
       List<Nutration> nutration});
 }
 
@@ -226,94 +226,94 @@ class __$$SgItemImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? itemId = null,
-    Object? itemName = null,
-    Object? itemKeyword = null,
-    Object? quantityTypeId = null,
-    Object? itemCategoryId = null,
-    Object? categoryName = null,
-    Object? typeName = null,
-    Object? abbrivation = null,
-    Object? unitName = null,
-    Object? couldBeDouble = null,
-    Object? fileName = null,
-    Object? fileType = null,
-    Object? dataFiles = null,
-    Object? description = null,
-    Object? itemNutritionId = null,
-    Object? moq = null,
-    Object? isActive = null,
+    Object? itemId = freezed,
+    Object? itemName = freezed,
+    Object? itemKeyword = freezed,
+    Object? quantityTypeId = freezed,
+    Object? itemCategoryId = freezed,
+    Object? categoryName = freezed,
+    Object? typeName = freezed,
+    Object? abbrivation = freezed,
+    Object? unitName = freezed,
+    Object? couldBeDouble = freezed,
+    Object? fileName = freezed,
+    Object? fileType = freezed,
+    Object? dataFiles = freezed,
+    Object? description = freezed,
+    Object? itemNutritionId = freezed,
+    Object? moq = freezed,
+    Object? isActive = freezed,
     Object? nutration = null,
   }) {
     return _then(_$SgItemImpl(
-      itemId: null == itemId
+      itemId: freezed == itemId
           ? _value.itemId
           : itemId // ignore: cast_nullable_to_non_nullable
-              as int,
-      itemName: null == itemName
+              as int?,
+      itemName: freezed == itemName
           ? _value.itemName
           : itemName // ignore: cast_nullable_to_non_nullable
-              as String,
-      itemKeyword: null == itemKeyword
+              as String?,
+      itemKeyword: freezed == itemKeyword
           ? _value.itemKeyword
           : itemKeyword // ignore: cast_nullable_to_non_nullable
-              as String,
-      quantityTypeId: null == quantityTypeId
+              as String?,
+      quantityTypeId: freezed == quantityTypeId
           ? _value.quantityTypeId
           : quantityTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
-      itemCategoryId: null == itemCategoryId
+              as int?,
+      itemCategoryId: freezed == itemCategoryId
           ? _value.itemCategoryId
           : itemCategoryId // ignore: cast_nullable_to_non_nullable
-              as int,
-      categoryName: null == categoryName
+              as int?,
+      categoryName: freezed == categoryName
           ? _value.categoryName
           : categoryName // ignore: cast_nullable_to_non_nullable
-              as String,
-      typeName: null == typeName
+              as String?,
+      typeName: freezed == typeName
           ? _value.typeName
           : typeName // ignore: cast_nullable_to_non_nullable
-              as String,
-      abbrivation: null == abbrivation
+              as String?,
+      abbrivation: freezed == abbrivation
           ? _value.abbrivation
           : abbrivation // ignore: cast_nullable_to_non_nullable
-              as String,
-      unitName: null == unitName
+              as String?,
+      unitName: freezed == unitName
           ? _value.unitName
           : unitName // ignore: cast_nullable_to_non_nullable
-              as String,
-      couldBeDouble: null == couldBeDouble
+              as String?,
+      couldBeDouble: freezed == couldBeDouble
           ? _value.couldBeDouble
           : couldBeDouble // ignore: cast_nullable_to_non_nullable
-              as bool,
-      fileName: null == fileName
+              as bool?,
+      fileName: freezed == fileName
           ? _value.fileName
           : fileName // ignore: cast_nullable_to_non_nullable
-              as String,
-      fileType: null == fileType
+              as String?,
+      fileType: freezed == fileType
           ? _value.fileType
           : fileType // ignore: cast_nullable_to_non_nullable
-              as String,
-      dataFiles: null == dataFiles
+              as String?,
+      dataFiles: freezed == dataFiles
           ? _value.dataFiles
           : dataFiles // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
+              as String?,
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      itemNutritionId: null == itemNutritionId
+              as String?,
+      itemNutritionId: freezed == itemNutritionId
           ? _value.itemNutritionId
           : itemNutritionId // ignore: cast_nullable_to_non_nullable
-              as int,
-      moq: null == moq
+              as int?,
+      moq: freezed == moq
           ? _value.moq
           : moq // ignore: cast_nullable_to_non_nullable
-              as int,
-      isActive: null == isActive
+              as int?,
+      isActive: freezed == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       nutration: null == nutration
           ? _value._nutration
           : nutration // ignore: cast_nullable_to_non_nullable
@@ -350,39 +350,39 @@ class _$SgItemImpl implements _SgItem {
       _$$SgItemImplFromJson(json);
 
   @override
-  final int itemId;
+  final int? itemId;
   @override
-  final String itemName;
+  final String? itemName;
   @override
-  final String itemKeyword;
+  final String? itemKeyword;
   @override
-  final int quantityTypeId;
+  final int? quantityTypeId;
   @override
-  final int itemCategoryId;
+  final int? itemCategoryId;
   @override
-  final String categoryName;
+  final String? categoryName;
   @override
-  final String typeName;
+  final String? typeName;
   @override
-  final String abbrivation;
+  final String? abbrivation;
   @override
-  final String unitName;
+  final String? unitName;
   @override
-  final bool couldBeDouble;
+  final bool? couldBeDouble;
   @override
-  final String fileName;
+  final String? fileName;
   @override
-  final String fileType;
+  final String? fileType;
   @override
-  final String dataFiles;
+  final String? dataFiles;
   @override
-  final String description;
+  final String? description;
   @override
-  final int itemNutritionId;
+  final int? itemNutritionId;
   @override
-  final int moq;
+  final int? moq;
   @override
-  final bool isActive;
+  final bool? isActive;
   final List<Nutration> _nutration;
   @override
   List<Nutration> get nutration {
@@ -478,61 +478,61 @@ class _$SgItemImpl implements _SgItem {
 
 abstract class _SgItem implements SgItem {
   factory _SgItem(
-      {required final int itemId,
-      required final String itemName,
-      required final String itemKeyword,
-      required final int quantityTypeId,
-      required final int itemCategoryId,
-      required final String categoryName,
-      required final String typeName,
-      required final String abbrivation,
-      required final String unitName,
-      required final bool couldBeDouble,
-      required final String fileName,
-      required final String fileType,
-      required final String dataFiles,
-      required final String description,
-      required final int itemNutritionId,
-      required final int moq,
-      required final bool isActive,
+      {required final int? itemId,
+      required final String? itemName,
+      required final String? itemKeyword,
+      required final int? quantityTypeId,
+      required final int? itemCategoryId,
+      required final String? categoryName,
+      required final String? typeName,
+      required final String? abbrivation,
+      required final String? unitName,
+      required final bool? couldBeDouble,
+      required final String? fileName,
+      required final String? fileType,
+      required final String? dataFiles,
+      required final String? description,
+      required final int? itemNutritionId,
+      required final int? moq,
+      required final bool? isActive,
       required final List<Nutration> nutration}) = _$SgItemImpl;
 
   factory _SgItem.fromJson(Map<String, dynamic> json) = _$SgItemImpl.fromJson;
 
   @override
-  int get itemId;
+  int? get itemId;
   @override
-  String get itemName;
+  String? get itemName;
   @override
-  String get itemKeyword;
+  String? get itemKeyword;
   @override
-  int get quantityTypeId;
+  int? get quantityTypeId;
   @override
-  int get itemCategoryId;
+  int? get itemCategoryId;
   @override
-  String get categoryName;
+  String? get categoryName;
   @override
-  String get typeName;
+  String? get typeName;
   @override
-  String get abbrivation;
+  String? get abbrivation;
   @override
-  String get unitName;
+  String? get unitName;
   @override
-  bool get couldBeDouble;
+  bool? get couldBeDouble;
   @override
-  String get fileName;
+  String? get fileName;
   @override
-  String get fileType;
+  String? get fileType;
   @override
-  String get dataFiles;
+  String? get dataFiles;
   @override
-  String get description;
+  String? get description;
   @override
-  int get itemNutritionId;
+  int? get itemNutritionId;
   @override
-  int get moq;
+  int? get moq;
   @override
-  bool get isActive;
+  bool? get isActive;
   @override
   List<Nutration> get nutration;
 
