@@ -24,9 +24,9 @@ _$SgItemImpl _$$SgItemImplFromJson(Map<String, dynamic> json) => _$SgItemImpl(
       itemNutritionId: (json['itemNutritionId'] as num?)?.toInt(),
       moq: (json['moq'] as num?)?.toInt(),
       isActive: json['isActive'] as bool?,
-      nutration: (json['nutration'] as List<dynamic>)
-          .map((e) => Nutration.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      nutration: json['nutration'] == null
+          ? null
+          : Nutration.fromJson(json['nutration'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SgItemImplToJson(_$SgItemImpl instance) =>

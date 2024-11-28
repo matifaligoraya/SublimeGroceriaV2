@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sublime_groceria/common/routes.dart';
 import 'package:sublime_groceria/cubit/sgitemcubit.dart';
-
 import 'package:sublime_groceria/cubit/sublime_state.dart';
 import 'package:sublime_groceria/models/item/sgitem.dart';
 
@@ -26,14 +25,69 @@ class SgItemScreen extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 } else if (state is SublimeLoaded<List<SgItem>>) {
-                  final SgItems = state.data;
+                  final sgItems = state.data
+                      .where((item) => item.itemNutritionId != null)
+                      .toList();
+
                   return ListView.builder(
-                    itemCount: SgItems.length,
+                    itemCount: sgItems.length,
                     itemBuilder: (context, index) {
-                      final SgItem = SgItems[index];
-                      return ListTile(
-                        title: Text(SgItem.itemName!),
-                        subtitle: Text('ID: ${SgItem.itemId!}'),
+                      final sgItem = sgItems[index];
+                      return Card(
+                        elevation: 2.0,
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 8.0,
+                          horizontal: 16.0,
+                        ),
+                        child: ListTile(
+                          title: Text(
+                            sgItem.itemName ?? 'No Name Available',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('ID: ${sgItem.itemId ?? 'N/A'}'),
+                              Text('Category: ${sgItem.categoryName ?? 'N/A'}'),
+                              Text(
+                                  'Type: ${sgItem.typeName ?? 'N/A'} (${sgItem.abbrivation ?? 'N/A'})'),
+                              Text(
+                                  'Description: ${sgItem.description == "//" ? "No description available" : sgItem.description ?? 'N/A'}'),
+                              Text(
+                                  'itemNutritionId: ${sgItem.itemNutritionId}'),
+                              if (sgItem.nutration != null)
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text('Nutration:'),
+                                    Text(
+                                        '- Calories: ${sgItem.nutration!.calories ?? 'Unknown'}'),
+                                    Text(
+                                        '- Serving Size: ${sgItem.nutration!.serving_size_g ?? 'Unknown'} g'),
+                                    Text(
+                                        '- Total Fat: ${sgItem.nutration!.fat_total_g ?? 'Unknown'} g'),
+                                    Text(
+                                        '- Saturated Fat: ${sgItem.nutration!.fat_saturated_g ?? 'Unknown'} g'),
+                                    Text(
+                                        '- Protein: ${sgItem.nutration!.protein_g ?? 'Unknown'} g'),
+                                  ],
+                                ),
+                            ],
+                          ),
+                          leading: sgItem.fileName != null &&
+                                  sgItem.fileType != null
+                              ? Image.network(
+                                  'https://example.com/${sgItem.fileName!}',
+                                  width: 50,
+                                  height: 50,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      const Icon(Icons.broken_image),
+                                )
+                              : const Icon(Icons.image_not_supported),
+                        ),
                       );
                     },
                   );

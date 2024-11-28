@@ -37,7 +37,7 @@ mixin _$SgItem {
   int? get itemNutritionId => throw _privateConstructorUsedError;
   int? get moq => throw _privateConstructorUsedError;
   bool? get isActive => throw _privateConstructorUsedError;
-  List<Nutration> get nutration => throw _privateConstructorUsedError;
+  Nutration? get nutration => throw _privateConstructorUsedError;
 
   /// Serializes this SgItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -71,7 +71,9 @@ abstract class $SgItemCopyWith<$Res> {
       int? itemNutritionId,
       int? moq,
       bool? isActive,
-      List<Nutration> nutration});
+      Nutration? nutration});
+
+  $NutrationCopyWith<$Res>? get nutration;
 }
 
 /// @nodoc
@@ -106,7 +108,7 @@ class _$SgItemCopyWithImpl<$Res, $Val extends SgItem>
     Object? itemNutritionId = freezed,
     Object? moq = freezed,
     Object? isActive = freezed,
-    Object? nutration = null,
+    Object? nutration = freezed,
   }) {
     return _then(_value.copyWith(
       itemId: freezed == itemId
@@ -177,11 +179,25 @@ class _$SgItemCopyWithImpl<$Res, $Val extends SgItem>
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool?,
-      nutration: null == nutration
+      nutration: freezed == nutration
           ? _value.nutration
           : nutration // ignore: cast_nullable_to_non_nullable
-              as List<Nutration>,
+              as Nutration?,
     ) as $Val);
+  }
+
+  /// Create a copy of SgItem
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $NutrationCopyWith<$Res>? get nutration {
+    if (_value.nutration == null) {
+      return null;
+    }
+
+    return $NutrationCopyWith<$Res>(_value.nutration!, (value) {
+      return _then(_value.copyWith(nutration: value) as $Val);
+    });
   }
 }
 
@@ -210,7 +226,10 @@ abstract class _$$SgItemImplCopyWith<$Res> implements $SgItemCopyWith<$Res> {
       int? itemNutritionId,
       int? moq,
       bool? isActive,
-      List<Nutration> nutration});
+      Nutration? nutration});
+
+  @override
+  $NutrationCopyWith<$Res>? get nutration;
 }
 
 /// @nodoc
@@ -243,7 +262,7 @@ class __$$SgItemImplCopyWithImpl<$Res>
     Object? itemNutritionId = freezed,
     Object? moq = freezed,
     Object? isActive = freezed,
-    Object? nutration = null,
+    Object? nutration = freezed,
   }) {
     return _then(_$SgItemImpl(
       itemId: freezed == itemId
@@ -314,10 +333,10 @@ class __$$SgItemImplCopyWithImpl<$Res>
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool?,
-      nutration: null == nutration
-          ? _value._nutration
+      nutration: freezed == nutration
+          ? _value.nutration
           : nutration // ignore: cast_nullable_to_non_nullable
-              as List<Nutration>,
+              as Nutration?,
     ));
   }
 }
@@ -326,25 +345,24 @@ class __$$SgItemImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SgItemImpl implements _SgItem {
   _$SgItemImpl(
-      {required this.itemId,
-      required this.itemName,
-      required this.itemKeyword,
-      required this.quantityTypeId,
-      required this.itemCategoryId,
-      required this.categoryName,
-      required this.typeName,
-      required this.abbrivation,
-      required this.unitName,
-      required this.couldBeDouble,
-      required this.fileName,
-      required this.fileType,
-      required this.dataFiles,
-      required this.description,
-      required this.itemNutritionId,
-      required this.moq,
-      required this.isActive,
-      required final List<Nutration> nutration})
-      : _nutration = nutration;
+      {this.itemId,
+      this.itemName,
+      this.itemKeyword,
+      this.quantityTypeId,
+      this.itemCategoryId,
+      this.categoryName,
+      this.typeName,
+      this.abbrivation,
+      this.unitName,
+      this.couldBeDouble,
+      this.fileName,
+      this.fileType,
+      this.dataFiles,
+      this.description,
+      this.itemNutritionId,
+      this.moq,
+      this.isActive,
+      this.nutration});
 
   factory _$SgItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$SgItemImplFromJson(json);
@@ -383,13 +401,8 @@ class _$SgItemImpl implements _SgItem {
   final int? moq;
   @override
   final bool? isActive;
-  final List<Nutration> _nutration;
   @override
-  List<Nutration> get nutration {
-    if (_nutration is EqualUnmodifiableListView) return _nutration;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_nutration);
-  }
+  final Nutration? nutration;
 
   @override
   String toString() {
@@ -433,8 +446,8 @@ class _$SgItemImpl implements _SgItem {
             (identical(other.moq, moq) || other.moq == moq) &&
             (identical(other.isActive, isActive) ||
                 other.isActive == isActive) &&
-            const DeepCollectionEquality()
-                .equals(other._nutration, _nutration));
+            (identical(other.nutration, nutration) ||
+                other.nutration == nutration));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -458,7 +471,7 @@ class _$SgItemImpl implements _SgItem {
       itemNutritionId,
       moq,
       isActive,
-      const DeepCollectionEquality().hash(_nutration));
+      nutration);
 
   /// Create a copy of SgItem
   /// with the given fields replaced by the non-null parameter values.
@@ -478,24 +491,24 @@ class _$SgItemImpl implements _SgItem {
 
 abstract class _SgItem implements SgItem {
   factory _SgItem(
-      {required final int? itemId,
-      required final String? itemName,
-      required final String? itemKeyword,
-      required final int? quantityTypeId,
-      required final int? itemCategoryId,
-      required final String? categoryName,
-      required final String? typeName,
-      required final String? abbrivation,
-      required final String? unitName,
-      required final bool? couldBeDouble,
-      required final String? fileName,
-      required final String? fileType,
-      required final String? dataFiles,
-      required final String? description,
-      required final int? itemNutritionId,
-      required final int? moq,
-      required final bool? isActive,
-      required final List<Nutration> nutration}) = _$SgItemImpl;
+      {final int? itemId,
+      final String? itemName,
+      final String? itemKeyword,
+      final int? quantityTypeId,
+      final int? itemCategoryId,
+      final String? categoryName,
+      final String? typeName,
+      final String? abbrivation,
+      final String? unitName,
+      final bool? couldBeDouble,
+      final String? fileName,
+      final String? fileType,
+      final String? dataFiles,
+      final String? description,
+      final int? itemNutritionId,
+      final int? moq,
+      final bool? isActive,
+      final Nutration? nutration}) = _$SgItemImpl;
 
   factory _SgItem.fromJson(Map<String, dynamic> json) = _$SgItemImpl.fromJson;
 
@@ -534,7 +547,7 @@ abstract class _SgItem implements SgItem {
   @override
   bool? get isActive;
   @override
-  List<Nutration> get nutration;
+  Nutration? get nutration;
 
   /// Create a copy of SgItem
   /// with the given fields replaced by the non-null parameter values.

@@ -12,17 +12,13 @@ class ReligionCubit extends Cubit<SublimeState<List<Religion>>> {
   void fetchReligions() async {
     emit(SublimeLoading());
     try {
-      final religions = await repository.get<List<Religion>>(
+      final rawData = await repository.get(
         url: API.RELIGION,
-        fromJsonT: (json) => (json as List<dynamic>)
-            .map((item) => Religion.fromJson(item as Map<String, dynamic>))
-            .toList(),
       );
-      if (religions.data != null) {
-        emit(SublimeLoaded(religions.data!));
-      } else {
-        emit(SublimeError(religions.message ?? 'No religions found.'));
-      }
+      final religions = (rawData['data'] as List)
+          .map((json) => Religion.fromJson(json as Map<String, dynamic>))
+          .toList();
+      emit(SublimeLoaded(religions));
     } catch (e) {
       emit(SublimeError(e.toString()));
     }

@@ -35,19 +35,18 @@ class SublimeBaseRepository {
   }
 
   /// Generic GET request
-  Future<ApiResponse<T>> get<T>({
+  Future<dynamic> get({
     required String url,
-    required T Function(Object?) fromJsonT,
     Map<String, dynamic>? queryParams,
   }) async {
     try {
       await _updateHeaders();
       final response = await _dio.get(url, queryParameters: queryParams);
-
-      return ApiResponse<T>.fromJson(
-        response.data,
-        fromJsonT,
-      );
+      return response.data;
+      // return ApiResponse<T>.fromJson(
+      //   response.data,
+      //   (data) => T.fromJson(data as Map<String, dynamic>),
+      // );
     } on DioException catch (e) {
       throw Exception('GET Error: ${e.response?.data ?? e.message}');
     } catch (e) {

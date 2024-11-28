@@ -237,17 +237,17 @@ class __$$NutrationImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$NutrationImpl implements _Nutration {
   _$NutrationImpl(
-      {required this.calories,
-      required this.serving_size_g,
-      required this.fat_total_g,
-      required this.fat_saturated_g,
-      required this.protein_g,
-      required this.sodium_mg,
-      required this.potassium_mg,
-      required this.cholesterol_mg,
-      required this.fiber_g,
-      required this.sugar_g,
-      required this.carbohydrates_total_g});
+      {this.calories,
+      this.serving_size_g,
+      this.fat_total_g,
+      this.fat_saturated_g,
+      this.protein_g,
+      this.sodium_mg,
+      this.potassium_mg,
+      this.cholesterol_mg,
+      this.fiber_g,
+      this.sugar_g,
+      this.carbohydrates_total_g});
 
   factory _$NutrationImpl.fromJson(Map<String, dynamic> json) =>
       _$$NutrationImplFromJson(json);
@@ -341,17 +341,17 @@ class _$NutrationImpl implements _Nutration {
 
 abstract class _Nutration implements Nutration {
   factory _Nutration(
-      {required final String? calories,
-      required final String? serving_size_g,
-      required final String? fat_total_g,
-      required final String? fat_saturated_g,
-      required final String? protein_g,
-      required final String? sodium_mg,
-      required final String? potassium_mg,
-      required final String? cholesterol_mg,
-      required final String? fiber_g,
-      required final String? sugar_g,
-      required final String? carbohydrates_total_g}) = _$NutrationImpl;
+      {final String? calories,
+      final String? serving_size_g,
+      final String? fat_total_g,
+      final String? fat_saturated_g,
+      final String? protein_g,
+      final String? sodium_mg,
+      final String? potassium_mg,
+      final String? cholesterol_mg,
+      final String? fiber_g,
+      final String? sugar_g,
+      final String? carbohydrates_total_g}) = _$NutrationImpl;
 
   factory _Nutration.fromJson(Map<String, dynamic> json) =
       _$NutrationImpl.fromJson;
