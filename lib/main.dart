@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:sublime_groceria/common/SublimeDS.dart';
-import 'package:sublime_groceria/cubit/religion/religion_cubit.dart';
+// import 'package:sublime_groceria/cubit/religion/religion_cubit.dart';
 import 'package:sublime_groceria/localization/applocalization.dart';
 import 'package:sublime_groceria/presentation/bloc/login_form/login_form_bloc.dart';
 import 'package:sublime_groceria/utilities/go_router_init.dart';

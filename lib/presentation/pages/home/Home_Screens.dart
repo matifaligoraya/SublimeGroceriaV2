@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sublime_groceria/common/colors.dart';
 import 'package:sublime_groceria/common/routes.dart';
 
 class HomeScreens extends StatelessWidget {
@@ -11,6 +12,7 @@ class HomeScreens extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home Screen'),
         centerTitle: true,
+        backgroundColor: ColorLight.bg,
       ),
       body: Column(
         children: [
@@ -27,9 +29,18 @@ class HomeScreens extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 // Navigate to the Religion Screen
+                context.go(AppRoutes.GROCERY_ITEM_PATH);
+              },
+              child: const Text('Go to Grocery List Screen'),
+            ),
+          ),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                // Navigate to the Religion Screen
                 context.go(AppRoutes.SGITEM_ROUTE_PATH);
               },
-              child: const Text('Go to Item Screen'),
+              child: const Text('Go to Grocery items Screen'),
             ),
           ),
         ],

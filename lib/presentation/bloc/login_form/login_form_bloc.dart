@@ -35,7 +35,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
 
     try {
       final response = await http.post(
-        Uri.parse(API.LOGIN),
+        Uri.parse(ApiConfig.LOGIN),
         headers: SublimeDS().headerOfApi(),
         body: jsonEncode(data),
       );

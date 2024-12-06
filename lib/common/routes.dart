@@ -22,6 +22,9 @@ class AppRoutes {
   static const String DASHBOARD_ROUTE_NAME = 'dashboard';
   static const String DASHBOARD_ROUTE_PATH = '/dashboard';
 
+  static const String GROCERY_ITEM_NAME = 'grocery_list_screen';
+  static const String GROCERY_ITEM_PATH = '/grocery_list_screen';
+
   static const String SGITEM_ROUTE_NAME = 'sgitem_screen';
   static const String SGITEM_ROUTE_PATH = '/sgitem_screen';
 

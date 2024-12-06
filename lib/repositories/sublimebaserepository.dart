@@ -28,7 +28,7 @@ class SublimeBaseRepository {
       _dio.options.headers['Content-Type'] = 'application/json';
       _dio.options.headers['Authorization'] = 'Bearer $token';
 
-      _dio.options.headers['Appkey'] = 'key ${API.apikey}';
+      _dio.options.headers['Appkey'] = 'key ${ApiConfig.apikey}';
     } else {
       _dio.options.headers.remove('Authorization');
     }

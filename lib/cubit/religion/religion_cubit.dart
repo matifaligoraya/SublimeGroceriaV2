@@ -13,7 +13,7 @@ class ReligionCubit extends Cubit<SublimeState<List<Religion>>> {
     emit(SublimeLoading());
     try {
       final rawData = await repository.get(
-        url: API.RELIGION,
+        url: ApiConfig.RELIGION,
       );
       final religions = (rawData['data'] as List)
           .map((json) => Religion.fromJson(json as Map<String, dynamic>))

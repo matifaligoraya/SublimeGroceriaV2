@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sublime_groceria/common/routes.dart';
+import 'package:sublime_groceria/cubit/grocery_list_cubit.dart';
 import 'package:sublime_groceria/cubit/religion/religion_cubit.dart';
 import 'package:sublime_groceria/cubit/sgitemcubit.dart';
 import 'package:sublime_groceria/presentation/pages/dashboard/dashboard_screen.dart';
 import 'package:sublime_groceria/presentation/pages/error/error_screen.dart';
+import 'package:sublime_groceria/presentation/pages/grocerylist/grocery_list_screen.dart';
 import 'package:sublime_groceria/presentation/pages/home/home_screens.dart';
 import 'package:sublime_groceria/presentation/pages/auth/login_screen.dart';
 import 'package:sublime_groceria/presentation/pages/religion/religion_screen.dart';
 import 'package:sublime_groceria/presentation/pages/religion/sgitem_screen.dart';
+import 'package:sublime_groceria/repositories/religionrepository/grocery_list_repository.dart';
 import 'package:sublime_groceria/repositories/religionrepository/religionrepository.dart';
 import 'package:sublime_groceria/repositories/sgitemrepository.dart';
 import 'package:sublime_groceria/utilities/logger.dart';
@@ -52,12 +55,13 @@ GoRouter routerinit = GoRouter(
       },
     ),
     GoRoute(
-      name: AppRoutes.SGITEM_ROUTE_NAME,
-      path: AppRoutes.SGITEM_ROUTE_PATH,
+      name: AppRoutes.GROCERY_ITEM_NAME,
+      path: AppRoutes.GROCERY_ITEM_PATH,
       builder: (BuildContext context, GoRouterState state) {
         return BlocProvider(
-          create: (_) => SgItemCubit(SgItemRepository())..fetchItems(),
-          child: const SgItemScreen(),
+          create: (_) =>
+              GroroceryListCubit(GroceryListRepository())..fetchItems(),
+          child: const GroceryListScreen(),
         );
       },
     ),
@@ -66,10 +70,13 @@ GoRouter routerinit = GoRouter(
     /// ********************** DashBoard Route **************************
     /// =================================================================
     GoRoute(
-      name: AppRoutes.DASHBOARD_ROUTE_NAME,
-      path: AppRoutes.DASHBOARD_ROUTE_PATH,
+      name: AppRoutes.SGITEM_ROUTE_NAME,
+      path: AppRoutes.SGITEM_ROUTE_PATH,
       builder: (BuildContext context, GoRouterState state) {
-        return const DashBoardScreen();
+        return BlocProvider(
+          create: (_) => SgItemCubit(SgItemRepository())..fetchItems(),
+          child: const SgItemScreen(),
+        );
       },
     ),
 

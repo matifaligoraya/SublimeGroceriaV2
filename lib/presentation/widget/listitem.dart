@@ -19,7 +19,9 @@ class ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Container(
+      width: mediaQueryData.size.width * 1,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -32,53 +34,66 @@ class ListItem extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 5),
+        padding: const EdgeInsets.only(
+          left: 5,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                SizedBox(
-                  width: 14,
-                ),
-                Container(
-                  width: 62,
-                  height: 14,
-                  decoration: BoxDecoration(
-                    color: ColorLight.secondary,
-                    borderRadius: BorderRadius.all(Radius.circular(3)),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.access_time,
-                          color: ColorLight.primary, size: 10),
-                      SizedBox(
-                        width: 2,
+                Row(
+                  children: [
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        title,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: const TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                      Text(tag,
-                          style: const TextStyle(
-                              fontSize: 6, color: ColorLight.primary)),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      width: 14,
+                    ),
+                    Container(
+                      width: 70,
+                      height: 16,
+                      decoration: BoxDecoration(
+                        color: ColorLight.secondary,
+                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.access_time,
+                              color: ColorLight.primary, size: 10),
+                          SizedBox(
+                            width: 2,
+                          ),
+                          Text(tag,
+                              style: const TextStyle(
+                                  fontSize: 6, color: ColorLight.primary)),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: 118,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Icon(
-                    Icons.more_vert,
-                    color: Colors.black,
-                    size: 16,
-                  ),
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Icon(
+                        Icons.more_vert,
+                        color: Colors.black,
+                        size: 16,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

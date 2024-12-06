@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sublime_groceria/common/colors.dart';
 import 'package:sublime_groceria/common/routes.dart';
 import 'package:sublime_groceria/cubit/sgitemcubit.dart';
 import 'package:sublime_groceria/cubit/sublime_state.dart';
 import 'package:sublime_groceria/models/item/sgitem.dart';
+import 'package:sublime_groceria/presentation/widget/items.dart';
+import 'package:sublime_groceria/presentation/widget/searchbar_widget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SgItemScreen extends StatelessWidget {
   const SgItemScreen({Key? key}) : super(key: key);
@@ -12,112 +16,254 @@ class SgItemScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('SgItems'),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: BlocBuilder<SgItemCubit, SublimeState<List<SgItem>>>(
-              builder: (context, state) {
-                if (state is SublimeLoading<List<SgItem>>) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is SublimeLoaded<List<SgItem>>) {
-                  final sgItems = state.data
-                      .where((item) => item.itemNutritionId != null)
-                      .toList();
-
-                  return ListView.builder(
-                    itemCount: sgItems.length,
-                    itemBuilder: (context, index) {
-                      final sgItem = sgItems[index];
-                      return Card(
-                        elevation: 2.0,
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 8.0,
-                          horizontal: 16.0,
-                        ),
-                        child: ListTile(
-                          title: Text(
-                            sgItem.itemName ?? 'No Name Available',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('ID: ${sgItem.itemId ?? 'N/A'}'),
-                              Text('Category: ${sgItem.categoryName ?? 'N/A'}'),
-                              Text(
-                                  'Type: ${sgItem.typeName ?? 'N/A'} (${sgItem.abbrivation ?? 'N/A'})'),
-                              Text(
-                                  'Description: ${sgItem.description == "//" ? "No description available" : sgItem.description ?? 'N/A'}'),
-                              Text(
-                                  'itemNutritionId: ${sgItem.itemNutritionId}'),
-                              if (sgItem.nutration != null)
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text('Nutration:'),
-                                    Text(
-                                        '- Calories: ${sgItem.nutration!.calories ?? 'Unknown'}'),
-                                    Text(
-                                        '- Serving Size: ${sgItem.nutration!.serving_size_g ?? 'Unknown'} g'),
-                                    Text(
-                                        '- Total Fat: ${sgItem.nutration!.fat_total_g ?? 'Unknown'} g'),
-                                    Text(
-                                        '- Saturated Fat: ${sgItem.nutration!.fat_saturated_g ?? 'Unknown'} g'),
-                                    Text(
-                                        '- Protein: ${sgItem.nutration!.protein_g ?? 'Unknown'} g'),
-                                  ],
-                                ),
-                            ],
-                          ),
-                          leading: sgItem.fileName != null &&
-                                  sgItem.fileType != null
-                              ? Image.network(
-                                  'https://example.com/${sgItem.fileName!}',
-                                  width: 50,
-                                  height: 50,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) =>
-                                      const Icon(Icons.broken_image),
-                                )
-                              : const Icon(Icons.image_not_supported),
-                        ),
-                      );
-                    },
-                  );
-                } else if (state is SublimeError<List<SgItem>>) {
-                  return Center(
-                    child: Text(
-                      'Error: ${state.message}',
-                      style: const TextStyle(color: Colors.red),
-                    ),
-                  );
-                } else {
-                  return const Center(
-                    child: Text('No data available.'),
-                  );
-                }
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Navigate to the Home Screen
+        backgroundColor: Colors.white,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            InkWell(
+              onTap: () {
                 context.go(AppRoutes.HOME_ROUTE_PATH);
               },
-              child: const Text('Go to Home Screen'),
+              child: Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(
+                    color: ColorLight.widgetsbg,
+                    width: 1,
+                  ),
+                ),
+                child: Icon(Icons.arrow_back_outlined, size: 18),
+              ),
             ),
-          ),
-        ],
+            Text(
+              "Bulk Item",
+              style: TextStyle(fontSize: 23, color: ColorLight.widgetstitle),
+            ),
+            InkWell(
+              onTap: () {
+                ShowDialogue(context);
+              },
+              child: Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(
+                    color: ColorLight.widgetsbg,
+                    width: 1,
+                  ),
+                ),
+                child: Icon(Icons.help_outline, size: 16),
+              ),
+            ),
+          ],
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(right: 10, left: 10),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              child: SearchbarWidget(
+                controller: TextEditingController(),
+                onChanged: (query) {
+                  print("Search query: $query");
+                },
+                hintText: 'Search here',
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Container(
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: ColorLight.primary,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Icon(
+                      Icons.tune,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: BlocBuilder<SgItemCubit, SublimeState<List<SgItem>>>(
+                builder: (context, state) {
+                  if (state is SublimeLoading<List<SgItem>>) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is SublimeLoaded<List<SgItem>>) {
+                    final sgItems = state.data
+                        .where((item) => item.itemNutritionId != null)
+                        .toList();
+
+                    return GridView.builder(
+                        itemCount: sgItems.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 2,
+                          // mainAxisSpacing: -5,
+                          childAspectRatio: 0.68,
+                        ),
+                        itemBuilder: (BuildContext, index) {
+                          final SgItem = sgItems[index];
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              top: 20,
+                              bottom: 10,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SuggestedItems(
+                                  title: '${SgItem.itemName}',
+                                  image: '${SgItem.fileName}',
+                                ),
+                              ],
+                            ),
+                          );
+                        });
+                  } else if (state is SublimeError<List<SgItem>>) {
+                    return Center(
+                      child: Text(
+                        'Error: ${state.message}',
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text('No data available.'),
+                    );
+                  }
+                },
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                      child: InkWell(
+                        onTap: () {
+                          context.go(AppRoutes.HOME_ROUTE_PATH);
+                        },
+                        child: Container(
+                          height: 48,
+                          width: 176,
+                          decoration: BoxDecoration(
+                              color: ColorLight.primary,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 35,
+                                width: 35,
+                                child: SvgPicture.asset(
+                                  'assets/icons/icons_for_add.svg',
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                'Add Items',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                      child: InkWell(
+                        onTap: () {
+                          context.go(AppRoutes.HOME_ROUTE_PATH);
+                        },
+                        child: Container(
+                          height: 48,
+                          width: 176,
+                          decoration: BoxDecoration(
+                              color: ColorLight.buttons,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 35,
+                                width: 35,
+                                child: SvgPicture.asset(
+                                  'assets/icons/icons_for_add.svg',
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                'Add Recipe',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
+}
+
+void ShowDialogue(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(
+          "Title",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: ColorLight.primary,
+          ),
+        ),
+        content: Text(
+            'This is our List View screen where you can see all the lists.'),
+        actions: [
+          TextButton(
+            child: Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

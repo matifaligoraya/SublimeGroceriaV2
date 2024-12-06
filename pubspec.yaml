@@ -30,6 +30,8 @@ dependencies:
   logger: ^2.3.0
   font_awesome_flutter: ^10.7.0
   bloc_concurrency: ^0.2.5
+  timeago: ^3.3.0
+  flutter_svg: ^2.0.16
 
 dev_dependencies:
   flutter_test:
@@ -48,7 +50,7 @@ flutter:
     - assets/lang/en.json
     - assets/lang/es.json
     - assets/lang/da.json
-    - assets/images/
+    - assets/icons/icons_for_add.svg
   # fonts:
   #   - family: Poppins
   #     fonts:

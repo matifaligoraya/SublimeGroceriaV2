@@ -130,8 +130,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (state.loginState == LoginState.loading) {
                         showDialog(
                           context: context,
-                          builder: (context) =>
-                              Center(child: CircularProgressIndicator()),
+                          builder: (context) => Center(
+                              child: CircularProgressIndicator(
+                            color: ColorLight.primary,
+                          )),
                         );
                       } else if (state.loginState == LoginState.success) {
                         // ScaffoldMessenger.of(context).showSnackBar(

@@ -13,7 +13,7 @@ class SgItemCubit extends BaseCubit<SgItem> {
     emit(SublimeLoading());
     try {
       final rawData = await repository.get(
-        url: API.SGITEMS,
+        url: ApiConfig.SGITEMS,
       );
 
       loadStates(
