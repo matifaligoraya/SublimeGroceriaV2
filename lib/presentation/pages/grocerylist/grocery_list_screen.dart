@@ -22,19 +22,12 @@ class _GroceryListScreenState extends State<GroceryListScreen>
   late TabController _tabController;
   late TextEditingController _searchController;
 
-  List<GroceryList> _allMyLists = [];
-  List<GroceryList> _allSharedLists = [];
-  List<GroceryList> _filteredMyLists = [];
-  List<GroceryList> _filteredSharedLists = [];
-
-  int myListCounts = 0;
-  int sharedListCounts = 0;
-
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     _searchController = TextEditingController();
+    context.read<GroroceryListCubit>()..fetchItems();
   }
 
   @override
@@ -42,22 +35,6 @@ class _GroceryListScreenState extends State<GroceryListScreen>
     _tabController.dispose();
     _searchController.dispose();
     super.dispose();
-  }
-
-  void _filterItems(String query) {
-    setState(() {
-      _filteredMyLists = _allMyLists
-          .where((item) =>
-              item.listName != null &&
-              item.listName!.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-
-      _filteredSharedLists = _allSharedLists
-          .where((item) =>
-              item.listName != null &&
-              item.listName!.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-    });
   }
 
   @override
@@ -70,97 +47,66 @@ class _GroceryListScreenState extends State<GroceryListScreen>
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
-              onTap: () {
-                context.go(AppRoutes.HOME_ROUTE_PATH);
-              },
-              child: Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                    color: ColorLight.widgetsbg,
-                    width: 1,
-                  ),
-                ),
-                child: Icon(Icons.arrow_back_outlined, size: 18),
-              ),
+              onTap: () => context.go(AppRoutes.HOME_ROUTE_PATH),
+              child: _buildIcon(Icons.arrow_back_outlined, 18),
             ),
             Text(
               "View List",
               style: TextStyle(fontSize: 23, color: ColorLight.widgetstitle),
             ),
             InkWell(
-              onTap: () {
-                ShowDialogue(context);
-              },
-              child: Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                    color: ColorLight.widgetsbg,
-                    width: 1,
-                  ),
-                ),
-                child: Icon(Icons.help_outline, size: 16),
-              ),
+              onTap: () => _showHelpDialog(context),
+              child: _buildIcon(Icons.help_outline, 16),
             ),
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            child: SearchbarWidget(
-              controller: _searchController,
-              onChanged: (query) {
-                _filterItems(query);
-              },
-              hintText: 'Search here',
-              suffixIcon: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: ColorLight.primary,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Icon(
-                    Icons.tune,
-                    color: Colors.white,
-                    size: 20,
+      body: BlocBuilder<GroroceryListCubit, SublimeState<List<GroceryList>>>(
+          builder: (context, state) {
+        if (state is SublimeLoading<List<GroceryList>>) {
+          return Center(
+              child: CircularProgressIndicator(color: ColorLight.primary));
+        }
+        if (state is SublimeError<List<GroceryList>>) {
+          return Center(
+              child: Text(state.message,
+                  style: TextStyle(color: Colors.red, fontSize: 16)));
+        }
+        if (state is SublimeLoaded<List<GroceryList>>) {
+          final cubit = context.read<GroroceryListCubit>();
+          return Column(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                child: SearchbarWidget(
+                  controller: _searchController,
+                  onChanged: (query) => cubit.filterLists(query),
+                  hintText: 'Search here',
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: ColorLight.primary,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          _showFilterOptions(context);
+                        },
+                        child: Icon(
+                          Icons.tune,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          BlocBuilder<GroroceryListCubit, SublimeState<List<GroceryList>>>(
-            builder: (context, state) {
-              if (state is SublimeLoaded<List<GroceryList>>) {
-                // Separate data into My Lists and Shared Lists
-                _allMyLists = state.data
-                    .where((item) => item.isSharedList == false)
-                    .toList();
-                _allSharedLists = state.data
-                    .where((item) => item.isSharedList == true)
-                    .toList();
-
-                // Update counts
-                myListCounts = _allMyLists.length;
-                sharedListCounts = _allSharedLists.length;
-
-                // Update filtered lists if no search query
-                if (_searchController.text.isEmpty) {
-                  _filteredMyLists = _allMyLists;
-                  _filteredSharedLists = _allSharedLists;
-                }
-              }
-
-              return TabBar(
+              TabBar(
                 controller: _tabController,
                 indicatorSize: TabBarIndicatorSize.label,
                 unselectedLabelColor: ColorLight.widgetstitle,
@@ -168,56 +114,68 @@ class _GroceryListScreenState extends State<GroceryListScreen>
                 labelColor: ColorLight.primary,
                 indicatorColor: ColorLight.primary,
                 tabs: [
-                  Tab(text: 'My List ($myListCounts)'),
-                  Tab(text: 'Shared List ($sharedListCounts)'),
+                  Tab(text: 'My List (${cubit.myListCount})'),
+                  Tab(text: 'Shared List (${cubit.sharedListCount})'),
                 ],
-              );
-            },
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                // My List Tab: Display items with isSharedList == false
-                _filteredMyLists.isNotEmpty
-                    ? buildList(_filteredMyLists)
-                    : Center(child: Text("No items in My List.")),
-                // Shared List Tab: Display items with isSharedList == true
-                _filteredSharedLists.isNotEmpty
-                    ? buildList(_filteredSharedLists)
-                    : Center(child: Text("No items in Shared List.")),
-              ],
-            ),
-          ),
-        ],
-      ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    _buildListView(cubit.filteredMyLists, "My List"),
+                    _buildListView(cubit.filteredSharedLists, "Shared List"),
+                  ],
+                ),
+              ),
+            ],
+          );
+        }
+        return Center(child: Text("No data available.")); // Default state
+      }),
     );
   }
 
-  Widget buildList(List<GroceryList> groceryLists) {
+  Widget _buildListView(List<GroceryList> lists, String emptyMessage) {
+    if (lists.isEmpty) {
+      return Center(child: Text("No items in $emptyMessage."));
+    }
     return ListView.builder(
-      itemCount: groceryLists.length,
+      itemCount: lists.length,
       itemBuilder: (context, index) {
-        final groceryList = groceryLists[index];
+        final list = lists[index];
         return Padding(
-          padding: const EdgeInsets.only(
-            left: 10,
-            right: 10,
-            top: 15,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           child: ListItem(
-            title: groceryList.listName ?? 'Unnamed List',
-            tag: '${groceryList.updatedDate?.formatRelativeTime()}',
-            purchaseditems: '${groceryList.pendingItemsCount ?? 0}',
-            pendingItems: '${groceryList.pendingItemsCount ?? 0} Pending',
-            sharedWith: '${groceryList.isSharedList}',
+            title: list.listName ?? 'Unnamed List',
+            tag: '${list.updatedDate?.formatRelativeTime() ?? 12}',
+            purchaseditems: '${list.userId ?? 0} user id',
+            pendingItems: '${list.pendingItemsCount ?? 0} Pending',
+            sharedWith: '${list.isSharedList}',
+            onChanged: (message) {
+              print("onChanged $message");
+            },
           ),
         );
       },
     );
   }
 
-  void ShowDialogue(BuildContext context) {
+  Widget _buildIcon(IconData icon, double size) {
+    return Container(
+      width: 30,
+      height: 30,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(
+          color: ColorLight.widgetsbg,
+          width: 1,
+        ),
+      ),
+      child: Icon(icon, size: size),
+    );
+  }
+
+  void _showHelpDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
@@ -235,13 +193,74 @@ class _GroceryListScreenState extends State<GroceryListScreen>
           actions: [
             TextButton(
               child: Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              onPressed: () => Navigator.of(context).pop(),
             ),
           ],
         );
       },
     );
   }
+}
+
+void _showFilterOptions(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(15),
+      ),
+    ),
+    builder: (context) {
+      return Container(
+        padding: const EdgeInsets.all(15),
+        height: 300,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                'Filter Options',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(height: 15),
+            Expanded(
+              child: ListView(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.filter_list),
+                    title: Text('Option 1'),
+                    onTap: () {
+                      Navigator.of(context).pop(); // Close the bottom sheet
+                      // Handle Option 1 click
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.filter_list),
+                    title: Text('Option 2'),
+                    onTap: () {
+                      Navigator.of(context).pop(); // Close the bottom sheet
+                      // Handle Option 2 click
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.filter_list),
+                    title: Text('Option 3'),
+                    onTap: () {
+                      Navigator.of(context).pop(); // Close the bottom sheet
+                      // Handle Option 3 click
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }

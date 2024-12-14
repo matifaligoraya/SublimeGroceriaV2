@@ -7,6 +7,7 @@ class ListItem extends StatelessWidget {
   final String purchaseditems;
   final String pendingItems;
   final String sharedWith;
+  final ValueChanged<String> onChanged; // Callback function
 
   const ListItem({
     super.key,
@@ -15,13 +16,14 @@ class ListItem extends StatelessWidget {
     required this.purchaseditems,
     required this.pendingItems,
     required this.sharedWith,
+    required this.onChanged, // Required parameter for callback
   });
 
   @override
   Widget build(BuildContext context) {
     final MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Container(
-      width: mediaQueryData.size.width * 1,
+      width: mediaQueryData.size.width,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -34,66 +36,65 @@ class ListItem extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: 5,
-        ),
+        padding: const EdgeInsets.only(left: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        title,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        style: const TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w700,
+                Flexible(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          title,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: const TextStyle(
+                            fontSize: 19,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 14,
-                    ),
-                    Container(
-                      width: 70,
-                      height: 16,
-                      decoration: BoxDecoration(
-                        color: ColorLight.secondary,
-                        borderRadius: BorderRadius.all(Radius.circular(3)),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.access_time,
-                              color: ColorLight.primary, size: 10),
-                          SizedBox(
-                            width: 2,
+                      const SizedBox(width: 6), // Space between title and tag
+                      Container(
+                        width: 70,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          color: ColorLight.secondary,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(3),
                           ),
-                          Text(tag,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.access_time,
+                              color: ColorLight.primary,
+                              size: 10,
+                            ),
+                            const SizedBox(width: 2),
+                            Text(
+                              tag,
                               style: const TextStyle(
-                                  fontSize: 6, color: ColorLight.primary)),
-                        ],
+                                fontSize: 6,
+                                color: ColorLight.primary,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () {},
-                      child: Icon(
-                        Icons.more_vert,
-                        color: Colors.black,
-                        size: 16,
-                      ),
-                    ),
-                  ],
+                const Icon(
+                  Icons.more_vert,
+                  color: Colors.black,
+                  size: 16,
                 ),
               ],
             ),
@@ -102,61 +103,43 @@ class ListItem extends StatelessWidget {
               padding: const EdgeInsets.only(left: 5),
               child: Row(
                 children: [
-                  Container(
-                    width: 5,
-                    height: 5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: ColorLight.homecard,
-                    ),
-                  ),
-                  SizedBox(width: 4),
-                  Text(
-                    purchaseditems,
-                    style: TextStyle(
-                      color: ColorLight.widgetstitle,
-                      fontSize: 8,
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Container(
-                    width: 5,
-                    height: 5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: ColorLight.carbohydrates,
-                    ),
-                  ),
-                  SizedBox(width: 4),
-                  Text(
-                    pendingItems,
-                    style: TextStyle(
-                      color: ColorLight.widgetstitle,
-                      fontSize: 8,
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Container(
-                    width: 5,
-                    height: 5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: ColorLight.primary,
-                    ),
-                  ),
-                  SizedBox(width: 4),
-                  Text(
-                    sharedWith,
-                    style: TextStyle(
-                      color: ColorLight.widgetstitle,
-                      fontSize: 8,
-                    ),
-                  ),
+                  _buildDot(ColorLight.homecard),
+                  const SizedBox(width: 4),
+                  _buildText(purchaseditems),
+                  const SizedBox(width: 10),
+                  _buildDot(ColorLight.carbohydrates),
+                  const SizedBox(width: 4),
+                  _buildText(pendingItems),
+                  const SizedBox(width: 10),
+                  _buildDot(ColorLight.primary),
+                  const SizedBox(width: 4),
+                  _buildText(sharedWith),
                 ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildDot(Color color) {
+    return Container(
+      width: 5,
+      height: 5,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(30)),
+        color: color,
+      ),
+    );
+  }
+
+  Widget _buildText(String text) {
+    return Text(
+      text,
+      style: const TextStyle(
+        color: ColorLight.widgetstitle,
+        fontSize: 8,
       ),
     );
   }

@@ -22,7 +22,7 @@ class SgItemScreen extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            InkWell(
+            GestureDetector(
               onTap: () {
                 context.go(AppRoutes.HOME_ROUTE_PATH);
               },
@@ -36,14 +36,14 @@ class SgItemScreen extends StatelessWidget {
                     width: 1,
                   ),
                 ),
-                child: Icon(Icons.arrow_back_outlined, size: 18),
+                child: const Icon(Icons.arrow_back_outlined, size: 18),
               ),
             ),
-            Text(
+            const Text(
               "Bulk Item",
               style: TextStyle(fontSize: 23, color: ColorLight.widgetstitle),
             ),
-            InkWell(
+            GestureDetector(
               onTap: () {
                 ShowDialogue(context);
               },
@@ -57,22 +57,22 @@ class SgItemScreen extends StatelessWidget {
                     width: 1,
                   ),
                 ),
-                child: Icon(Icons.help_outline, size: 16),
+                child: const Icon(Icons.help_outline, size: 16),
               ),
             ),
           ],
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(right: 10, left: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 5),
               child: SearchbarWidget(
                 controller: TextEditingController(),
                 onChanged: (query) {
-                  print("Search query: $query");
+                  debugPrint("Search query: $query");
                 },
                 hintText: 'Search here',
                 suffixIcon: Padding(
@@ -84,7 +84,7 @@ class SgItemScreen extends StatelessWidget {
                       color: ColorLight.primary,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.tune,
                       color: Colors.white,
                       size: 20,
@@ -98,7 +98,9 @@ class SgItemScreen extends StatelessWidget {
                 builder: (context, state) {
                   if (state is SublimeLoading<List<SgItem>>) {
                     return const Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(
+                        color: ColorLight.primary,
+                      ),
                     );
                   } else if (state is SublimeLoaded<List<SgItem>>) {
                     final sgItems = state.data
@@ -106,31 +108,20 @@ class SgItemScreen extends StatelessWidget {
                         .toList();
 
                     return GridView.builder(
-                        itemCount: sgItems.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 2,
-                          // mainAxisSpacing: -5,
-                          childAspectRatio: 0.68,
-                        ),
-                        itemBuilder: (BuildContext, index) {
-                          final SgItem = sgItems[index];
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                              top: 20,
-                              bottom: 10,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SuggestedItems(
-                                  title: '${SgItem.itemName}',
-                                  image: '${SgItem.fileName}',
-                                ),
-                              ],
-                            ),
-                          );
-                        });
+                      itemCount: sgItems.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              childAspectRatio: 0.7,
+                              mainAxisSpacing: 2),
+                      itemBuilder: (context, index) {
+                        final sgItem = sgItems[index];
+                        return SuggestedItems(
+                          title: sgItem.itemName ?? 'Unnamed',
+                          image: sgItem.fileName ?? '',
+                        );
+                      },
+                    );
                   } else if (state is SublimeError<List<SgItem>>) {
                     return Center(
                       child: Text(
@@ -146,94 +137,69 @@ class SgItemScreen extends StatelessWidget {
                 },
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                      child: InkWell(
-                        onTap: () {
-                          context.go(AppRoutes.HOME_ROUTE_PATH);
-                        },
-                        child: Container(
-                          height: 48,
-                          width: 176,
-                          decoration: BoxDecoration(
-                              color: ColorLight.primary,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6))),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 35,
-                                width: 35,
-                                child: SvgPicture.asset(
-                                  'assets/icons/icons_for_add.svg',
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Text(
-                                'Add Items',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                      child: InkWell(
-                        onTap: () {
-                          context.go(AppRoutes.HOME_ROUTE_PATH);
-                        },
-                        child: Container(
-                          height: 48,
-                          width: 176,
-                          decoration: BoxDecoration(
-                              color: ColorLight.buttons,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6))),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 35,
-                                width: 35,
-                                child: SvgPicture.asset(
-                                  'assets/icons/icons_for_add.svg',
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Text(
-                                'Add Recipe',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildActionButton(
+                    context,
+                    onTap: () => context.go(AppRoutes.HOME_ROUTE_PATH),
+                    color: ColorLight.primary,
+                    label: 'Add Items',
+                    icon: 'assets/icons/icons_for_add.svg',
+                  ),
+                  _buildActionButton(
+                    context,
+                    onTap: () => context.go(AppRoutes.HOME_ROUTE_PATH),
+                    color: ColorLight.buttons,
+                    label: 'Add Recipe',
+                    icon: 'assets/icons/icons_for_add.svg',
+                  ),
+                ],
+              ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildActionButton(
+    BuildContext context, {
+    required VoidCallback onTap,
+    required Color color,
+    required String label,
+    required String icon,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          height: 48,
+          width: 176,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 35,
+                width: 35,
+                child: SvgPicture.asset(
+                  icon,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(width: 7),
+              Text(
+                label,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -245,19 +211,20 @@ void ShowDialogue(BuildContext context) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text(
-          "Title",
+        title: const Text(
+          "Help",
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w500,
             color: ColorLight.primary,
           ),
         ),
-        content: Text(
-            'This is our List View screen where you can see all the lists.'),
+        content: const Text(
+          'This is our List View screen where you can see all the lists.',
+        ),
         actions: [
           TextButton(
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
             onPressed: () {
               Navigator.of(context).pop();
             },

@@ -59,8 +59,7 @@ GoRouter routerinit = GoRouter(
       path: AppRoutes.GROCERY_ITEM_PATH,
       builder: (BuildContext context, GoRouterState state) {
         return BlocProvider(
-          create: (_) =>
-              GroroceryListCubit(GroceryListRepository())..fetchItems(),
+          create: (_) => GroroceryListCubit(GroceryListRepository()),
           child: const GroceryListScreen(),
         );
       },
