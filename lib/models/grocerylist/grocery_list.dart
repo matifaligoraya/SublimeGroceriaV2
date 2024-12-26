@@ -5,7 +5,7 @@ part 'grocery_list.freezed.dart';
 part 'grocery_list.g.dart';
 
 @freezed
-class GroceryList with _$Glist {
+class GroceryList with _$GroceryList {
   factory GroceryList({
     int? listId,
     String? listName,
@@ -20,7 +20,7 @@ class GroceryList with _$Glist {
     int? sharedUserCount,
     bool? isSharedList,
     List<GRecipe>? gRecipe,
-  }) = _Glist;
+  }) = _GroceryList;
 
   factory GroceryList.withDefaults({
     int? listId,
@@ -54,5 +54,5 @@ class GroceryList with _$Glist {
   }
 
   factory GroceryList.fromJson(Map<String, dynamic> json) =>
-      _$GlistFromJson(json);
+      _$GroceryListFromJson(json);
 }

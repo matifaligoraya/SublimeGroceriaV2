@@ -10,8 +10,7 @@ class SublimeInitial<T> extends SublimeState<T> {}
 class SublimeLoading<T> extends SublimeState<T> {}
 
 class SublimeLoaded<T> extends SublimeState<T> {
-  final T data;
-
+  final Map<String, dynamic> data;
   SublimeLoaded(this.data);
 
   @override

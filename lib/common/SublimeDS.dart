@@ -1,7 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SublimeDS {
-  // Singleton pattern for easy reuse
   static final SublimeDS _instance = SublimeDS._internal();
 
   factory SublimeDS() {

@@ -18,7 +18,7 @@ class ReligionCubit extends Cubit<SublimeState<List<Religion>>> {
       final religions = (rawData['data'] as List)
           .map((json) => Religion.fromJson(json as Map<String, dynamic>))
           .toList();
-      emit(SublimeLoaded(religions));
+      emit(SublimeLoaded({'asd': religions}));
     } catch (e) {
       emit(SublimeError(e.toString()));
     }

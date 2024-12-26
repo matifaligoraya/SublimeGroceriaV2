@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sublime_groceria/common/routes.dart';
-import 'package:sublime_groceria/cubit/grocery_list_cubit.dart';
+import 'package:sublime_groceria/cubit/groceryList/grocery_list_cubit.dart';
 import 'package:sublime_groceria/cubit/religion/religion_cubit.dart';
 import 'package:sublime_groceria/cubit/sgitemcubit.dart';
 import 'package:sublime_groceria/presentation/pages/dashboard/dashboard_screen.dart';

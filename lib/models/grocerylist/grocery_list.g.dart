@@ -6,7 +6,8 @@ part of 'grocery_list.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GlistImpl _$$GlistImplFromJson(Map<String, dynamic> json) => _$GlistImpl(
+_$GroceryListImpl _$$GroceryListImplFromJson(Map<String, dynamic> json) =>
+    _$GroceryListImpl(
       listId: (json['listId'] as num?)?.toInt(),
       listName: json['listName'] as String?,
       mobileID: json['mobileID'] as String?,
@@ -28,7 +29,7 @@ _$GlistImpl _$$GlistImplFromJson(Map<String, dynamic> json) => _$GlistImpl(
           .toList(),
     );
 
-Map<String, dynamic> _$$GlistImplToJson(_$GlistImpl instance) =>
+Map<String, dynamic> _$$GroceryListImplToJson(_$GroceryListImpl instance) =>
     <String, dynamic>{
       'listId': instance.listId,
       'listName': instance.listName,

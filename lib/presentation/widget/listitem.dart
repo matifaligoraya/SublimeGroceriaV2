@@ -105,15 +105,51 @@ class ListItem extends StatelessWidget {
                 children: [
                   _buildDot(ColorLight.homecard),
                   const SizedBox(width: 4),
-                  _buildText(purchaseditems),
+                  RichText(
+                      text: TextSpan(
+                          style: TextStyle(
+                              color: ColorLight.widgetstitle, fontSize: 8),
+                          children: [
+                        TextSpan(
+                          text: 'Out of ',
+                        ),
+                        TextSpan(
+                          text: purchaseditems,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: ' Item Purchased'),
+                      ])),
                   const SizedBox(width: 10),
                   _buildDot(ColorLight.carbohydrates),
                   const SizedBox(width: 4),
-                  _buildText(pendingItems),
+                  RichText(
+                      text: TextSpan(
+                          style: TextStyle(
+                              color: ColorLight.widgetstitle, fontSize: 8),
+                          children: [
+                        TextSpan(
+                          text: pendingItems,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: ' Pending'),
+                      ])),
                   const SizedBox(width: 10),
                   _buildDot(ColorLight.primary),
                   const SizedBox(width: 4),
-                  _buildText(sharedWith),
+                  RichText(
+                      text: TextSpan(
+                          style: TextStyle(
+                              color: ColorLight.widgetstitle, fontSize: 8),
+                          children: [
+                        TextSpan(
+                          text: 'Shared With ',
+                        ),
+                        TextSpan(
+                          text: sharedWith,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: ' Persons'),
+                      ])),
                 ],
               ),
             ),
@@ -134,13 +170,13 @@ class ListItem extends StatelessWidget {
     );
   }
 
-  Widget _buildText(String text) {
-    return Text(
-      text,
-      style: const TextStyle(
-        color: ColorLight.widgetstitle,
-        fontSize: 8,
-      ),
-    );
-  }
+//   Widget _buildText(String text) {
+//     return Text(
+//       text,
+//       style: const TextStyle(
+//         color: ColorLight.widgetstitle,
+//         fontSize: 8,
+//       ),
+//     );
+//   }
 }

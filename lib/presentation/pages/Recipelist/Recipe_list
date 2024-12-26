@@ -10,8 +10,8 @@ import 'package:sublime_groceria/presentation/widget/items.dart';
 import 'package:sublime_groceria/presentation/widget/searchbar_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SgItemScreen extends StatelessWidget {
-  const SgItemScreen({Key? key}) : super(key: key);
+class RecipeList extends StatelessWidget {
+  const RecipeList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class SgItemScreen extends StatelessWidget {
               ),
             ),
             const Text(
-              "Bulk Item",
+              "Recipe Integration",
               style: TextStyle(fontSize: 23, color: ColorLight.widgetstitle),
             ),
             GestureDetector(
@@ -72,7 +72,7 @@ class SgItemScreen extends StatelessWidget {
               child: SearchbarWidget(
                 controller: TextEditingController(),
                 onChanged: (query) {
-                  debugPrint("Search query: $query");
+                  Print("Search query: $query");
                 },
                 hintText: 'Search here',
                 suffixIcon: Padding(
@@ -103,23 +103,13 @@ class SgItemScreen extends StatelessWidget {
                       ),
                     );
                   } else if (state is SublimeLoaded<List<SgItem>>) {
-                    final sgItems = state.data['asd'];
+                    final sgItems = state.data
+                        .where((item) => item.itemNutritionId != null)
+                        .toList();
 
-                    return GridView.builder(
-                      itemCount: sgItems.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              childAspectRatio: 0.7,
-                              mainAxisSpacing: 2),
-                      itemBuilder: (context, index) {
-                        final sgItem = sgItems[index];
-                        return SuggestedItems(
-                          title: sgItem.itemName ?? 'Unnamed',
-                          image: sgItem.fileName ?? '',
-                        );
-                      },
-                    );
+                    return Listvew.builder(
+                      itemcount: sgItems.length;
+                    )
                   } else if (state is SublimeError<List<SgItem>>) {
                     return Center(
                       child: Text(

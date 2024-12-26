@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sublime_groceria/common/colors.dart';
 import 'package:sublime_groceria/common/routes.dart';
-import 'package:sublime_groceria/cubit/grocery_list_cubit.dart';
+import 'package:sublime_groceria/cubit/groceryList/grocery_list_cubit.dart';
 import 'package:sublime_groceria/cubit/sublime_state.dart';
 import 'package:sublime_groceria/models/grocerylist/grocery_list.dart';
 import 'package:sublime_groceria/presentation/widget/listitem.dart';
@@ -81,7 +81,7 @@ class _GroceryListScreenState extends State<GroceryListScreen>
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 child: SearchbarWidget(
                   controller: _searchController,
-                  onChanged: (query) => cubit.filterLists(query),
+                  onChanged: (query) => {},
                   hintText: 'Search here',
                   suffixIcon: Padding(
                     padding: const EdgeInsets.all(8),
@@ -114,16 +114,19 @@ class _GroceryListScreenState extends State<GroceryListScreen>
                 labelColor: ColorLight.primary,
                 indicatorColor: ColorLight.primary,
                 tabs: [
-                  Tab(text: 'My List (${cubit.myListCount})'),
-                  Tab(text: 'Shared List (${cubit.sharedListCount})'),
+                  Tab(text: 'My List ( )'),
+                  Tab(text: 'Shared List ( )'),
                 ],
               ),
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    _buildListView(cubit.filteredMyLists, "My List"),
-                    _buildListView(cubit.filteredSharedLists, "Shared List"),
+                    _buildListView(
+                        state.data["myLists"] as List<GroceryList>, "My List"),
+                    _buildListView(
+                        state.data["sharedLists"] as List<GroceryList>,
+                        "Shared List"),
                   ],
                 ),
               ),
@@ -136,9 +139,6 @@ class _GroceryListScreenState extends State<GroceryListScreen>
   }
 
   Widget _buildListView(List<GroceryList> lists, String emptyMessage) {
-    if (lists.isEmpty) {
-      return Center(child: Text("No items in $emptyMessage."));
-    }
     return ListView.builder(
       itemCount: lists.length,
       itemBuilder: (context, index) {
@@ -148,9 +148,9 @@ class _GroceryListScreenState extends State<GroceryListScreen>
           child: ListItem(
             title: list.listName ?? 'Unnamed List',
             tag: '${list.updatedDate?.formatRelativeTime() ?? 12}',
-            purchaseditems: '${list.userId ?? 0} user id',
-            pendingItems: '${list.pendingItemsCount ?? 0} Pending',
-            sharedWith: '${list.isSharedList}',
+            purchaseditems: '${list.pendingItemsCount ?? 0}',
+            pendingItems: '${list.pendingItemsCount ?? 0}',
+            sharedWith: '${list.sharedUserCount}',
             onChanged: (message) {
               print("onChanged $message");
             },

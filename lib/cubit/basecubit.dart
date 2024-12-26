@@ -18,7 +18,7 @@ abstract class BaseCubit<T> extends Cubit<SublimeState<List<T>>> {
 
     // Handle status and data
     if (apiResponse.statusCode == 200 && apiResponse.data != null) {
-      emit(SublimeLoaded(apiResponse.data!));
+      //emit(SublimeLoaded(apiResponse.data!));
     } else {
       emit(SublimeError(apiResponse.message ?? 'Failed to fetch items'));
     }

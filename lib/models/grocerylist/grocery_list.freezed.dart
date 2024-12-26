@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-GroceryList _$GlistFromJson(Map<String, dynamic> json) {
-  return _Glist.fromJson(json);
+GroceryList _$GroceryListFromJson(Map<String, dynamic> json) {
+  return _GroceryList.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Glist {
+mixin _$GroceryList {
   int? get listId => throw _privateConstructorUsedError;
   String? get listName => throw _privateConstructorUsedError;
   String? get mobileID => throw _privateConstructorUsedError;
@@ -34,20 +34,21 @@ mixin _$Glist {
   bool? get isSharedList => throw _privateConstructorUsedError;
   List<GRecipe>? get gRecipe => throw _privateConstructorUsedError;
 
-  /// Serializes this Glist to a JSON map.
+  /// Serializes this GroceryList to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of Glist
+  /// Create a copy of GroceryList
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GlistCopyWith<GroceryList> get copyWith =>
+  $GroceryListCopyWith<GroceryList> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GlistCopyWith<$Res> {
-  factory $GlistCopyWith(GroceryList value, $Res Function(GroceryList) then) =
-      _$GlistCopyWithImpl<$Res, GroceryList>;
+abstract class $GroceryListCopyWith<$Res> {
+  factory $GroceryListCopyWith(
+          GroceryList value, $Res Function(GroceryList) then) =
+      _$GroceryListCopyWithImpl<$Res, GroceryList>;
   @useResult
   $Res call(
       {int? listId,
@@ -66,16 +67,16 @@ abstract class $GlistCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GlistCopyWithImpl<$Res, $Val extends GroceryList>
-    implements $GlistCopyWith<$Res> {
-  _$GlistCopyWithImpl(this._value, this._then);
+class _$GroceryListCopyWithImpl<$Res, $Val extends GroceryList>
+    implements $GroceryListCopyWith<$Res> {
+  _$GroceryListCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Glist
+  /// Create a copy of GroceryList
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -152,10 +153,11 @@ class _$GlistCopyWithImpl<$Res, $Val extends GroceryList>
 }
 
 /// @nodoc
-abstract class _$$GlistImplCopyWith<$Res> implements $GlistCopyWith<$Res> {
-  factory _$$GlistImplCopyWith(
-          _$GlistImpl value, $Res Function(_$GlistImpl) then) =
-      __$$GlistImplCopyWithImpl<$Res>;
+abstract class _$$GroceryListImplCopyWith<$Res>
+    implements $GroceryListCopyWith<$Res> {
+  factory _$$GroceryListImplCopyWith(
+          _$GroceryListImpl value, $Res Function(_$GroceryListImpl) then) =
+      __$$GroceryListImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -175,14 +177,14 @@ abstract class _$$GlistImplCopyWith<$Res> implements $GlistCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$GlistImplCopyWithImpl<$Res>
-    extends _$GlistCopyWithImpl<$Res, _$GlistImpl>
-    implements _$$GlistImplCopyWith<$Res> {
-  __$$GlistImplCopyWithImpl(
-      _$GlistImpl _value, $Res Function(_$GlistImpl) _then)
+class __$$GroceryListImplCopyWithImpl<$Res>
+    extends _$GroceryListCopyWithImpl<$Res, _$GroceryListImpl>
+    implements _$$GroceryListImplCopyWith<$Res> {
+  __$$GroceryListImplCopyWithImpl(
+      _$GroceryListImpl _value, $Res Function(_$GroceryListImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Glist
+  /// Create a copy of GroceryList
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -201,7 +203,7 @@ class __$$GlistImplCopyWithImpl<$Res>
     Object? isSharedList = freezed,
     Object? gRecipe = freezed,
   }) {
-    return _then(_$GlistImpl(
+    return _then(_$GroceryListImpl(
       listId: freezed == listId
           ? _value.listId
           : listId // ignore: cast_nullable_to_non_nullable
@@ -260,8 +262,8 @@ class __$$GlistImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GlistImpl implements _Glist {
-  _$GlistImpl(
+class _$GroceryListImpl implements _GroceryList {
+  _$GroceryListImpl(
       {this.listId,
       this.listName,
       this.mobileID,
@@ -277,8 +279,8 @@ class _$GlistImpl implements _Glist {
       final List<GRecipe>? gRecipe})
       : _gRecipe = gRecipe;
 
-  factory _$GlistImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GlistImplFromJson(json);
+  factory _$GroceryListImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GroceryListImplFromJson(json);
 
   @override
   final int? listId;
@@ -316,14 +318,14 @@ class _$GlistImpl implements _Glist {
 
   @override
   String toString() {
-    return 'Glist(listId: $listId, listName: $listName, mobileID: $mobileID, userId: $userId, userName: $userName, ownerEmail: $ownerEmail, createdDate: $createdDate, updatedDate: $updatedDate, totalItems: $totalItems, pendingItemsCount: $pendingItemsCount, sharedUserCount: $sharedUserCount, isSharedList: $isSharedList, gRecipe: $gRecipe)';
+    return 'GroceryList(listId: $listId, listName: $listName, mobileID: $mobileID, userId: $userId, userName: $userName, ownerEmail: $ownerEmail, createdDate: $createdDate, updatedDate: $updatedDate, totalItems: $totalItems, pendingItemsCount: $pendingItemsCount, sharedUserCount: $sharedUserCount, isSharedList: $isSharedList, gRecipe: $gRecipe)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GlistImpl &&
+            other is _$GroceryListImpl &&
             (identical(other.listId, listId) || other.listId == listId) &&
             (identical(other.listName, listName) ||
                 other.listName == listName) &&
@@ -367,24 +369,24 @@ class _$GlistImpl implements _Glist {
       isSharedList,
       const DeepCollectionEquality().hash(_gRecipe));
 
-  /// Create a copy of Glist
+  /// Create a copy of GroceryList
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$GlistImplCopyWith<_$GlistImpl> get copyWith =>
-      __$$GlistImplCopyWithImpl<_$GlistImpl>(this, _$identity);
+  _$$GroceryListImplCopyWith<_$GroceryListImpl> get copyWith =>
+      __$$GroceryListImplCopyWithImpl<_$GroceryListImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$GlistImplToJson(
+    return _$$GroceryListImplToJson(
       this,
     );
   }
 }
 
-abstract class _Glist implements GroceryList {
-  factory _Glist(
+abstract class _GroceryList implements GroceryList {
+  factory _GroceryList(
       {final int? listId,
       final String? listName,
       final String? mobileID,
@@ -397,9 +399,10 @@ abstract class _Glist implements GroceryList {
       final int? pendingItemsCount,
       final int? sharedUserCount,
       final bool? isSharedList,
-      final List<GRecipe>? gRecipe}) = _$GlistImpl;
+      final List<GRecipe>? gRecipe}) = _$GroceryListImpl;
 
-  factory _Glist.fromJson(Map<String, dynamic> json) = _$GlistImpl.fromJson;
+  factory _GroceryList.fromJson(Map<String, dynamic> json) =
+      _$GroceryListImpl.fromJson;
 
   @override
   int? get listId;
@@ -428,10 +431,10 @@ abstract class _Glist implements GroceryList {
   @override
   List<GRecipe>? get gRecipe;
 
-  /// Create a copy of Glist
+  /// Create a copy of GroceryList
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GlistImplCopyWith<_$GlistImpl> get copyWith =>
+  _$$GroceryListImplCopyWith<_$GroceryListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
