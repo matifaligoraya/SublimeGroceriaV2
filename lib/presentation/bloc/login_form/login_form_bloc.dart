@@ -31,9 +31,12 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   FutureOr<void> loginApi(LoginApi event, Emitter<LoginFormState> emit) async {
     emit(state.copyWith(loginState: LoginState.loading));
     print(state);
+
+    // Sample login credentials for testing
     Map data = {'vUserName': 'atigoraya', 'vPassword': 'Abfa\$\$123'};
 
     try {
+      // Sending POST request to login API
       final response = await http.post(
         Uri.parse(ApiConfig.LOGIN),
         headers: SublimeDS().headerOfApi(),
@@ -43,8 +46,13 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
       var data1 = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        print('Server error: ${response.statusCode}');
+        print('Server response: ${response.statusCode}');
+
+        // Extracting token and userId from the response
         final token = data1['userMeta']?['token'];
+        final userId = data1['data']?['userId']; // Correctly extracting userId
+
+        // Storing token if found
         if (token != null) {
           await SublimeDS().saveToken(token);
           print('Token stored: $token');
@@ -52,6 +60,17 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
           print('Token not found in response');
         }
 
+        // Ensuring userId is always treated as a String
+        if (userId != null) {
+          // If userId is an int, it will be converted to a string using .toString()
+          String userIdStr = userId.toString();
+          await SublimeDS().saveUserId(userIdStr); // Store userId as String
+          print('User ID stored: $userIdStr');
+        } else {
+          print('User ID not found in response');
+        }
+
+        // Emitting success state with the response message
         emit(state.copyWith(
           loginState: LoginState.success,
           message: data1['Success'] ?? 'Login Successful',
@@ -59,7 +78,8 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
       } else {
         emit(state.copyWith(
           loginState: LoginState.message,
-          message: data1['Error'] ?? 'Something Went Wrong',
+          message: data1['Error'] ??
+              'Something Went Wrong', // Fix reference to data1
         ));
       }
     } catch (e) {

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sublime_groceria/common/colors.dart';
 import 'package:sublime_groceria/common/routes.dart';
 import 'package:sublime_groceria/presentation/bloc/login_form/login_form_bloc.dart';
-import 'package:sublime_groceria/presentation/widget/text_fiel.dart';
+import 'package:sublime_groceria/presentation/widget/text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -54,25 +54,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(height: 50),
-                  Row(
-                    children: [
-                      Text(
-                        "Email address",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: ColorLight.widgetstitle,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Text(
+                  //       "Email address",
+                  //       style: TextStyle(
+                  //         fontSize: 14,
+                  //         color: ColorLight.widgetstitle,
+                  //         fontWeight: FontWeight.w300,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(height: 5),
                   BlocBuilder<LoginFormBloc, LoginFormState>(
                     buildWhen: (previous, current) =>
                         current.email != previous.email,
                     builder: (context, state) {
                       return Loginfields(
-                        lable: "atigoraya",
+                        label: "Email Address",
                         suffix: Icon(
                           Icons.check_circle,
                           color: ColorLight.widgetstitle,
@@ -90,25 +90,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "Password",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: ColorLight.widgetstitle,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Text(
+                  //       "Password",
+                  //       style: TextStyle(
+                  //         fontSize: 14,
+                  //         color: ColorLight.widgetstitle,
+                  //         fontWeight: FontWeight.w300,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(height: 5),
                   BlocBuilder<LoginFormBloc, LoginFormState>(
                     buildWhen: (previous, current) =>
                         current.password != previous.password,
                     builder: (context, state) {
                       return Loginfields(
-                        lable: "Enter Your Password",
+                        label: "Enter Your Password",
                         suffix: Icon(
                           Icons.visibility_off,
                           color: ColorLight.widgetstitle,

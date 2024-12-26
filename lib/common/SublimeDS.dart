@@ -52,6 +52,23 @@ class SublimeDS {
 
     return _prefs!.getString("token");
   }
+
+  Future<void> saveUserId(String userId) async {
+    if (_prefs == null) {
+      throw Exception("SublimeDS is not initialized.");
+    }
+
+    await _prefs!
+        .setString("userId", userId); // Save userId to SharedPreferences
+  }
+
+  String? getUserId() {
+    if (_prefs == null) {
+      throw Exception("SublimeDS is not initialized.");
+    }
+
+    return _prefs!.getString("userId");
+  }
 }
 
 class Constants {

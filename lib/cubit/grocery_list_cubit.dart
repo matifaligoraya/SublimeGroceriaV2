@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sublime_groceria/common/api.dart';
 import 'package:sublime_groceria/cubit/basecubit.dart';
 import 'package:sublime_groceria/cubit/sublime_state.dart';
@@ -19,35 +20,48 @@ class GroroceryListCubit extends BaseCubit<GroceryList> {
   void fetchItems() async {
     emit(SublimeLoading());
     try {
-      final String url = '${ApiConfig.GLIST}'; // Add the id to the URL
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final String? userid = prefs.getString('userId');
 
-      // Query parameter passed as mobileid
-      final Map<String, dynamic> queryParams = {'userid': id};
+      if (userid == null) {
+        emit(SublimeError("User id is null or empty"));
+        return;
+      }
 
-      // Fetch the data from the repository
-      final rawData = await repository.get(
-        url: url, // Use the updated URL with id
-        queryParams: queryParams, // Pass the mobileid as query param
-      );
+      String url = '${Uri.parse(ApiConfig.GLIST)}/$userid';
+      print("URL: $url"); // Log the constructed URL
 
-      print('Raw API Response: $rawData');
+      final Map<String, dynamic> queryParams = {'userId': userid};
 
-      // Handle wrapped object with "data" key
+      // Log the query parameters
+      print("Query Params: $queryParams");
+
+      // Make the GET request using the repository's method
+      final rawData = await repository.get(url: url);
+
+      // Log the raw data returned from API
+      print("Raw API Data: $rawData");
+
+      // Check if rawData is null or empty
+      if (rawData == null) {
+        throw Exception("API returned null or empty data.");
+      }
+
+      // Handle the response data based on its type
       if (rawData is Map<String, dynamic> && rawData['data'] is List) {
         _allLists = (rawData['data'] as List).map((item) {
           if (item is Map<String, dynamic>) {
             return GroceryList.fromJson(item);
           } else {
-            throw Exception('Invalid data format: $item');
+            throw Exception('Invalid data format in list item: $item');
           }
         }).toList();
       } else if (rawData is List) {
-        // Handle direct list response
         _allLists = rawData.map((item) {
           if (item is Map<String, dynamic>) {
             return GroceryList.fromJson(item);
           } else {
-            throw Exception('Invalid data format: $item');
+            throw Exception('Invalid data format in list item: $item');
           }
         }).toList();
       } else {
@@ -63,18 +77,26 @@ class GroroceryListCubit extends BaseCubit<GroceryList> {
       _filteredMyLists = List.from(_myLists);
       _filteredSharedLists = List.from(_sharedLists);
 
-      // Emit initial loaded state
       emit(SublimeLoaded<List<GroceryList>>(_allLists));
     } catch (e) {
-      // Debugging: Log the exception details
+      // Log the detailed error
       print('Error occurred during API call: $e');
+
       if (e is DioException) {
-        // Provide more details on DioError
+        // Log details of DioException
         print('DioError: ${e.message}');
         if (e.response != null) {
           print('Response data: ${e.response?.data}');
+          print('Response status code: ${e.response?.statusCode}');
+        } else {
+          print('No response data available.');
         }
+      } else {
+        // For other exceptions (non-Dio)
+        print('Non-Dio Exception: ${e.toString()}');
       }
+
+      // Emit error state with detailed error message
       emit(SublimeError('Failed to parse API response: ${e.toString()}'));
     }
   }
