@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:sublime_groceria/common/colors.dart';
 import 'package:sublime_groceria/presentation/Models/list_model.dart';
-
 import 'package:sublime_groceria/presentation/pages/auth/login_screen.dart';
 
 final List<ShoppingListItem> item = [
@@ -26,14 +24,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // final ReligionBloc religionBloc = ReligionBloc();
-
-  // @override
-  // void initState() {
-  //   religionBloc.add(ReligionInitialEvent());
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

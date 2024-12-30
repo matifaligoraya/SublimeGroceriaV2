@@ -18,9 +18,10 @@ class SublimeLoaded<T> extends SublimeState<T> {
 }
 
 class SublimeError<T> extends SublimeState<T> {
-  final String message;
+  final String? message;
+  final Map<String, String?>? fieldErrors;
 
-  SublimeError(this.message);
+  SublimeError(this.message, {this.fieldErrors});
 
   @override
   List<Object?> get props => [message];

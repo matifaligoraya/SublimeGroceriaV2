@@ -40,9 +40,9 @@ class _GroceryListScreenState extends State<GroceryListScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorLight.bg,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: ColorLight.bg,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -52,7 +52,7 @@ class _GroceryListScreenState extends State<GroceryListScreen>
             ),
             Text(
               "View List",
-              style: TextStyle(fontSize: 23, color: ColorLight.widgetstitle),
+              style: Theme.of(context).textTheme.displayLarge,
             ),
             InkWell(
               onTap: () => _showHelpDialog(context),
@@ -69,11 +69,14 @@ class _GroceryListScreenState extends State<GroceryListScreen>
         }
         if (state is SublimeError<List<GroceryList>>) {
           return Center(
-              child: Text(state.message,
+              child: Text(state.message!,
                   style: TextStyle(color: Colors.red, fontSize: 16)));
         }
         if (state is SublimeLoaded<List<GroceryList>>) {
           final cubit = context.read<GroroceryListCubit>();
+          final myLists = (state.data["MyLists"] as List<GroceryList>?) ?? [];
+          final sharedLists =
+              (state.data["SharedLists"] as List<GroceryList>?) ?? [];
           return Column(
             children: [
               Padding(
@@ -89,7 +92,7 @@ class _GroceryListScreenState extends State<GroceryListScreen>
                       width: 20,
                       height: 20,
                       decoration: BoxDecoration(
-                        color: ColorLight.primary,
+                        color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: InkWell(
@@ -98,7 +101,7 @@ class _GroceryListScreenState extends State<GroceryListScreen>
                         },
                         child: Icon(
                           Icons.tune,
-                          color: Colors.white,
+                          color: ColorLight.bg,
                           size: 20,
                         ),
                       ),
@@ -109,31 +112,28 @@ class _GroceryListScreenState extends State<GroceryListScreen>
               TabBar(
                 controller: _tabController,
                 indicatorSize: TabBarIndicatorSize.label,
-                unselectedLabelColor: ColorLight.widgetstitle,
+                unselectedLabelColor: Theme.of(context).disabledColor,
                 labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                labelColor: ColorLight.primary,
-                indicatorColor: ColorLight.primary,
+                labelColor: Theme.of(context).primaryColor,
+                indicatorColor: Theme.of(context).primaryColor,
                 tabs: [
-                  Tab(text: 'My List ( )'),
-                  Tab(text: 'Shared List ( )'),
+                  Tab(text: 'My List (${state.data["MyListsCount"]})'),
+                  Tab(text: 'Shared List (${state.data["SharedListsCount"]})'),
                 ],
               ),
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    _buildListView(
-                        state.data["myLists"] as List<GroceryList>, "My List"),
-                    _buildListView(
-                        state.data["sharedLists"] as List<GroceryList>,
-                        "Shared List"),
+                    _buildListView(myLists, "My List"),
+                    _buildListView(sharedLists, "Shared List"),
                   ],
                 ),
               ),
             ],
           );
         }
-        return Center(child: Text("No data available.")); // Default state
+        return Center(child: Text("No data available."));
       }),
     );
   }
@@ -167,11 +167,15 @@ class _GroceryListScreenState extends State<GroceryListScreen>
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
-          color: ColorLight.widgetsbg,
+          color: Theme.of(context).indicatorColor,
           width: 1,
         ),
       ),
-      child: Icon(icon, size: size),
+      child: Icon(
+        icon,
+        size: size,
+        color: Theme.of(context).indicatorColor,
+      ),
     );
   }
 

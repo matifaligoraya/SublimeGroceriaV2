@@ -34,7 +34,7 @@ class SearchbarWidget extends StatelessWidget {
           hintStyle: TextStyle(color: Color(0xffC8C8C8)),
           prefixIcon: Icon(
             Icons.search,
-            color: ColorLight.primary,
+            color: Theme.of(context).cardColor,
           ),
           suffixIcon: suffixIcon,
           focusedBorder: OutlineInputBorder(

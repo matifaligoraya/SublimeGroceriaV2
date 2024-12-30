@@ -1,12 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sublime_groceria/common/api.dart';
+import 'package:sublime_groceria/common/apiException.dart';
 import 'package:sublime_groceria/models/common/response.dart';
 
 class SublimeBaseRepository {
   final Dio _dio = Dio();
+  String? userId;
   String? _token;
-
+  SublimeBaseRepository() {
+    _initialize();
+  }
   Future<void> _initialize() async {
     // _token = await _getToken();
     _dio.options = BaseOptions(
@@ -15,13 +19,6 @@ class SublimeBaseRepository {
     );
   }
 
-  /// Fetch token from SharedPreferences
-  Future<String?> _getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token'); // Replace 'auth_token' with your token key
-  }
-
-  /// Update Authorization header dynamically
   Future<void> _updateHeaders() async {
     final token = await _getToken();
     if (token != null) {
@@ -35,6 +32,24 @@ class SublimeBaseRepository {
     }
   }
 
+  /// Fetch userId from SharedPreferences
+  Future<String?> fetchUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    userId = prefs.getString('userId');
+    if (userId == null || userId!.isEmpty) {
+      throw Exception("User ID is null or empty.");
+    }
+    return userId;
+  }
+
+  /// Fetch token from SharedPreferences
+  Future<String?> _getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token'); // Replace 'auth_token' with your token key
+  }
+
+  /// Update Authorization header dynamically
+
   /// Generic GET request
   Future<dynamic> get({
     required String url,
@@ -43,20 +58,17 @@ class SublimeBaseRepository {
     try {
       await _updateHeaders();
       final response = await _dio.get(url, queryParameters: queryParams);
-      return response.data;
-      // return ApiResponse<T>.fromJson(
-      //   response.data,
-      //   (data) => T.fromJson(data as Map<String, dynamic>),
-      // );
+      final responseData = response.data as Map<String, dynamic>;
+
+      return responseData;
     } on DioException catch (e) {
-      throw Exception('GET Error: ${e.response?.data ?? e.message}');
+      processDioException(e);
     } catch (e) {
       throw Exception('Unexpected GET Error: $e');
     }
   }
 
-  /// Generic POST request
-  Future<ApiResponse<T>> post<T>({
+  Future<dynamic> post<T>({
     required String url,
     required T Function(Object?) fromJsonT,
     dynamic data,
@@ -64,11 +76,13 @@ class SublimeBaseRepository {
     try {
       await _updateHeaders();
       final response = await _dio.post(url, data: data);
+      final responseData = response.data as Map<String, dynamic>;
 
-      return ApiResponse<T>.fromJson(
-        response.data,
-        fromJsonT,
-      );
+      handleResponse(responseData);
+
+      return responseData;
+    } on ApiException catch (e) {
+      throw e;
     } on DioException catch (e) {
       throw Exception('POST Error: ${e.response?.data ?? e.message}');
     } catch (e) {
@@ -115,6 +129,56 @@ class SublimeBaseRepository {
       throw Exception('DELETE Error: ${e.response?.data ?? e.message}');
     } catch (e) {
       throw Exception('Unexpected DELETE Error: $e');
+    }
+  }
+
+  String processDioException(DioException e) {
+    if (e.response?.data != null) {
+      final errorData = e.response?.data as Map<String, dynamic>;
+
+      // Safely extract the `errors` array and the `errorMessage`
+      final List<dynamic>? errors = errorData['errors'] as List<dynamic>?;
+      final String errorMessage = errors?.isNotEmpty == true
+          ? errors!
+              .map((error) => error['errorCode'] ?? 'Unknown error')
+              .join(', ')
+          : errorData['message']?.toString() ?? 'Unknown server error';
+
+      return errorMessage;
+    }
+
+    return 'Network error: ${e.message}';
+  }
+
+  void handleResponse(Map<String, dynamic> response) {
+    if (response["errors"] != null && response["errors"].isNotEmpty) {
+      // Extract the list of errors from the response
+      var errors = response["errors"];
+
+      // Initialize a map to store the error properties in the desired format
+      Map<String, String?> errorMap = {};
+
+      // Iterate through the errors and extract the 'name' and 'message' properties
+      for (var error in errors) {
+        if (error['properties'] != null) {
+          var properties = error['properties'];
+          String? name = properties['name'];
+          String? message = properties['message'];
+
+          // Add the error to the map
+          if (name != null && message != null) {
+            errorMap[name] = message;
+          }
+        }
+      }
+
+      int? statusCode = int.tryParse(response["statusCode"].toString());
+
+      throw ApiException(
+        "Validation errors occurred",
+        statusCode: statusCode,
+        fieldErrors: errorMap,
+      );
     }
   }
 }

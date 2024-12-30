@@ -4,7 +4,7 @@ import 'package:sublime_groceria/cubit/sublime_state.dart';
 import 'package:sublime_groceria/models/item/sgitem.dart';
 import 'package:sublime_groceria/repositories/sgitemrepository.dart';
 
-class SgItemCubit extends BaseCubit<SgItem> {
+class SgItemCubit extends BaseCubit<List<SgItem>> {
   final SgItemRepository repository;
 
   SgItemCubit(this.repository) : super(SublimeInitial());
@@ -16,10 +16,10 @@ class SgItemCubit extends BaseCubit<SgItem> {
         url: ApiConfig.SGITEMS,
       );
 
-      loadStates(
-        rawData: rawData,
-        fromJson: (json) => SgItem.fromJson(json),
-      );
+      // loadStates(
+      //   rawData: rawData,
+      //   fromJson: (json) => SgItem.fromJson(json),
+      // );
     } catch (e) {
       emit(SublimeError(e.toString()));
     }

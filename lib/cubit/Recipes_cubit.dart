@@ -21,10 +21,10 @@ class RecipesCubit extends BaseCubit<Recipes> {
         url: ApiConfig.SGITEMS,
       );
 
-      loadStates(
-        rawData: rawData,
-        fromJson: (json) => Recipes.fromJson(json),
-      );
+      // loadStates(
+      //   rawData: rawData,
+      //   fromJson: (json) => Recipes.fromJson(json),
+      // );
     } catch (e) {
       emit(SublimeError(e.toString()));
     }

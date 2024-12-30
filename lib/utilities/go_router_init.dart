@@ -4,7 +4,6 @@ import 'package:sublime_groceria/common/routes.dart';
 import 'package:sublime_groceria/cubit/groceryList/grocery_list_cubit.dart';
 import 'package:sublime_groceria/cubit/religion/religion_cubit.dart';
 import 'package:sublime_groceria/cubit/sgitemcubit.dart';
-import 'package:sublime_groceria/presentation/pages/dashboard/dashboard_screen.dart';
 import 'package:sublime_groceria/presentation/pages/error/error_screen.dart';
 import 'package:sublime_groceria/presentation/pages/grocerylist/grocery_list_screen.dart';
 import 'package:sublime_groceria/presentation/pages/home/home_screens.dart';

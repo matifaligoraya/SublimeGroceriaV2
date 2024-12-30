@@ -26,7 +26,7 @@ class ListItem extends StatelessWidget {
       width: mediaQueryData.size.width,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(8.0),
         boxShadow: const [
           BoxShadow(
@@ -91,9 +91,9 @@ class ListItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Icon(
+                Icon(
                   Icons.more_vert,
-                  color: Colors.black,
+                  color: Theme.of(context).indicatorColor,
                   size: 16,
                 ),
               ],
@@ -108,7 +108,8 @@ class ListItem extends StatelessWidget {
                   RichText(
                       text: TextSpan(
                           style: TextStyle(
-                              color: ColorLight.widgetstitle, fontSize: 8),
+                              color: Theme.of(context).indicatorColor,
+                              fontSize: 8),
                           children: [
                         TextSpan(
                           text: 'Out of ',
@@ -125,7 +126,8 @@ class ListItem extends StatelessWidget {
                   RichText(
                       text: TextSpan(
                           style: TextStyle(
-                              color: ColorLight.widgetstitle, fontSize: 8),
+                              color: Theme.of(context).indicatorColor,
+                              fontSize: 8),
                           children: [
                         TextSpan(
                           text: pendingItems,
@@ -139,7 +141,8 @@ class ListItem extends StatelessWidget {
                   RichText(
                       text: TextSpan(
                           style: TextStyle(
-                              color: ColorLight.widgetstitle, fontSize: 8),
+                              color: Theme.of(context).indicatorColor,
+                              fontSize: 8),
                           children: [
                         TextSpan(
                           text: 'Shared With ',

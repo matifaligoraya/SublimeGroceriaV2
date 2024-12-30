@@ -6,7 +6,7 @@ import 'package:sublime_groceria/common/routes.dart';
 import 'package:sublime_groceria/cubit/sgitemcubit.dart';
 import 'package:sublime_groceria/cubit/sublime_state.dart';
 import 'package:sublime_groceria/models/item/sgitem.dart';
-import 'package:sublime_groceria/presentation/widget/items.dart';
+import 'package:sublime_groceria/presentation/widget/recipe.dart';
 import 'package:sublime_groceria/presentation/widget/searchbar_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -72,7 +72,7 @@ class RecipeList extends StatelessWidget {
               child: SearchbarWidget(
                 controller: TextEditingController(),
                 onChanged: (query) {
-                  Print("Search query: $query");
+                  // Print("Search query: $query");
                 },
                 hintText: 'Search here',
                 suffixIcon: Padding(
@@ -103,13 +103,27 @@ class RecipeList extends StatelessWidget {
                       ),
                     );
                   } else if (state is SublimeLoaded<List<SgItem>>) {
-                    final sgItems = state.data
-                        .where((item) => item.itemNutritionId != null)
-                        .toList();
+                    final sgItems = state.data['totalCount'] as List<SgItem>;
 
-                    return Listvew.builder(
-                      itemcount: sgItems.length;
-                    )
+                    return ListView.builder(
+                      itemCount: sgItems.length,
+                      itemBuilder: (context, index) {
+                        final list = sgItems[index];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 15),
+                          child: Recipeintegration(
+                            image: 'assets/images/recipe2.png',
+                            title: 'This is title',
+                            proteins: 'Protein',
+                            fats: 'Fats',
+                            carbohydrates: 'Carbohydrates',
+                            likes: 'Likes',
+                            time: 'Times',
+                          ),
+                        );
+                      },
+                    );
                   } else if (state is SublimeError<List<SgItem>>) {
                     return Center(
                       child: Text(

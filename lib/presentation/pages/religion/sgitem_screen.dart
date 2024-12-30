@@ -68,7 +68,7 @@ class SgItemScreen extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               child: SearchbarWidget(
                 controller: TextEditingController(),
                 onChanged: (query) {
@@ -175,7 +175,7 @@ class SgItemScreen extends StatelessWidget {
         onTap: onTap,
         child: Container(
           height: 48,
-          width: 176,
+          width: 170,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(6),

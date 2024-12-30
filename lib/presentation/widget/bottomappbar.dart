@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 class BottomNavItem extends StatelessWidget {
   final IconData icon;
   final String label;
-  final bool isActive;
+  final int isActive;
+  final VoidCallback? onTap;
 
   const BottomNavItem({
     super.key,
     required this.icon,
     required this.label,
-    this.isActive = false,
+    required this.isActive,
+    this.onTap,
   });
 
   @override
@@ -19,13 +21,13 @@ class BottomNavItem extends StatelessWidget {
       children: [
         Icon(
           icon,
-          color: isActive ? const Color(0xff1B7C3F) : const Color(0xff0F172A),
+          color: const Color(0xff1B7C3F),
           size: 25,
         ),
         Text(
           label,
           style: TextStyle(
-            color: isActive ? const Color(0xff1B7C3F) : const Color(0xff0F172A),
+            color: const Color(0xff1B7C3F),
             fontSize: 10,
           ),
         ),

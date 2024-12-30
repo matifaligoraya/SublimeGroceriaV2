@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:sublime_groceria/cubit/sublime_state.dart';
 import 'package:sublime_groceria/models/grocerylist/grocery_list.dart';
 

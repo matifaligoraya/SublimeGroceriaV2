@@ -5,11 +5,20 @@ import 'package:google_fonts/google_fonts.dart';
 ThemeData themeLight(BuildContext context) {
   return ThemeData(
     brightness: Brightness.light,
-    cardColor: ColorLight.widgetsbg,
-    // disabledColor: ColorLight.disabledButton,
-    // highlightColor: ColorLight.fontTitle,
-    // hintColor: ColorLight.fontSubtitle,
-    indicatorColor: ColorLight.link,
+    primary: ColorLight.primary,
+    secondary: ColorLight.secondary,
+    widgetstitle: ColorLight.widgetstitle,
+    homecard: ColorLight.homecard,
+    bg: ColorLight.bg,
+    widgetsbg: ColorLight.widgetsbg,
+    indicatorColor: ColorLight.widgetstitle,
+    buttons: ColorLight.buttons,
+    link: ColorLight.link,
+    carbohydrates: ColorLight.carbohydrates,
+    cardColor: ColorLight.cardcolor,
+    proteins: ColorLight.proteins,
+    fats: ColorLight.fats,
+    disabledColor: ColorLight.indicator,
     iconTheme: const IconThemeData(
       color: ColorLight.secondary,
     ),
@@ -22,7 +31,7 @@ ThemeData themeLight(BuildContext context) {
         color: ColorLight.widgetstitle,
       ),
     ),
-    scaffoldBackgroundColor: ColorLight.bg,
+    scaffoldBackgroundColor: ColorLight.white,
     appBarTheme: const AppBarTheme(
       elevation: 0,
       centerTitle: true,
@@ -30,7 +39,7 @@ ThemeData themeLight(BuildContext context) {
     textTheme: GoogleFonts.poppinsTextTheme().copyWith(
       displayLarge: GoogleFonts.poppins(
         color: ColorLight.widgetstitle,
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: FontWeight.w500,
       ),
       displayMedium: GoogleFonts.poppins(
@@ -84,15 +93,25 @@ ThemeData themeLight(BuildContext context) {
 
 ThemeData themeDark(BuildContext context) {
   return ThemeData(
-    brightness: Brightness.dark,
-    cardColor: ColorDark.card,
-    disabledColor: ColorDark.disabledButton,
-    hintColor: ColorDark.fontSubtitle,
-    indicatorColor: ColorLight.primary,
+    brightness: Brightness.light,
+    primary: ColorLight.primary,
+    secondary: ColorDark.secondary,
+    widgetstitle: ColorLight.widgetstitle,
+    homecard: ColorLight.homecard,
+    canvasColor: ColorDark.bg,
+    widgetsbg: ColorLight.widgetsbg,
+    indicatorColor: ColorLight.bg,
+    disabledColor: ColorDark.indicator,
+    buttons: ColorLight.buttons,
+    link: ColorLight.link,
+    carbohydrates: ColorLight.carbohydrates,
+    cardColor: ColorDark.cardcolor,
+    proteins: ColorLight.proteins,
+    fats: ColorLight.fats,
     iconTheme: const IconThemeData(
-      color: ColorDark.fontTitle,
+      color: ColorDark.secondary,
     ),
-    primaryColor: ColorLight.primary,
+    primaryColor: ColorLight.bg,
     textSelectionTheme: const TextSelectionThemeData(
       cursorColor: ColorLight.primary,
     ),
@@ -101,54 +120,54 @@ ThemeData themeDark(BuildContext context) {
         color: ColorLight.widgetstitle,
       ),
     ),
-    scaffoldBackgroundColor: ColorDark.background,
+    scaffoldBackgroundColor: AppColors.Onyx,
     appBarTheme: const AppBarTheme(
       elevation: 0,
       centerTitle: true,
     ),
     textTheme: GoogleFonts.poppinsTextTheme().copyWith(
       displayLarge: GoogleFonts.poppins(
-        color: ColorDark.fontTitle,
-        fontSize: 20,
+        color: ColorLight.bg,
+        fontSize: 22,
         fontWeight: FontWeight.w500,
       ),
       displayMedium: GoogleFonts.poppins(
-        color: ColorDark.fontTitle,
+        color: AppColors.White,
         fontSize: 18,
         fontWeight: FontWeight.w500,
       ),
       displaySmall: GoogleFonts.poppins(
-        color: ColorDark.fontTitle,
+        color: AppColors.White,
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
       headlineMedium: GoogleFonts.poppins(
-        color: ColorDark.fontTitle,
+        color: AppColors.White,
         fontSize: 14,
         fontWeight: FontWeight.w500,
       ),
       headlineSmall: GoogleFonts.poppins(
-        color: ColorDark.fontTitle,
+        color: AppColors.White,
         fontSize: 12,
         fontWeight: FontWeight.w500,
       ),
       bodyLarge: GoogleFonts.poppins(
-        color: ColorDark.fontTitle,
+        color: AppColors.White,
         fontSize: 16,
         fontWeight: FontWeight.normal,
       ),
       bodyMedium: GoogleFonts.poppins(
-        color: ColorDark.fontTitle,
+        color: AppColors.White,
         fontSize: 14,
         fontWeight: FontWeight.normal,
       ),
       titleMedium: GoogleFonts.poppins(
-        color: ColorDark.fontSubtitle,
+        color: AppColors.White,
         fontSize: 14,
         fontWeight: FontWeight.normal,
       ),
       titleSmall: GoogleFonts.poppins(
-        color: ColorDark.fontSubtitle,
+        color: AppColors.White,
         fontSize: 12,
         fontWeight: FontWeight.normal,
       ),

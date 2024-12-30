@@ -41,14 +41,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<LoginFormBloc>()),
         BlocProvider(create: (_) => di.locator<ThemeCubit>()),
       ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Bloc Clean Architecture',
-        theme: themeLight(context),
-        darkTheme: themeDark(context),
-        themeMode: ThemeMode.system,
-        routerConfig: routerinit,
-      ),
+      child: BlocBuilder(builder: (context, ThemeMode) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Bloc Clean Architecture',
+          // themeMode: ThemeMode.light,
+          theme: themeLight(context),
+          darkTheme: themeDark(context),
+          // themeMode: ThemeMode,
+          routerConfig: routerinit,
+        );
+      }),
     );
   }
 }
