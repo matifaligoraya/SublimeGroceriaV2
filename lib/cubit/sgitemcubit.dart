@@ -1,4 +1,3 @@
-import 'package:sublime_groceria/common/api.dart';
 import 'package:sublime_groceria/cubit/basecubit.dart';
 import 'package:sublime_groceria/cubit/sublime_state.dart';
 import 'package:sublime_groceria/models/item/sgitem.dart';
@@ -12,14 +11,11 @@ class SgItemCubit extends BaseCubit<List<SgItem>> {
   void fetchItems() async {
     emit(SublimeLoading());
     try {
-      final rawData = await repository.get(
-        url: ApiConfig.SGITEMS,
-      );
+      final rawData = await repository.fetchgroceryitems();
 
-      // loadStates(
-      //   rawData: rawData,
-      //   fromJson: (json) => SgItem.fromJson(json),
-      // );
+      emit(SublimeLoaded({
+        "Data": rawData,
+      }));
     } catch (e) {
       emit(SublimeError(e.toString()));
     }

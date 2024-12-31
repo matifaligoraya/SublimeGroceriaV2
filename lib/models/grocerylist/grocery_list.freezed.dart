@@ -29,6 +29,7 @@ mixin _$GroceryList {
   DateTime? get createdDate => throw _privateConstructorUsedError;
   DateTime? get updatedDate => throw _privateConstructorUsedError;
   int? get totalItems => throw _privateConstructorUsedError;
+  int? get purchasedItemsCount => throw _privateConstructorUsedError;
   int? get pendingItemsCount => throw _privateConstructorUsedError;
   int? get sharedUserCount => throw _privateConstructorUsedError;
   bool? get isSharedList => throw _privateConstructorUsedError;
@@ -60,6 +61,7 @@ abstract class $GroceryListCopyWith<$Res> {
       DateTime? createdDate,
       DateTime? updatedDate,
       int? totalItems,
+      int? purchasedItemsCount,
       int? pendingItemsCount,
       int? sharedUserCount,
       bool? isSharedList,
@@ -90,6 +92,7 @@ class _$GroceryListCopyWithImpl<$Res, $Val extends GroceryList>
     Object? createdDate = freezed,
     Object? updatedDate = freezed,
     Object? totalItems = freezed,
+    Object? purchasedItemsCount = freezed,
     Object? pendingItemsCount = freezed,
     Object? sharedUserCount = freezed,
     Object? isSharedList = freezed,
@@ -132,6 +135,10 @@ class _$GroceryListCopyWithImpl<$Res, $Val extends GroceryList>
           ? _value.totalItems
           : totalItems // ignore: cast_nullable_to_non_nullable
               as int?,
+      purchasedItemsCount: freezed == purchasedItemsCount
+          ? _value.purchasedItemsCount
+          : purchasedItemsCount // ignore: cast_nullable_to_non_nullable
+              as int?,
       pendingItemsCount: freezed == pendingItemsCount
           ? _value.pendingItemsCount
           : pendingItemsCount // ignore: cast_nullable_to_non_nullable
@@ -170,6 +177,7 @@ abstract class _$$GroceryListImplCopyWith<$Res>
       DateTime? createdDate,
       DateTime? updatedDate,
       int? totalItems,
+      int? purchasedItemsCount,
       int? pendingItemsCount,
       int? sharedUserCount,
       bool? isSharedList,
@@ -198,6 +206,7 @@ class __$$GroceryListImplCopyWithImpl<$Res>
     Object? createdDate = freezed,
     Object? updatedDate = freezed,
     Object? totalItems = freezed,
+    Object? purchasedItemsCount = freezed,
     Object? pendingItemsCount = freezed,
     Object? sharedUserCount = freezed,
     Object? isSharedList = freezed,
@@ -240,6 +249,10 @@ class __$$GroceryListImplCopyWithImpl<$Res>
           ? _value.totalItems
           : totalItems // ignore: cast_nullable_to_non_nullable
               as int?,
+      purchasedItemsCount: freezed == purchasedItemsCount
+          ? _value.purchasedItemsCount
+          : purchasedItemsCount // ignore: cast_nullable_to_non_nullable
+              as int?,
       pendingItemsCount: freezed == pendingItemsCount
           ? _value.pendingItemsCount
           : pendingItemsCount // ignore: cast_nullable_to_non_nullable
@@ -273,6 +286,7 @@ class _$GroceryListImpl implements _GroceryList {
       this.createdDate,
       this.updatedDate,
       this.totalItems,
+      this.purchasedItemsCount,
       this.pendingItemsCount,
       this.sharedUserCount,
       this.isSharedList,
@@ -301,6 +315,8 @@ class _$GroceryListImpl implements _GroceryList {
   @override
   final int? totalItems;
   @override
+  final int? purchasedItemsCount;
+  @override
   final int? pendingItemsCount;
   @override
   final int? sharedUserCount;
@@ -318,7 +334,7 @@ class _$GroceryListImpl implements _GroceryList {
 
   @override
   String toString() {
-    return 'GroceryList(listId: $listId, listName: $listName, mobileID: $mobileID, userId: $userId, userName: $userName, ownerEmail: $ownerEmail, createdDate: $createdDate, updatedDate: $updatedDate, totalItems: $totalItems, pendingItemsCount: $pendingItemsCount, sharedUserCount: $sharedUserCount, isSharedList: $isSharedList, gRecipe: $gRecipe)';
+    return 'GroceryList(listId: $listId, listName: $listName, mobileID: $mobileID, userId: $userId, userName: $userName, ownerEmail: $ownerEmail, createdDate: $createdDate, updatedDate: $updatedDate, totalItems: $totalItems, purchasedItemsCount: $purchasedItemsCount, pendingItemsCount: $pendingItemsCount, sharedUserCount: $sharedUserCount, isSharedList: $isSharedList, gRecipe: $gRecipe)';
   }
 
   @override
@@ -342,6 +358,8 @@ class _$GroceryListImpl implements _GroceryList {
                 other.updatedDate == updatedDate) &&
             (identical(other.totalItems, totalItems) ||
                 other.totalItems == totalItems) &&
+            (identical(other.purchasedItemsCount, purchasedItemsCount) ||
+                other.purchasedItemsCount == purchasedItemsCount) &&
             (identical(other.pendingItemsCount, pendingItemsCount) ||
                 other.pendingItemsCount == pendingItemsCount) &&
             (identical(other.sharedUserCount, sharedUserCount) ||
@@ -364,6 +382,7 @@ class _$GroceryListImpl implements _GroceryList {
       createdDate,
       updatedDate,
       totalItems,
+      purchasedItemsCount,
       pendingItemsCount,
       sharedUserCount,
       isSharedList,
@@ -396,6 +415,7 @@ abstract class _GroceryList implements GroceryList {
       final DateTime? createdDate,
       final DateTime? updatedDate,
       final int? totalItems,
+      final int? purchasedItemsCount,
       final int? pendingItemsCount,
       final int? sharedUserCount,
       final bool? isSharedList,
@@ -422,6 +442,8 @@ abstract class _GroceryList implements GroceryList {
   DateTime? get updatedDate;
   @override
   int? get totalItems;
+  @override
+  int? get purchasedItemsCount;
   @override
   int? get pendingItemsCount;
   @override

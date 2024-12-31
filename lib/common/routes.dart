@@ -6,6 +6,7 @@ class AppRoutes {
   static const String LOGIN_ROUTE_PATH = '/';
 
   // Authentications routes
+  static const String HOME_TITLE = 'Home';
   static const String HOME_ROUTE_NAME = 'Home_Screens';
   static const String HOME_ROUTE_PATH = '/Home_Screens';
 

@@ -21,6 +21,7 @@ _$GroceryListImpl _$$GroceryListImplFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['updatedDate'] as String),
       totalItems: (json['totalItems'] as num?)?.toInt(),
+      purchasedItemsCount: (json['purchasedItemsCount'] as num?)?.toInt(),
       pendingItemsCount: (json['pendingItemsCount'] as num?)?.toInt(),
       sharedUserCount: (json['sharedUserCount'] as num?)?.toInt(),
       isSharedList: json['isSharedList'] as bool?,
@@ -40,6 +41,7 @@ Map<String, dynamic> _$$GroceryListImplToJson(_$GroceryListImpl instance) =>
       'createdDate': instance.createdDate?.toIso8601String(),
       'updatedDate': instance.updatedDate?.toIso8601String(),
       'totalItems': instance.totalItems,
+      'purchasedItemsCount': instance.purchasedItemsCount,
       'pendingItemsCount': instance.pendingItemsCount,
       'sharedUserCount': instance.sharedUserCount,
       'isSharedList': instance.isSharedList,

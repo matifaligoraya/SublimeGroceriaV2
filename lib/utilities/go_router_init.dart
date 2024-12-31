@@ -6,8 +6,8 @@ import 'package:sublime_groceria/cubit/religion/religion_cubit.dart';
 import 'package:sublime_groceria/cubit/sgitemcubit.dart';
 import 'package:sublime_groceria/presentation/pages/error/error_screen.dart';
 import 'package:sublime_groceria/presentation/pages/grocerylist/grocery_list_screen.dart';
-import 'package:sublime_groceria/presentation/pages/home/home_screens.dart';
 import 'package:sublime_groceria/presentation/pages/auth/login_screen.dart';
+import 'package:sublime_groceria/presentation/pages/home/home_screens.dart';
 import 'package:sublime_groceria/presentation/pages/religion/religion_screen.dart';
 import 'package:sublime_groceria/presentation/pages/religion/sgitem_screen.dart';
 import 'package:sublime_groceria/repositories/religionrepository/grocery_list_repository.dart';
@@ -36,11 +36,15 @@ GoRouter routerinit = GoRouter(
       name: AppRoutes.HOME_ROUTE_NAME,
       path: AppRoutes.HOME_ROUTE_PATH,
       builder: (BuildContext context, GoRouterState state) {
-        return BlocProvider(
-          create: (_) =>
-              ReligionCubit(context as ReligionRepository)..fetchReligions(),
-          child: const HomeScreens(),
+        final String appBarTitle = getAppBarTitle(
+          state,
+          defaultTitle: AppRoutes.HOME_TITLE,
         );
+        return BlocProvider(
+            create: (_) => GroroceryListCubit(GroceryListRepository()),
+            child: Home(
+              appBarTitle: appBarTitle,
+            ));
       },
     ),
     GoRoute(
@@ -72,8 +76,8 @@ GoRouter routerinit = GoRouter(
       path: AppRoutes.SGITEM_ROUTE_PATH,
       builder: (BuildContext context, GoRouterState state) {
         return BlocProvider(
-          create: (_) => SgItemCubit(SgItemRepository())..fetchItems(),
-          child: const SgItemScreen(),
+          create: (_) => SgItemCubit(SgItemRepository()),
+          child: const SgitemScreen(),
         );
       },
     ),
@@ -105,3 +109,7 @@ GoRouter routerinit = GoRouter(
     return null; // Adjust this if you have authentication-based redirection.
   },
 );
+
+String getAppBarTitle(GoRouterState state, {String defaultTitle = ' '}) {
+  return state.uri.queryParameters['title'] ?? defaultTitle;
+}

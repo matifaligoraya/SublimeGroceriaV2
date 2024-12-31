@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:sublime_groceria/common/colors.dart';
-import 'package:sublime_groceria/common/routes.dart';
 import 'package:sublime_groceria/cubit/groceryList/grocery_list_cubit.dart';
+import 'package:sublime_groceria/cubit/sgitemcubit.dart';
 import 'package:sublime_groceria/cubit/sublime_state.dart';
-import 'package:sublime_groceria/presentation/cubit/theme/theme_cubit.dart';
+import 'package:sublime_groceria/models/grocerylist/grocery_list.dart';
+import 'package:sublime_groceria/models/item/sgitem.dart';
 import 'package:sublime_groceria/presentation/pages/grocerylist/grocery_list_screen.dart';
 import 'package:sublime_groceria/presentation/pages/religion/religion_screen.dart';
 import 'package:sublime_groceria/presentation/pages/religion/sgitem_screen.dart';
+import 'package:sublime_groceria/presentation/widget/app_bar.dart';
+import 'package:sublime_groceria/presentation/widget/bottom_navigation_bar.dart';
+import 'package:sublime_groceria/presentation/widget/canvas.dart';
+import 'package:sublime_groceria/presentation/widget/items.dart';
+import 'package:sublime_groceria/presentation/widget/listitem.dart';
+import 'package:sublime_groceria/presentation/widget/section_heading.dart';
 
 class HomeScreens extends StatefulWidget {
   const HomeScreens({Key? key}) : super(key: key);
@@ -21,9 +27,11 @@ class _HomeScreensState extends State<HomeScreens> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    Home(),
+    Home(
+      appBarTitle: '',
+    ),
     GroceryListScreen(),
-    SgItemScreen(),
+    SgitemScreen(),
     ReligionScreen(),
   ];
 
@@ -53,48 +61,9 @@ class _HomeScreensState extends State<HomeScreens> {
           color: Colors.white,
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        notchMargin: 6,
-        shape: const CircularNotchedRectangle(),
-        color: const Color(0xffF4F4F4),
-        height: 65,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                icon: Icon(Icons.home,
-                    color: _currentIndex == 0
-                        ? ColorLight.primary
-                        : ColorLight.widgetstitle),
-                onPressed: () => _onTapnavbar(0),
-              ),
-              IconButton(
-                icon: Icon(Icons.list,
-                    color: _currentIndex == 1
-                        ? ColorLight.primary
-                        : ColorLight.widgetstitle),
-                onPressed: () => context.go(AppRoutes.GROCERY_ITEM_PATH),
-              ),
-              const SizedBox(width: 40), // Space for the notch
-              IconButton(
-                icon: Icon(Icons.book,
-                    color: _currentIndex == 2
-                        ? ColorLight.primary
-                        : ColorLight.widgetstitle),
-                onPressed: () => context.go(AppRoutes.SGITEM_ROUTE_PATH),
-              ),
-              IconButton(
-                icon: Icon(Icons.account_circle,
-                    color: _currentIndex == 3
-                        ? ColorLight.primary
-                        : ColorLight.widgetstitle),
-                onPressed: () => context.go(AppRoutes.RELIGION_ROUTE_PATH),
-              ),
-            ],
-          ),
-        ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTapNavbar: _onTapnavbar,
       ),
     );
   }
@@ -219,69 +188,204 @@ void _ShowAddListPopUp(BuildContext context) {
 }
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String appBarTitle;
+  const Home({super.key, required this.appBarTitle});
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = [
+    GroceryListScreen(),
+    SgitemScreen(),
+    ReligionScreen(),
+  ];
+
+  void _onTapnavbar(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  void _openDrawer() {
+    Scaffold.of(context).openDrawer();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<GroroceryListCubit>()..fetchItems();
+  }
+
   @override
   Widget build(BuildContext context) {
-    ThemeCubit themeCubit = context.read<ThemeCubit>();
-    ThemeMode currentTheme = context.watch<ThemeCubit>().state;
-    return SafeArea(
-      child: Column(
-        children: [
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                // Navigate to the Religion Screen
-                context.go(AppRoutes.RELIGION_ROUTE_PATH);
-              },
-              child: const Text('Go to Religion Screen'),
-            ),
-          ),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                // Navigate to the Religion Screen
-                context.go(AppRoutes.GROCERY_ITEM_PATH);
-              },
-              child: const Text('Go to Grocery List Screen'),
-            ),
-          ),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                // Navigate to the Religion Screen
-                context.go(AppRoutes.SGITEM_ROUTE_PATH);
-              },
-              child: const Text('Go to Grocery items Screen'),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Light'),
-              Radio<ThemeMode>(
-                value: ThemeMode.light,
-                groupValue: currentTheme,
-                onChanged: (value) {
-                  themeCubit.changeTheme();
-                },
+    return Scaffold(
+      appBar: SublimeAppBar(
+        title: widget.appBarTitle,
+        isDrawerRequired: true,
+        onPressed: _openDrawer,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child: Text(
+                "Drawer Header",
+                style: TextStyle(color: ColorLight.primary),
               ),
-              const Text('Dark'),
-              Radio<ThemeMode>(
-                value: ThemeMode.dark,
-                groupValue: currentTheme,
-                onChanged: (value) {
-                  themeCubit.changeTheme();
-                },
-              ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
+      ),
+      body: _currentIndex == 0
+          ? SublimeCanvas(
+              children: [
+                Text(
+                  "Your Companion For Grocery List",
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                SizedBox(
+                  height: 60,
+                ),
+                SublimeSectionHeading(
+                  headerText: 'Recent Lists',
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                BlocBuilder<GroroceryListCubit,
+                    SublimeState<List<GroceryList>>>(
+                  builder: (context, state) {
+                    if (state is SublimeLoading<List<GroceryList>>) {
+                      return Center(
+                          child: ListItem(
+                        onChanged: (message) {},
+                      ));
+                    }
+
+                    if (state is SublimeError<List<GroceryList>>) {
+                      return Center(
+                        child: Text(
+                          state.message ?? 'An error occurred',
+                          style: TextStyle(
+                            color: AppColors.DarkSpringGreen,
+                            fontSize: 16,
+                          ),
+                        ),
+                      );
+                    }
+
+                    if (state is SublimeLoaded<List<GroceryList>>) {
+                      final cubit = context.read<GroroceryListCubit>();
+                      final lists =
+                          state.data['TotalCount'] as List<GroceryList>;
+                      if (lists.isEmpty) {
+                        return Text("Data is Not Available");
+                      }
+                      ;
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Container(
+                          height: 75,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 228, 228, 228),
+                                blurRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: ListView.builder(
+                            // scrollDirection: Axis.horizontal,
+                            itemCount: 1,
+                            itemBuilder: (context, index) {
+                              final list = lists[index];
+                              return ListItem(
+                                list: list,
+                                onChanged: (message) {},
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    }
+                    return SizedBox();
+                  },
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                SublimeSectionHeading(
+                  headerText: 'Suggested Items',
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                // BlocBuilder<SgItemCubit, SublimeState<List<SgItem>>>(
+                //   builder: (context, state) {
+                //     if (state is SublimeLoading<List<SgItem>>) {
+                //       return Center(
+                //         child: CircularProgressIndicator(
+                //           color: AppColors.DarkSpringGreen,
+                //         ),
+                //       );
+                //     }
+                //     if (state is SublimeError<List<SgItem>>) {
+                //       return Text(
+                //         state.message ?? 'an error occured',
+                //         style: TextStyle(
+                //             color: AppColors.DarkSpringGreen, fontSize: 16),
+                //       );
+                //     }
+                //     if (state is SublimeLoaded<List<SgItem>>) {
+                //       final items = state.data["data"] as List<SgItem>;
+                //       return Container(
+                //         child: GridView.builder(
+                //           gridDelegate:
+                //               SliverGridDelegateWithFixedCrossAxisCount(
+                //                   crossAxisCount: 3,
+                //                   crossAxisSpacing: 2.0,
+                //                   mainAxisSpacing: 2.0),
+                //           itemCount: 3,
+                //           itemBuilder: (BuildContext context, int index) {
+                //             final item = items[index];
+                //             return SuggestedItems(
+                //               title: '${item.itemName}',
+                //               image: item.itemName ?? '',
+                //             );
+                //           },
+                //         ),
+                //       );
+                //     }
+                //     return SizedBox();
+                //   },
+                // )
+              ],
+            )
+          : _pages[_currentIndex - 1],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _ShowAddListPopUp(context);
+        },
+        foregroundColor: Colors.white,
+        backgroundColor: ColorLight.primary,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTapNavbar: _onTapnavbar,
       ),
     );
   }

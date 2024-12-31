@@ -13,6 +13,9 @@ class AppColors {
   static const Color FireEngineRed = Color(0xFFC32626);
   static const Color Onyx = Color(0xFF373B3D);
   static const Color White = Color(0xFFFFFFFF);
+
+  // Generic Colors
+  static const Color Info = Color(0xFF2E98D7);
 }
 
 //Light Colors for Light theme

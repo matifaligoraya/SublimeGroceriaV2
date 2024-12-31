@@ -6,12 +6,24 @@ import 'package:sublime_groceria/common/routes.dart';
 import 'package:sublime_groceria/cubit/sgitemcubit.dart';
 import 'package:sublime_groceria/cubit/sublime_state.dart';
 import 'package:sublime_groceria/models/item/sgitem.dart';
+import 'package:sublime_groceria/presentation/widget/canvas.dart';
 import 'package:sublime_groceria/presentation/widget/items.dart';
 import 'package:sublime_groceria/presentation/widget/searchbar_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SgItemScreen extends StatelessWidget {
-  const SgItemScreen({Key? key}) : super(key: key);
+class SgitemScreen extends StatefulWidget {
+  const SgitemScreen({super.key});
+
+  @override
+  State<SgitemScreen> createState() => _SgitemScreenState();
+}
+
+class _SgitemScreenState extends State<SgitemScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<SgItemCubit>().fetchItems();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +34,7 @@ class SgItemScreen extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GestureDetector(
+            InkWell(
               onTap: () {
                 context.go(AppRoutes.HOME_ROUTE_PATH);
               },
@@ -43,7 +55,7 @@ class SgItemScreen extends StatelessWidget {
               "Bulk Item",
               style: TextStyle(fontSize: 23, color: ColorLight.widgetstitle),
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 ShowDialogue(context);
               },
@@ -63,138 +75,102 @@ class SgItemScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              child: SearchbarWidget(
-                controller: TextEditingController(),
-                onChanged: (query) {
-                  debugPrint("Search query: $query");
-                },
-                hintText: 'Search here',
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: ColorLight.primary,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: const Icon(
-                      Icons.tune,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: BlocBuilder<SgItemCubit, SublimeState<List<SgItem>>>(
-                builder: (context, state) {
-                  if (state is SublimeLoading<List<SgItem>>) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: ColorLight.primary,
-                      ),
-                    );
-                  } else if (state is SublimeLoaded<List<SgItem>>) {
-                    final sgItems = state.data['asd'];
-
-                    return GridView.builder(
-                      itemCount: sgItems.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              childAspectRatio: 0.7,
-                              mainAxisSpacing: 2),
-                      itemBuilder: (context, index) {
-                        final sgItem = sgItems[index];
-                        return SuggestedItems(
-                          title: sgItem.itemName ?? 'Unnamed',
-                          image: sgItem.fileName ?? '',
-                        );
-                      },
-                    );
-                  } else if (state is SublimeError<List<SgItem>>) {
-                    return Center(
-                      child: Text(
-                        'Error: ${state.message}',
-                        style: const TextStyle(color: Colors.red),
-                      ),
-                    );
-                  } else {
-                    return const Center(
-                      child: Text('No data available.'),
-                    );
-                  }
-                },
-              ),
-            ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildActionButton(
-                    context,
-                    onTap: () => context.go(AppRoutes.HOME_ROUTE_PATH),
-                    color: ColorLight.primary,
-                    label: 'Add Items',
-                    icon: 'assets/icons/icons_for_add.svg',
-                  ),
-                  _buildActionButton(
-                    context,
-                    onTap: () => context.go(AppRoutes.HOME_ROUTE_PATH),
-                    color: ColorLight.buttons,
-                    label: 'Add Recipe',
-                    icon: 'assets/icons/icons_for_add.svg',
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildActionButton(
-    BuildContext context, {
-    required VoidCallback onTap,
-    required Color color,
-    required String label,
-    required String icon,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          height: 48,
-          width: 170,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
             children: [
-              SizedBox(
-                height: 35,
-                width: 35,
-                child: SvgPicture.asset(
-                  icon,
-                  color: Colors.white,
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                child: SearchbarWidget(
+                  controller: TextEditingController(),
+                  onChanged: (query) {
+                    debugPrint("Search query: $query");
+                  },
+                  hintText: 'Search here',
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: ColorLight.primary,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: const Icon(
+                        Icons.tune,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              const SizedBox(width: 7),
-              Text(
-                label,
-                style: const TextStyle(color: Colors.white),
+              Expanded(
+                child: BlocBuilder<SgItemCubit, SublimeState<List<SgItem>>>(
+                  builder: (context, state) {
+                    if (state is SublimeLoading<List<SgItem>>) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: ColorLight.primary,
+                        ),
+                      );
+                    } else if (state is SublimeLoaded<List<SgItem>>) {
+                      final sgItems = state.data['Data'] as List<SgItem>;
+
+                      return GridView.builder(
+                        itemCount: sgItems.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                childAspectRatio: 0.7,
+                                mainAxisSpacing: 2),
+                        itemBuilder: (context, index) {
+                          final sgItem = sgItems[index];
+                          return SuggestedItems(
+                            title: sgItem.itemName ?? 'Unnamed',
+                            image: sgItem.fileName ?? '',
+                          );
+                        },
+                      );
+                    } else if (state is SublimeError<List<SgItem>>) {
+                      return Center(
+                        child: Text(
+                          'Error: ${state.message}',
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      );
+                    } else {
+                      return const Center(
+                        child: Text('No data available.'),
+                      );
+                    }
+                  },
+                ),
+              ),
+              SizedBox(
+                // Wrap the bottom container in SizedBox to constrain height
+                height: 70,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildActionButton(
+                      context,
+                      onTap: () => context.go(AppRoutes.HOME_ROUTE_PATH),
+                      color: ColorLight.primary,
+                      label: 'Add Items',
+                      icon: 'assets/icons/icons_for_add.svg',
+                    ),
+                    _buildActionButton(
+                      context,
+                      onTap: () => context.go(AppRoutes.HOME_ROUTE_PATH),
+                      color: ColorLight.buttons,
+                      label: 'Add Recipe',
+                      icon: 'assets/icons/icons_for_add.svg',
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -209,7 +185,7 @@ void ShowDialogue(BuildContext context) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text(
+        title: Text(
           "Help",
           style: TextStyle(
             fontSize: 20,
@@ -217,18 +193,56 @@ void ShowDialogue(BuildContext context) {
             color: ColorLight.primary,
           ),
         ),
-        content: const Text(
-          'This is our List View screen where you can see all the lists.',
-        ),
+        content: Text(
+            'This is our List View screen where you can see all the lists.'),
         actions: [
           TextButton(
-            child: const Text('Cancel'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+            child: Text('Cancel'),
+            onPressed: () => Navigator.of(context).pop(),
           ),
         ],
       );
     },
+  );
+}
+
+Widget _buildActionButton(
+  BuildContext context, {
+  required VoidCallback onTap,
+  required Color color,
+  required String label,
+  required String icon,
+}) {
+  return Padding(
+    padding: const EdgeInsets.all(10),
+    child: GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 48,
+        width: 170,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 35,
+              width: 35,
+              child: SvgPicture.asset(
+                icon,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(width: 7),
+            Text(
+              label,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+    ),
   );
 }

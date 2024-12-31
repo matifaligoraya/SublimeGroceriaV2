@@ -8,7 +8,6 @@ import 'package:sublime_groceria/cubit/sublime_state.dart';
 import 'package:sublime_groceria/models/grocerylist/grocery_list.dart';
 import 'package:sublime_groceria/presentation/widget/listitem.dart';
 import 'package:sublime_groceria/presentation/widget/searchbar_widget.dart';
-import 'package:sublime_groceria/utilities/extensions/string_extension.dart';
 
 class GroceryListScreen extends StatefulWidget {
   const GroceryListScreen({super.key});
@@ -146,11 +145,7 @@ class _GroceryListScreenState extends State<GroceryListScreen>
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           child: ListItem(
-            title: list.listName ?? 'Unnamed List',
-            tag: '${list.updatedDate?.formatRelativeTime() ?? 12}',
-            purchaseditems: '${list.pendingItemsCount ?? 0}',
-            pendingItems: '${list.pendingItemsCount ?? 0}',
-            sharedWith: '${list.sharedUserCount}',
+            list: list,
             onChanged: (message) {
               print("onChanged $message");
             },

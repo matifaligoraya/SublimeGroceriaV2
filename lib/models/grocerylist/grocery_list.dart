@@ -16,6 +16,7 @@ class GroceryList with _$GroceryList {
     DateTime? createdDate,
     DateTime? updatedDate,
     int? totalItems,
+    int? purchasedItemsCount,
     int? pendingItemsCount,
     int? sharedUserCount,
     bool? isSharedList,
@@ -29,13 +30,20 @@ class GroceryList with _$GroceryList {
     int? userId,
     String? userName,
     String? ownerEmail,
+    DateTime? createdDate,
     DateTime? updatedDate,
     int? totalItems,
+    int? purchasedItemsCount,
     int? pendingItemsCount,
     int? sharedUserCount,
     bool? isSharedList,
     List<GRecipe>? gRecipe,
   }) {
+    // Calculate Purchased Items
+    final safeTotalItems = totalItems ?? 0;
+    final safePendingItemsCount = pendingItemsCount ?? 0;
+    final safePurchasedItemsCount = safeTotalItems - safePendingItemsCount;
+
     return GroceryList(
       listId: listId,
       listName: listName,
@@ -43,10 +51,11 @@ class GroceryList with _$GroceryList {
       userId: userId,
       userName: userName,
       ownerEmail: ownerEmail,
-      createdDate: DateTime(2022, 1, 1), // Hardcoded default
+      createdDate: createdDate ?? DateTime(2022, 1, 1), // Hardcoded default
       updatedDate: updatedDate ?? DateTime(2022, 1, 2), // Hardcoded default
       totalItems: totalItems,
       pendingItemsCount: pendingItemsCount,
+      purchasedItemsCount: safePurchasedItemsCount,
       sharedUserCount: sharedUserCount,
       isSharedList: isSharedList,
       gRecipe: gRecipe,
