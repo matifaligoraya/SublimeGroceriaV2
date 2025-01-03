@@ -5,6 +5,7 @@ import 'package:sublime_groceria/common/colors.dart';
 import 'package:sublime_groceria/common/routes.dart';
 import 'package:sublime_groceria/cubit/groceryList/grocery_list_cubit.dart';
 import 'package:sublime_groceria/cubit/sublime_state.dart';
+import 'package:sublime_groceria/localization/applocalization.dart';
 import 'package:sublime_groceria/models/grocerylist/grocery_list.dart';
 import 'package:sublime_groceria/presentation/widget/listitem.dart';
 import 'package:sublime_groceria/presentation/widget/searchbar_widget.dart';
@@ -50,7 +51,7 @@ class _GroceryListScreenState extends State<GroceryListScreen>
               child: _buildIcon(Icons.arrow_back_outlined, 18),
             ),
             Text(
-              "View List",
+              SublimeLocal.of(context).translate("View_List"),
               style: Theme.of(context).textTheme.displayLarge,
             ),
             InkWell(
@@ -84,7 +85,7 @@ class _GroceryListScreenState extends State<GroceryListScreen>
                 child: SearchbarWidget(
                   controller: _searchController,
                   onChanged: (query) => {},
-                  hintText: 'Search here',
+                  hintText: SublimeLocal.of(context).translate("Search_here"),
                   suffixIcon: Padding(
                     padding: const EdgeInsets.all(8),
                     child: Container(
@@ -124,8 +125,10 @@ class _GroceryListScreenState extends State<GroceryListScreen>
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    _buildListView(myLists, "My List"),
-                    _buildListView(sharedLists, "Shared List"),
+                    _buildListView(
+                        myLists, SublimeLocal.of(context).translate("My_List")),
+                    _buildListView(sharedLists,
+                        SublimeLocal.of(context).translate("Shared_List")),
                   ],
                 ),
               ),
@@ -191,7 +194,7 @@ class _GroceryListScreenState extends State<GroceryListScreen>
               'This is our List View screen where you can see all the lists.'),
           actions: [
             TextButton(
-              child: Text('Cancel'),
+              child: Text(SublimeLocal.of(context).translate("Cancel")),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ],

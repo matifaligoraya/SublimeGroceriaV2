@@ -8,22 +8,31 @@ part of 'recipes.dart';
 
 _$RecipesImpl _$$RecipesImplFromJson(Map<String, dynamic> json) =>
     _$RecipesImpl(
-      id: (json['id'] as num).toInt(),
-      title: json['title'] as String,
-      directions: json['directions'] as String,
-      imgUrl: json['imgUrl'] as String,
-      categoryId: (json['categoryId'] as num).toInt(),
-      categoryName: json['categoryName'] as String,
-      ingredientList: (json['ingredientList'] as List<dynamic>)
-          .map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      fileName: json['fileName'] as String,
-      fileType: json['fileType'] as String,
-      dataFiles: json['dataFiles'] as String,
-      tags: json['tags'] as String,
-      time: json['time'] as String,
-      description: json['description'] as String,
-      serving: (json['serving'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt() ?? 0, // Default to 0 if null
+      title: json['title'] as String? ?? '', // Default to empty string if null
+      directions: json['directions'] as String? ??
+          '', // Default to empty string if null
+      imgUrl:
+          json['imgUrl'] as String? ?? '', // Default to empty string if null
+      categoryId:
+          (json['categoryId'] as num?)?.toInt() ?? 0, // Default to 0 if null
+      categoryName: json['categoryName'] as String? ??
+          '', // Default to empty string if null
+      ingredientList: (json['ingredientList'] as List<dynamic>?)
+              ?.map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [], // Default to empty list if null
+      fileName:
+          json['fileName'] as String? ?? '', // Default to empty string if null
+      fileType:
+          json['fileType'] as String? ?? '', // Default to empty string if null
+      dataFiles:
+          json['dataFiles'] as String? ?? '', // Default to empty string if null
+      tags: json['tags'] as String? ?? '', // Default to empty string if null
+      time: json['time'] as String? ?? '', // Default to empty string if null
+      description: json['description'] as String? ??
+          '', // Default to empty string if null
+      serving: (json['serving'] as num?)?.toInt() ?? 0, // Default to 0 if null
     );
 
 Map<String, dynamic> _$$RecipesImplToJson(_$RecipesImpl instance) =>

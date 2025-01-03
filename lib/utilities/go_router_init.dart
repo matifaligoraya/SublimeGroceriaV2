@@ -52,7 +52,7 @@ GoRouter routerinit = GoRouter(
       path: AppRoutes.RELIGION_ROUTE_PATH,
       builder: (BuildContext context, GoRouterState state) {
         return BlocProvider(
-          create: (_) => ReligionCubit(ReligionRepository())..fetchReligions(),
+          create: (_) => ReligionCubit(ReligionRepository()),
           child: const ReligionScreen(),
         );
       },
@@ -61,10 +61,7 @@ GoRouter routerinit = GoRouter(
       name: AppRoutes.GROCERY_ITEM_NAME,
       path: AppRoutes.GROCERY_ITEM_PATH,
       builder: (BuildContext context, GoRouterState state) {
-        return BlocProvider(
-          create: (_) => GroroceryListCubit(GroceryListRepository()),
-          child: const GroceryListScreen(),
-        );
+        return GroceryListScreen();
       },
     ),
 

@@ -5,7 +5,9 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.6 <4.0.0'
+  # sdk: ">=2.17.0 <4.0.0"
+  sdk: ">=3.0.0 <4.0.0"
+
 
 dependencies:
   flutter:
@@ -32,6 +34,7 @@ dependencies:
   bloc_concurrency: ^0.2.5
   timeago: ^3.3.0
   flutter_svg: ^2.0.16
+  webview_flutter: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -50,8 +53,10 @@ flutter:
     - assets/lang/en.json
     - assets/lang/es.json
     - assets/lang/da.json
+    - assets/lang/ur.json
     - assets/icons/icons_for_add.svg
     - assets/images/recipe2.png
+    - assets/images/SublimeLogo.png
   # fonts:
   #   - family: Poppins
   #     fonts:

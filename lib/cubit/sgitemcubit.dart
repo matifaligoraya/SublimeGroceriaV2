@@ -14,7 +14,7 @@ class SgItemCubit extends BaseCubit<List<SgItem>> {
       final rawData = await repository.fetchgroceryitems();
 
       emit(SublimeLoaded({
-        "Data": rawData,
+        "data": rawData,
       }));
     } catch (e) {
       emit(SublimeError(e.toString()));

@@ -112,12 +112,10 @@ class RecipeList extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 15),
-                          child: Recipeintegration(
+                          child: RecipeIntegration(
                             image: 'assets/images/recipe2.png',
                             title: 'This is title',
-                            proteins: 'Protein',
-                            fats: 'Fats',
-                            carbohydrates: 'Carbohydrates',
+                            tags: 'Carbohydrates',
                             likes: 'Likes',
                             time: 'Times',
                           ),

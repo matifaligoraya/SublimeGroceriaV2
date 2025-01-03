@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sublime_groceria/common/colors.dart';
+import 'package:sublime_groceria/localization/applocalization.dart';
 import 'package:sublime_groceria/models/grocerylist/grocery_list.dart';
 import 'package:sublime_groceria/utilities/extensions/string_extension.dart';
 
@@ -108,16 +109,21 @@ class ListItem extends StatelessWidget {
                         text: TextSpan(
                             style: TextStyle(
                                 color: Theme.of(context).indicatorColor,
-                                fontSize: 8),
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall
+                                    ?.fontSize),
                             children: [
                           TextSpan(
-                            text: 'Out of ',
+                            text: SublimeLocal.of(context).translate("Out_of"),
                           ),
                           TextSpan(
                             text: list!.pendingItemsCount?.toString() ?? "0",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          TextSpan(text: ' Item Purchased'),
+                          TextSpan(
+                              text: SublimeLocal.of(context)
+                                  .translate("Item_Purchased")),
                         ])),
                     const SizedBox(width: 10),
                     _buildDot(ColorLight.carbohydrates),
@@ -126,13 +132,18 @@ class ListItem extends StatelessWidget {
                         text: TextSpan(
                             style: TextStyle(
                                 color: Theme.of(context).indicatorColor,
-                                fontSize: 8),
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall
+                                    ?.fontSize),
                             children: [
                           TextSpan(
                             text: list!.pendingItemsCount?.toString() ?? "0",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          TextSpan(text: ' Pending'),
+                          TextSpan(
+                              text: SublimeLocal.of(context)
+                                  .translate("Pending")),
                         ])),
                     const SizedBox(width: 10),
                     _buildDot(ColorLight.primary),
@@ -141,16 +152,22 @@ class ListItem extends StatelessWidget {
                         text: TextSpan(
                             style: TextStyle(
                                 color: Theme.of(context).indicatorColor,
-                                fontSize: 8),
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall
+                                    ?.fontSize),
                             children: [
                           TextSpan(
-                            text: 'Shared With ',
+                            text: SublimeLocal.of(context)
+                                .translate("shared_with"),
                           ),
                           TextSpan(
                             text: list!.sharedUserCount?.toString() ?? "0",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          TextSpan(text: ' Persons'),
+                          TextSpan(
+                              text: SublimeLocal.of(context)
+                                  .translate("Persons")),
                         ])),
                   ],
                 ),

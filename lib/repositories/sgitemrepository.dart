@@ -7,7 +7,7 @@ class SgItemRepository extends SublimeBaseRepository {
 
   Future<List<SgItem>> fetchgroceryitems() async {
     // userId = await fetchUserId();
-    String url = '${Uri.parse(ApiConfig.SGITEMS)}';
+    String url = '${Uri.parse(ApiConfig.TOP5ITEMS)}';
     final response = await get(url: url, queryParams: null);
 
     if (response['isList'] == true && response['data'] != null) {

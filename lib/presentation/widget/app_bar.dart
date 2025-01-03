@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sublime_groceria/presentation/cubit/theme/theme_cubit.dart';
+import 'package:sublime_groceria/cubit/language_cubit.dart'; // Make sure to implement this Cubit
 
 class SublimeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -20,15 +21,17 @@ class SublimeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     ThemeCubit themeCubit = context.read<ThemeCubit>();
     ThemeMode currentTheme = context.watch<ThemeCubit>().state;
+    LanguageCubit languageCubit = context.read<LanguageCubit>();
 
     return AppBar(
+      backgroundColor: Colors.white,
       leading: isDrawerRequired
           ? IconButton(
               icon: Icon(
                 Icons.menu,
                 color: Theme.of(context).indicatorColor,
               ),
-              onPressed: onPressed, // Call onPressed directly here
+              onPressed: onPressed,
             )
           : IconButton(
               icon: Icon(
@@ -41,6 +44,16 @@ class SublimeAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
       title: Text(title),
       actions: [
+        IconButton(
+          icon: Icon(
+            languageCubit.state is LanguageEnglish
+                ? Icons.language
+                : Icons.translate,
+          ),
+          onPressed: () {
+            languageCubit.toggleLanguage();
+          },
+        ),
         IconButton(
           icon: Icon(
             currentTheme == ThemeMode.light

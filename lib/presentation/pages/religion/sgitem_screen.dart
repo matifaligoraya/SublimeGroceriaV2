@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sublime_groceria/common/api.dart';
 import 'package:sublime_groceria/common/colors.dart';
 import 'package:sublime_groceria/common/routes.dart';
 import 'package:sublime_groceria/cubit/sgitemcubit.dart';
 import 'package:sublime_groceria/cubit/sublime_state.dart';
+import 'package:sublime_groceria/localization/applocalization.dart';
 import 'package:sublime_groceria/models/item/sgitem.dart';
-import 'package:sublime_groceria/presentation/widget/canvas.dart';
 import 'package:sublime_groceria/presentation/widget/items.dart';
 import 'package:sublime_groceria/presentation/widget/searchbar_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -51,8 +52,8 @@ class _SgitemScreenState extends State<SgitemScreen> {
                 child: const Icon(Icons.arrow_back_outlined, size: 18),
               ),
             ),
-            const Text(
-              "Bulk Item",
+            Text(
+              SublimeLocal.of(context).translate("Bulk_Item"),
               style: TextStyle(fontSize: 23, color: ColorLight.widgetstitle),
             ),
             InkWell(
@@ -88,7 +89,7 @@ class _SgitemScreenState extends State<SgitemScreen> {
                   onChanged: (query) {
                     debugPrint("Search query: $query");
                   },
-                  hintText: 'Search here',
+                  hintText: SublimeLocal.of(context).translate("Search_here"),
                   suffixIcon: Padding(
                     padding: const EdgeInsets.all(8),
                     child: Container(
@@ -117,7 +118,7 @@ class _SgitemScreenState extends State<SgitemScreen> {
                         ),
                       );
                     } else if (state is SublimeLoaded<List<SgItem>>) {
-                      final sgItems = state.data['Data'] as List<SgItem>;
+                      final sgItems = state.data['data'] as List<SgItem>;
 
                       return GridView.builder(
                         itemCount: sgItems.length,
@@ -159,14 +160,14 @@ class _SgitemScreenState extends State<SgitemScreen> {
                       context,
                       onTap: () => context.go(AppRoutes.HOME_ROUTE_PATH),
                       color: ColorLight.primary,
-                      label: 'Add Items',
+                      label: SublimeLocal.of(context).translate("Add_Items"),
                       icon: 'assets/icons/icons_for_add.svg',
                     ),
                     _buildActionButton(
                       context,
                       onTap: () => context.go(AppRoutes.HOME_ROUTE_PATH),
                       color: ColorLight.buttons,
-                      label: 'Add Recipe',
+                      label: SublimeLocal.of(context).translate("Add_Recipe"),
                       icon: 'assets/icons/icons_for_add.svg',
                     ),
                   ],
